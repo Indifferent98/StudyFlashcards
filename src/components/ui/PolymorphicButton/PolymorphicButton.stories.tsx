@@ -20,18 +20,42 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Primary1: Story = {
-  args: { children: 'Primary' },
+export const PrimaryButton: Story = {
+  args: { children: 'Primary', disabled: false },
 }
 
-export const Secondary1: Story = {
-  args: { variant: 'secondary', disabled: true, children: 'Secondary' },
+export const SecondaryButton: Story = {
+  args: { variant: 'secondary', children: 'Secondary', disabled: false },
 }
 
-export const Large1: Story = {
-  args: {},
+export const PrimaryFullWidth: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Primary Full Width',
+    disabled: false,
+    fullWidth: true,
+  },
+  parameters: {
+    layout: 'center ',
+  },
 }
 
-export const Small1: Story = {
-  args: {},
+export const SecondaryFullWidth: Story = {
+  args: {
+    variant: 'secondary',
+    children: 'Secondary Full Width',
+    disabled: false,
+    fullWidth: true,
+  },
+  parameters: {
+    layout: 'center ',
+  },
 }
+
+// export const Small1: Story = {
+//   render: () => (
+//     <div>
+//       <PolymorphicButton children={'FullWidth'} fullWidth={true} />
+//     </div>
+//   ),
+// }

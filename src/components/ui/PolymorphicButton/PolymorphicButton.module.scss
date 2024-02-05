@@ -1,7 +1,40 @@
+button {
+  color: var(--color-light-100);
+  padding: 6px 28px;
+  border-radius: 4px;
+  border: none;
+}
+button:focus {
+  border: 2px solid var(--color-info-700);
+}
 .primary {
   background-color: var(--color-primary-500);
 }
 
+.primary:hover {
+  background-color: var(--color-primary-300);
+}
+.primary:active {
+  background-color: var(--color-primary-700);
+}
+.primary:disabled {
+  background-color: var(--color-primary-900);
+}
+
 .secondary {
   background-color: var(--color-dark-300);
+}
+.secondary:hover {
+  background-color: var(--color-dark-100);
+}
+.secondary:active {
+  background-color: var(--color-dark-500);
+}
+.secondary:disabled {
+  background-color: var(--color-dark-300);
+  color: var(--color-light-900);
+}
+
+.fullWidth {
+  width: 100%;
 }
