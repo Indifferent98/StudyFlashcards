@@ -1,22 +1,37 @@
-import React, { ComponentPropsWithoutRef } from 'react'
-import s from './PolymorphicButton.module.scss'
+import React from 'react'
 
-type Props = {
+import { ComponentPropsWithoutRef, ElementType } from 'react'
+import s from './PolymorphicButton.module.scss'
+import logOut from '@/img/logOut.svg'
+
+type Props<T extends ElementType> = {
+  as?: T
   variant?: 'primary' | 'secondary'
   withIcon?: boolean
   fullWidth?: boolean
-} & ComponentPropsWithoutRef<'button'>
+} & ComponentPropsWithoutRef<T>
 
-export const PolymorphicButton = ({
-  variant = 'primary',
-  fullWidth = false,
-  withIcon = false,
-  className,
-  ...restProps
-}: Props) => {
+export const PolymorphicButton = <T extends ElementType = 'button'>(props: Props<T>) => {
+  const {
+    variant = 'primary',
+    fullWidth = false,
+    withIcon = false,
+    as: Component = 'button',
+    className,
+    children,
+    ...restProps
+  } = props
   return (
-    <button
-      className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`}
+    <Component
+      className={`${Component === 'button' ? s[variant] : ''} ${fullWidth ? s.fullWidth : ''} ${
+        withIcon ? s.withIcon : s.withoutIcon
+      }  ${className}`}
+      children={
+        <>
+          {withIcon && <img className={s.logo} src={logOut} />}
+          {props.children}
+        </>
+      }
       {...restProps}
     />
   )

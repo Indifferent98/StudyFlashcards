@@ -36,7 +36,7 @@ export const PrimaryFullWidth: Story = {
     fullWidth: true,
   },
   parameters: {
-    layout: 'center ',
+    layout: '',
   },
 }
 
@@ -48,14 +48,22 @@ export const SecondaryFullWidth: Story = {
     fullWidth: true,
   },
   parameters: {
-    layout: 'center ',
+    layout: '',
   },
 }
 
-// export const Small1: Story = {
-//   render: () => (
-//     <div>
-//       <PolymorphicButton children={'FullWidth'} fullWidth={true} />
-//     </div>
-//   ),
-// }
+export const LinkButton: Story = {
+  args: {
+    children: 'Link like look a button',
+    as: 'a',
+    href: 'https://google.com',
+  },
+}
+
+export const PrimaryWithIcon: Story = {
+  args: { children: 'Primary', disabled: false, withIcon: true },
+}
+
+export const SecondaryWithIcon: Story = {
+  args: { variant: 'secondary', children: 'Secondary', disabled: false, withIcon: true },
+}
