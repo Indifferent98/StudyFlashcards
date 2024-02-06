@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { ComponentPropsWithoutRef, ElementType } from 'react'
-import s from './PolymorphicButton.module.scss'
-import logOut from '@/img/logOut.svg'
+import s from './Button.module.scss'
+import { LogOutIcon } from '@/img/logOutIcon/logOutIcon'
 
 type Props<T extends ElementType> = {
   as?: T
@@ -11,7 +11,7 @@ type Props<T extends ElementType> = {
   fullWidth?: boolean
 } & ComponentPropsWithoutRef<T>
 
-export const PolymorphicButton = <T extends ElementType = 'button'>(props: Props<T>) => {
+export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
   const {
     variant = 'primary',
     fullWidth = false,
@@ -28,7 +28,7 @@ export const PolymorphicButton = <T extends ElementType = 'button'>(props: Props
       }  ${className}`}
       children={
         <>
-          {withIcon && <img className={s.logo} src={logOut} />}
+          {withIcon && <LogOutIcon className={s.logo} disabled={props.disabled} />}
           {props.children}
         </>
       }

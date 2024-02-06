@@ -24,6 +24,7 @@ button:focus {
 }
 .primary:disabled {
   background-color: var(--color-primary-900);
+  color: var(--color-light-900);
 }
 
 .secondary {
@@ -71,4 +72,5 @@ a:focus {
 
 .logo {
   margin-right: 10px;
+  fill: red;
 }

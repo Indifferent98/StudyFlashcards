@@ -1,16 +1,17 @@
 import React from 'react'
-import logOut from '@/img/logOut.svg'
-import { PolymorphicButton } from './components/ui/PolymorphicButton'
+
+import { Button } from './components/ui/Button'
 
 export const App = () => {
   return (
     <div>
       <div style={{ margin: '20px' }}>
-        <PolymorphicButton children={'Button Primary'} />
+        <Button children={'Button Primary'} />
       </div>
-      <div>
-        <PolymorphicButton children={'Button Primary'} withIcon={true} />
+      <div style={{ margin: '20px' }}>
+        <Button children={<div>saasfas</div>} withIcon={true} />
       </div>
+      <div></div>
     </div>
   )
 }
