@@ -1,13 +1,13 @@
 .input {
-  all: unset;
+  outline: none;
+
   background-color: black;
   color: var(--color-dark-100);
   border: 1px solid var(--color-dark-300);
-
   border-radius: 2px;
-  padding-left: 12px;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding: 6px 12px 6px 12px;
+  width: 300px;
+  // display: inline-block;
 }
 
 .input:hover {
@@ -31,18 +31,18 @@
 }
 
 .error {
-  all: unset;
+  outline: none;
   background-color: black;
   border-radius: 2px;
-  padding-left: 12px;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding: 6px 12px 6px 12px;
   border: 1px solid var(--color-danger-300);
   color: var(--color-danger-300);
+  width: 300px;
 }
 
 .disabled {
-  all: unset;
+  // border: none;
+  width: 300px;
   background-color: black;
   border-radius: 2px;
   padding-left: 12px;
@@ -53,17 +53,48 @@
 }
 
 .wrapper {
-  width: max-content;
+  margin: 30px;
+  position: relative;
 }
-
+.top {
+  width: 300px;
+  display: flex;
+}
 .helperText {
   color: var(--color-dark-100);
+  width: 250px;
 }
 .disbaledHelperText {
   color: var(--color-dark-300);
 }
 
 .svg {
-  fill: red;
-  color: red;
+  fill: var(--color-light-100);
+  position: absolute;
+  cursor: pointer;
+  top: 6px;
+  left: 275px;
+}
+.svg2 {
+  fill: var(--color-dark-300);
+  position: absolute;
+  cursor: pointer;
+  top: 6px;
+  left: 275px;
+}
+
+.withIcon {
+  padding-right: 33px;
+}
+.search {
+  padding-left: 35px;
+}
+
+.searchIcon {
+  fill: var(--color-light-100);
+  display: inline-block;
+  position: absolute;
+  cursor: pointer;
+  left: 8px;
+  top: 6px;
 }

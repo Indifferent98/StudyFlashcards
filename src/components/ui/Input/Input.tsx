@@ -1,10 +1,10 @@
-import React, { ComponentPropsWithoutRef } from 'react'
+import React, { ChangeEvent, ComponentPropsWithoutRef, useState } from 'react'
 import { Typography } from '../Typography'
 import s from './Input.module.scss'
-import logo from '@/img/eye-outline.svg'
-
-import logo1 from '@/img/logOutIcon/logOutIcon.svg'
-
+import eyeIcon from '@/img/eye-outline.svg'
+import offEyeIcon from '@/img/eye-off-outline.svg'
+import searchIcon from '@/img/searchIcon.svg'
+import closeIcon from '@/img/closeIcon.svg'
 import { ReactSVG } from 'react-svg'
 
 type Props = {
@@ -23,24 +23,46 @@ export const Input = ({
   disabled = false,
   ...restProps
 }: Props) => {
+  const [inputType, setInputType] = useState<string>('text')
+  const [value, setValue] = useState('')
+  const changeValue = (e: ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value)
+
+  const changeInputType = () => setInputType(inputType === 'text' ? 'password' : 'text')
+
+  const currentImgSrc =
+    variant === 'password' ? offEyeIcon : variant === 'search' ? closeIcon : eyeIcon
+  const findItem = () => {}
+  const clearInput = () => setValue('')
+  const svgOnClick = disabled ? () => {} : variant === 'password' ? changeInputType : clearInput
+
   return (
     <div className={s.wrapper}>
       {helperMessage && (
-        <Typography
-          variant="Body2"
-          children={helperMessage}
-          className={disabled ? s.disbaledHelperText : s.helperText}
-        />
+        <div className={s.top}>
+          <Typography
+            variant="Body2"
+            children={helperMessage}
+            className={disabled ? s.disbaledHelperText : s.helperText}
+          />
+        </div>
       )}
+
       <input
-        className={`${s[variant]} ${disabled ? s.disabled : errorMessage ? s.error : s.input}`}
+        value={value}
+        className={`${s[variant]} ${disabled ? s.disabled : errorMessage ? s.error : s.input} ${
+          variant === 'search' || variant === 'password' ? s.withIcon : ''
+        }`}
         disabled={disabled}
-        type="text"
+        type={inputType}
+        onChange={changeValue}
         {...restProps}
       />
-      <div style={{ fill: 'red' }}>
-        <ReactSVG src={logo1} style={{ stroke: 'red', fill: 'green' }} />
-      </div>
+      {(variant === 'password' || (variant === 'search' && value)) && (
+        <ReactSVG src={currentImgSrc} className={disabled ? s.svg2 : s.svg} onClick={svgOnClick} />
+      )}
+      {variant === 'search' && (
+        <ReactSVG src={searchIcon} className={!disabled ? s.searchIcon : ''} onClick={findItem} />
+      )}
     </div>
   )
 }

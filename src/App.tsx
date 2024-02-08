@@ -1,21 +1,33 @@
 import React from 'react'
-import eyeLogo from '@/img/eye-outline.svg'
-import { Button } from './components/ui/Button'
-import { Input } from './components/ui/Input'
 
 export const App = () => {
   return (
-    <div>
-      <div style={{ margin: '20px' }}>
-        <Button children={<div>saasfas</div>} withIcon={true} />
-      </div>
-      <div style={{ margin: '20px' }}>
-        <Input helperMessage="12312" />
+    <div
+      style={{
+        border: '1px solid white',
+        backgroundColor: 'green',
+        width: '300px',
+        height: '300px',
+        position: 'relative',
+      }}
+    >
+      <span>asfasfas</span>
+      <div
+        style={{
+          border: '1px solid white',
+          backgroundColor: 'grey',
+          width: '15px',
+          height: '15px',
+          position: 'absolute',
+          // left: '0px',
+          // top: '10px',
+        }}
+      >
+        hello i
       </div>
 
-      <div style={{ margin: '20px' }}>
-        <img src={eyeLogo} alt="" />
-      </div>
+      <span>asdasd</span>
+      <div>asfasasfasfasfasf</div>
     </div>
   )
 }
