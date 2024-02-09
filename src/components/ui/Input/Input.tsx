@@ -30,7 +30,7 @@ export const Input = ({
   const changeInputType = () => setInputType(inputType === 'text' ? 'password' : 'text')
 
   const currentImgSrc =
-    variant === 'password' ? offEyeIcon : variant === 'search' ? closeIcon : eyeIcon
+    inputType === 'password' ? offEyeIcon : variant === 'search' ? closeIcon : eyeIcon
   const findItem = () => {}
   const clearInput = () => setValue('')
   const svgOnClick = disabled ? () => {} : variant === 'password' ? changeInputType : clearInput

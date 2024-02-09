@@ -36,6 +36,17 @@ export const errorInput: Story = {
   },
 }
 
+export const passwordInput: Story = {
+  args: {
+    disabled: false,
+    helperMessage: 'Password',
+    variant: 'password',
+  },
+  parameters: {
+    layout: '',
+  },
+}
+
 export const searchInput: Story = {
   args: {
     disabled: false,
@@ -46,7 +57,3 @@ export const searchInput: Story = {
     layout: '',
   },
 }
-
-// export const SecondaryButton: Story = {
-//   args: { variant: 'secondary', children: 'Secondary', disabled: false },
-// }
