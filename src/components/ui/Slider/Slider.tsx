@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import * as Slider from '@radix-ui/react-slider'
 import s from './Slider.module.scss'
+import { Typography } from '../Typography'
 
 export const SuperSlider = () => {
   const onChangeHandler = (value: number[]) => {
@@ -10,7 +11,7 @@ export const SuperSlider = () => {
 
   return (
     <div className={s.wrapper}>
-      <div className={s.valueBox}>{sliderValue[0]}</div>
+      <Typography className={s.valueBox} children={sliderValue[0]} variant="Body1" />
       <form>
         <Slider.Root
           className={s.SliderRoot}
@@ -28,7 +29,7 @@ export const SuperSlider = () => {
           <Slider.Thumb className={s.SliderThumb} />
         </Slider.Root>
       </form>
-      <div className={s.valueBox}>{sliderValue[1]}</div>
+      <Typography className={s.valueBox} children={sliderValue[1]} variant="Body1" />
     </div>
   )
 }
