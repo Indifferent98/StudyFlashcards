@@ -20,6 +20,7 @@ type Props<T extends ElementType> = {
   as?: T
   textColor?: 'light' | 'dark'
   variant: TypographyVariant
+  // className: any
 } & ComponentPropsWithoutRef<T>
 
 export const Typography = <T extends ElementType = 'div'>(

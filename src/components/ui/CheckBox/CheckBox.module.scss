@@ -1,0 +1,93 @@
+button {
+  all: unset;
+}
+
+.checkBox {
+  border-radius: 3px;
+  display: flex;
+
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.checked {
+  background-color: var(--color-light-100);
+}
+.unChecked {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-light-900);
+  border-radius: 3px;
+}
+
+.CheckboxIndicator {
+  color: rgb(34, 5, 34);
+}
+
+.svg {
+  position: relative;
+  top: 0px;
+  fill: black;
+}
+.svgDisabled {
+  position: relative;
+  top: 0px;
+  fill: var(--color-light-700);
+}
+
+.wrapper {
+  position: relative;
+  width: max-content;
+  display: inline-block;
+  align-self: center;
+  padding: 3px;
+}
+.wrapper:hover .circle {
+  background-color: var(--color-dark-500);
+  opacity: 100%;
+}
+.wrapper:active .circle {
+  background-color: var(--color-dark-100);
+  opacity: 100%;
+}
+
+.circle {
+  bottom: -6px;
+  left: -6px;
+
+  display: inline-block;
+  position: absolute;
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+}
+
+.circle:focus {
+  background-color: #808080;
+  opacity: 50%;
+}
+
+.disabled {
+  background-color: var(--color-dark-100);
+}
+
+.disabledUnchecked {
+  border: 2px solid var(--color-dark-100);
+}
+.circle {
+  z-index: -1;
+}
+
+.superWrapper {
+  display: flex;
+  height: 36px;
+  width: max-content;
+  padding: 6px 9px 6px 6px;
+}
+
+.title {
+  margin-left: 8px;
+  align-self: center;
+}
