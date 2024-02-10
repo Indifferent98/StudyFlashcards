@@ -1,5 +1,7 @@
 import React from 'react'
-import { SuperCheckBox } from './components/ui/CheckBox/CheckBox'
+
+import { SuperSlider } from './components/ui/Slider/Slider'
+import { SuperCheckBox } from './components/ui/CheckBox'
 
 export const App = () => {
   return (
@@ -7,6 +9,7 @@ export const App = () => {
       <div>hello</div>
       <SuperCheckBox title="hohhohooh" />
       <SuperCheckBox />
+      <SuperSlider />
     </div>
   )
 }
