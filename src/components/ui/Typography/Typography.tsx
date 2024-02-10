@@ -20,7 +20,7 @@ type Props<T extends ElementType> = {
   as?: T
   textColor?: 'light' | 'dark'
   variant: TypographyVariant
-  className: any
+  className?: any
   color?: string
 } & ComponentPropsWithoutRef<T>
 

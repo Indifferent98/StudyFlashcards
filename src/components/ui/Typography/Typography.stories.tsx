@@ -19,7 +19,27 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const allTypography: Story = {
+  render: () => {
+    return (
+      <div>
+        <Typography variant="H1" children="H1" />
+        <Typography variant="H2" children="H2" />
+        <Typography variant="H3" children="H3" />
+        <Typography variant="H4" children="H4" />
+        <Typography variant="Body1" children="Body1" />
+        <Typography variant="Body2" children="Body2" />
+        <Typography variant="Caption" children="Caption" />
+        <Typography variant="Link1" children="Link1" />
+        <Typography variant="Link2" children="Link2" />
+        <Typography variant="Overline" children="Overline" />
+        <Typography variant="Subtitle1" children="Subtitle1" />
+        <Typography variant="Subtitle2" children="Subtitle2" />
+      </div>
+    )
+  },
+}
+
 export const H1: Story = {
   args: { children: 'TEXT CHECK text check TEXT CHECK text check', variant: 'H1' },
 }
