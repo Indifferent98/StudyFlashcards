@@ -20,13 +20,27 @@ type Props<T extends ElementType> = {
   as?: T
   textColor?: 'light' | 'dark'
   variant: TypographyVariant
-  // className: any
+  className: any
+  color?: string
 } & ComponentPropsWithoutRef<T>
 
 export const Typography = <T extends ElementType = 'div'>(
   props: Props<T> & Omit<ComponentPropsWithoutRef<T>, keyof Props<T>>
 ) => {
-  const { as: Component = 'div', variant, className, textColor = 'light', ...restProps } = props
+  const {
+    as: Component = 'div',
+    variant,
+    className,
+    textColor = 'light',
+    color = '',
+    ...restProps
+  } = props
 
-  return <Component className={`${s[variant]} ${s[textColor]} ${className}`} {...restProps} />
+  return (
+    <Component
+      style={{ color: color }}
+      className={`${s[variant]} ${s[textColor]} ${className}`}
+      {...restProps}
+    />
+  )
 }

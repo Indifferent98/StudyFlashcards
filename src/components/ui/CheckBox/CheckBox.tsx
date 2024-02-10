@@ -33,8 +33,15 @@ export const SuperCheckBox = ({ disabled = false, title }: Props) => {
         )}
         {!disabled && <span className={s.circle}></span>}
       </div>
-      {/* {title && <span className={s.title}>{title}</span>} */}
-      {title && <Typography variant="Body2" className={s.title} children={title} as="span" />}
+      {title && (
+        <Typography
+          variant="Body2"
+          className={s.title}
+          children={title}
+          as="span"
+          color={disabled ? '#808080' : ''}
+        />
+      )}
     </div>
   )
 }
