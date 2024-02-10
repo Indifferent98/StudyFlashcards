@@ -34,7 +34,14 @@ export const Input = ({
   const findItem = () => {}
   const clearInput = () => setValue('')
   const svgOnClick = disabled ? () => {} : variant === 'password' ? changeInputType : clearInput
+  const [searchIconStyle, setSearchIconStyle] = useState<any>(s.searchUnfocused)
 
+  const onfocus = () => {
+    setSearchIconStyle(s.searchFocused)
+  }
+  const onBlur = () => {
+    setSearchIconStyle(s.searchUnfocused)
+  }
   return (
     <div className={s.wrapper}>
       {helperMessage && (
@@ -42,12 +49,15 @@ export const Input = ({
           <Typography
             variant="Body2"
             children={helperMessage}
-            className={disabled ? s.disbaledHelperText : s.helperText}
+            className={s.helperText}
+            color={disabled ? '#4C4C4C' : '#808080'}
           />
         </div>
       )}
 
       <input
+        onFocus={onfocus}
+        onBlur={onBlur}
         value={value}
         className={`${s[variant]} ${disabled ? s.disabled : errorMessage ? s.error : s.input} ${
           variant === 'search' || variant === 'password' ? s.withIcon : ''
@@ -57,12 +67,21 @@ export const Input = ({
         onChange={changeValue}
         {...restProps}
       />
-      {(variant === 'password' || (variant === 'search' && value)) && (
-        <ReactSVG src={currentImgSrc} className={disabled ? s.svg2 : s.svg} onClick={svgOnClick} />
+      {(variant === 'password' || (variant === 'search' && value && !disabled)) && (
+        <ReactSVG
+          src={currentImgSrc}
+          className={disabled && variant !== 'search' ? s.svg2 : s.svg}
+          onClick={svgOnClick}
+        />
       )}
       {variant === 'search' && (
-        <ReactSVG src={searchIcon} className={!disabled ? s.searchIcon : ''} onClick={findItem} />
+        <ReactSVG
+          className={`${searchIconStyle} ${disabled ? s.disabledSearchIcon : s.searchIcon} `}
+          src={searchIcon}
+          onClick={findItem}
+        />
       )}
+      {/* <div className={s.svgFocused}>hello</div> */}
     </div>
   )
 }

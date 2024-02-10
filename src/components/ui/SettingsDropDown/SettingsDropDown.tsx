@@ -1,13 +1,13 @@
 import React from 'react'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import s from './settingsDropDown.module.scss'
+import s from './SettingsDropDown.module.scss'
 import settingIcon from '@/img/settings.svg'
 import { ReactSVG } from 'react-svg'
 import playIcon from '@/img/playCircleIcon.svg'
 import editIcon from '@/img/editIcon.svg'
 import trashIcon from '@/img/trashIcon.svg'
 
-export const settingsDropDown = () => {
+export const SettingsDropDown = () => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>

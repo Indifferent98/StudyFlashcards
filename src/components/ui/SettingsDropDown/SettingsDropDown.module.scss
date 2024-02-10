@@ -120,6 +120,7 @@ button {
   // background-color: var(--violet-3);
 }
 .IconButton:focus {
+  outline: none;
 }
 
 .leftSlot {

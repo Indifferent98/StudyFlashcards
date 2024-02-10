@@ -2,7 +2,8 @@ import React from 'react'
 
 import { SuperSlider } from './components/ui/Slider/Slider'
 import { SuperCheckBox } from './components/ui/CheckBox'
-import { DropDown } from './components/ui/dropDonwMenu'
+import { SettingsDropDown } from './components/ui/SettingsDropDown/SettingsDropDown'
+import { Input } from './components/ui/Input'
 
 export const App = () => {
   return (
@@ -11,7 +12,8 @@ export const App = () => {
       <SuperCheckBox title="hohhohooh" />
       <SuperCheckBox />
       <SuperSlider />
-      <DropDown />
+
+      <Input variant="search" disabled={true} />
       <div>helo</div>
       <div>helo</div>
       <div>helo</div>

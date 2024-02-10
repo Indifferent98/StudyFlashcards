@@ -61,11 +61,7 @@
   display: flex;
 }
 .helperText {
-  color: var(--color-dark-100);
   width: 250px;
-}
-.disbaledHelperText {
-  color: var(--color-dark-300);
 }
 
 .withIcon {
@@ -83,7 +79,7 @@
   left: 275px;
 }
 .svg2 {
-  fill: var(--color-dark-300);
+  fill: var(--color-light-100);
   position: absolute;
   cursor: pointer;
   bottom: 0px;
@@ -91,10 +87,24 @@
 }
 
 .searchIcon {
-  fill: var(--color-light-100);
   display: inline-block;
   position: absolute;
   cursor: pointer;
   left: 8px;
   bottom: 0px;
+}
+.searchFocused {
+  fill: var(--color-light-100);
+}
+.searchUnfocused {
+  fill: var(--color-dark-100);
+}
+
+.disabledSearchIcon {
+  display: inline-block;
+  position: absolute;
+  cursor: pointer;
+  left: 8px;
+  bottom: 0px;
+  fill: var(--color-dark-300);
 }
