@@ -1,26 +1,29 @@
 import React, { ChangeEvent, ComponentPropsWithoutRef, useState } from 'react'
-import { Typography } from '../Typography'
-import s from './Input.module.scss'
-import eyeIcon from '@/img/eye-outline.svg'
-import offEyeIcon from '@/img/eye-off-outline.svg'
-import searchIcon from '@/img/searchIcon.svg'
-import closeIcon from '@/img/closeIcon.svg'
 import { ReactSVG } from 'react-svg'
 
+import closeIcon from '@/img/closeIcon.svg'
+import offEyeIcon from '@/img/eye-off-outline.svg'
+import eyeIcon from '@/img/eye-outline.svg'
+import searchIcon from '@/img/searchIcon.svg'
+
+import s from './Input.module.scss'
+
+import { Typography } from '../Typography'
+
 type Props = {
-  helperMessage?: string
-  errorMessage?: string | null
-  variant?: 'default' | 'password' | 'search'
-  fullWidth?: boolean
   disabled?: boolean
+  errorMessage?: null | string
+  fullWidth?: boolean
+  helperMessage?: string
+  variant?: 'default' | 'password' | 'search'
 } & ComponentPropsWithoutRef<'input'>
 
 export const Input = ({
-  helperMessage,
-  errorMessage,
-  variant = 'default',
-  fullWidth = false,
   disabled = false,
+  errorMessage,
+  fullWidth = false,
+  helperMessage,
+  variant = 'default',
   ...restProps
 }: Props) => {
   const [inputType, setInputType] = useState<string>('text')
@@ -28,7 +31,6 @@ export const Input = ({
   const changeValue = (e: ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value)
 
   const changeInputType = () => setInputType(inputType === 'text' ? 'password' : 'text')
-
   const currentImgSrc =
     inputType === 'password' ? offEyeIcon : variant === 'search' ? closeIcon : eyeIcon
   const findItem = () => {}
@@ -42,46 +44,46 @@ export const Input = ({
   const onBlur = () => {
     setSearchIconStyle(s.searchUnfocused)
   }
+
   return (
     <div className={s.wrapper}>
       {helperMessage && (
         <div className={s.top}>
           <Typography
-            variant="Body2"
             children={helperMessage}
             className={s.helperText}
             color={disabled ? '#4C4C4C' : '#808080'}
+            variant={'Body2'}
           />
         </div>
       )}
 
       <input
-        onFocus={onfocus}
-        onBlur={onBlur}
-        value={value}
         className={`${s[variant]} ${disabled ? s.disabled : errorMessage ? s.error : s.input} ${
           variant === 'search' || variant === 'password' ? s.withIcon : ''
         }`}
         disabled={disabled}
-        type={inputType}
+        onBlur={onBlur}
         onChange={changeValue}
+        onFocus={onfocus}
+        type={inputType}
+        value={value}
         {...restProps}
       />
       {(variant === 'password' || (variant === 'search' && value && !disabled)) && (
         <ReactSVG
-          src={currentImgSrc}
           className={disabled && variant !== 'search' ? s.svg2 : s.svg}
           onClick={svgOnClick}
+          src={currentImgSrc}
         />
       )}
       {variant === 'search' && (
         <ReactSVG
           className={`${searchIconStyle} ${disabled ? s.disabledSearchIcon : s.searchIcon} `}
-          src={searchIcon}
           onClick={findItem}
+          src={searchIcon}
         />
       )}
-      {/* <div className={s.svgFocused}>hello</div> */}
     </div>
   )
 }

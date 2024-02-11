@@ -1,17 +1,19 @@
 import React from 'react'
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import s from './SettingsDropDown.module.scss'
-import settingIcon from '@/img/settings.svg'
 import { ReactSVG } from 'react-svg'
-import playIcon from '@/img/playCircleIcon.svg'
+
 import editIcon from '@/img/editIcon.svg'
+import playIcon from '@/img/playCircleIcon.svg'
+import settingIcon from '@/img/settings.svg'
 import trashIcon from '@/img/trashIcon.svg'
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+
+import s from './SettingsDropDown.module.scss'
 
 export const SettingsDropDown = () => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button className={s.IconButton} aria-label="Customise options">
+        <button aria-label={'Customise options'} className={s.IconButton}>
           <ReactSVG src={settingIcon} />
         </button>
       </DropdownMenu.Trigger>

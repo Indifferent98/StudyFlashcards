@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
-import * as Checkbox from '@radix-ui/react-checkbox'
-import s from './CheckBox.module.scss'
 import { ReactSVG } from 'react-svg'
+
 import checkIcon from '@/img/checkIcon.svg'
+import * as Checkbox from '@radix-ui/react-checkbox'
+
+import s from './CheckBox.module.scss'
+
 import { Typography } from '../Typography'
 
 type Props = {
@@ -23,11 +26,11 @@ export const SuperCheckBox = ({ disabled = false, title }: Props) => {
           <div className={`${s.unChecked} ${disabled && s.disabledUnchecked}`}></div>
         ) : (
           <Checkbox.Root
-            className={`${s.checkBox} ${checked ? s.checked : ''} ${disabled && s.disabled}`}
             checked={checked}
+            className={`${s.checkBox} ${checked ? s.checked : ''} ${disabled && s.disabled}`}
           >
             <Checkbox.Indicator className={s.CheckboxIndicator}>
-              <ReactSVG src={checkIcon} className={`${disabled ? s.svgDisabled : s.svg}`} />
+              <ReactSVG className={`${disabled ? s.svgDisabled : s.svg}`} src={checkIcon} />
             </Checkbox.Indicator>
           </Checkbox.Root>
         )}
@@ -35,11 +38,11 @@ export const SuperCheckBox = ({ disabled = false, title }: Props) => {
       </div>
       {title && (
         <Typography
-          variant="Body2"
-          className={s.title}
+          as={'span'}
           children={title}
-          as="span"
+          className={s.title}
           color={disabled ? '#808080' : ''}
+          variant={'Body2'}
         />
       )}
     </div>

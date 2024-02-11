@@ -1,27 +1,28 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
 import React from 'react'
+
 import s from './Typography.module.scss'
 
 type TypographyVariant =
+  | 'Body1'
+  | 'Body2'
+  | 'Caption'
   | 'H1'
   | 'H2'
   | 'H3'
   | 'H4'
-  | 'Body1'
-  | 'Subtitle1'
-  | 'Body2'
-  | 'Subtitle2'
-  | 'Caption'
-  | 'Overline'
   | 'Link1'
   | 'Link2'
+  | 'Overline'
+  | 'Subtitle1'
+  | 'Subtitle2'
 
 type Props<T extends ElementType> = {
   as?: T
-  textColor?: 'light' | 'dark'
-  variant: TypographyVariant
   className?: any
   color?: string
+  textColor?: 'dark' | 'light'
+  variant: TypographyVariant
 } & ComponentPropsWithoutRef<T>
 
 export const Typography = <T extends ElementType = 'div'>(
@@ -29,17 +30,17 @@ export const Typography = <T extends ElementType = 'div'>(
 ) => {
   const {
     as: Component = 'div',
-    variant,
     className,
-    textColor = 'light',
     color = '',
+    textColor = 'light',
+    variant,
     ...restProps
   } = props
 
   return (
     <Component
-      style={{ color: color }}
       className={`${s[variant]} ${s[textColor]} ${className}`}
+      style={{ color: color }}
       {...restProps}
     />
   )

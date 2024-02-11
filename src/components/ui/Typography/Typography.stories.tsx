@@ -4,7 +4,8 @@ import { Typography } from './Typography'
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: 'Example/Typography',
+  // More on argTypes: https://storybook.js.org/docs/api/argtypes
+  argTypes: {},
   component: Typography,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -12,8 +13,7 @@ const meta = {
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
-  argTypes: {},
+  title: 'Example/Typography',
 } satisfies Meta<typeof Typography>
 
 export default meta
@@ -23,18 +23,18 @@ export const allTypography: Story = {
   render: () => {
     return (
       <div>
-        <Typography variant="H1" children="H1" />
-        <Typography variant="H2" children="H2" />
-        <Typography variant="H3" children="H3" />
-        <Typography variant="H4" children="H4" />
-        <Typography variant="Body1" children="Body1" />
-        <Typography variant="Body2" children="Body2" />
-        <Typography variant="Caption" children="Caption" />
-        <Typography variant="Link1" children="Link1" />
-        <Typography variant="Link2" children="Link2" />
-        <Typography variant="Overline" children="Overline" />
-        <Typography variant="Subtitle1" children="Subtitle1" />
-        <Typography variant="Subtitle2" children="Subtitle2" />
+        <Typography children={'H1'} variant={'H1'} />
+        <Typography children={'H2'} variant={'H2'} />
+        <Typography children={'H3'} variant={'H3'} />
+        <Typography children={'H4'} variant={'H4'} />
+        <Typography children={'Body1'} variant={'Body1'} />
+        <Typography children={'Body2'} variant={'Body2'} />
+        <Typography children={'Caption'} variant={'Caption'} />
+        <Typography children={'Link1'} variant={'Link1'} />
+        <Typography children={'Link2'} variant={'Link2'} />
+        <Typography children={'Overline'} variant={'Overline'} />
+        <Typography children={'Subtitle1'} variant={'Subtitle1'} />
+        <Typography children={'Subtitle2'} variant={'Subtitle2'} />
       </div>
     )
   },

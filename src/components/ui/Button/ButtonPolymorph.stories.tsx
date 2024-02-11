@@ -4,7 +4,8 @@ import { Button } from './Button'
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: 'Example/ButtonPolymorph',
+  // More on argTypes: https://storybook.js.org/docs/api/argtypes
+  argTypes: {},
   component: Button,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -12,8 +13,7 @@ const meta = {
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
-  argTypes: {},
+  title: 'Example/ButtonPolymorph',
 } satisfies Meta<typeof Button>
 
 export default meta
@@ -25,15 +25,15 @@ export const PolymorphPrimaryButton: Story = {
 }
 
 export const SecondaryButton: Story = {
-  args: { variant: 'secondary', children: 'Secondary', disabled: false },
+  args: { children: 'Secondary', disabled: false, variant: 'secondary' },
 }
 
 export const PrimaryFullWidth: Story = {
   args: {
-    variant: 'primary',
     children: 'Primary Full Width',
     disabled: false,
     fullWidth: true,
+    variant: 'primary',
   },
   parameters: {
     layout: '',
@@ -42,10 +42,10 @@ export const PrimaryFullWidth: Story = {
 
 export const SecondaryFullWidth: Story = {
   args: {
-    variant: 'secondary',
     children: 'Secondary Full Width',
     disabled: false,
     fullWidth: true,
+    variant: 'secondary',
   },
   parameters: {
     layout: '',
@@ -54,8 +54,8 @@ export const SecondaryFullWidth: Story = {
 
 export const LinkButton: Story = {
   args: {
-    children: 'Link like look a button',
     as: 'a',
+    children: 'Link like look a button',
     href: 'https://google.com',
   },
 }
@@ -65,5 +65,5 @@ export const PrimaryWithIcon: Story = {
 }
 
 export const SecondaryWithIcon: Story = {
-  args: { variant: 'secondary', children: 'Secondary', disabled: false, withIcon: true },
+  args: { children: 'Secondary', disabled: false, variant: 'secondary', withIcon: true },
 }
