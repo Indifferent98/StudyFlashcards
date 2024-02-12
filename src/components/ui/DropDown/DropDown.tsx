@@ -1,6 +1,5 @@
 import React from 'react'
 import { ReactSVG } from 'react-svg'
-
 import editIcon from '@/img/editIcon.svg'
 import playIcon from '@/img/playCircleIcon.svg'
 import settingIcon from '@/img/settings.svg'
@@ -8,7 +7,7 @@ import trashIcon from '@/img/trashIcon.svg'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import profileAvatar from '@/img/30142bfde5bdcdb7549cf75f7a51d100.png'
 import personIcon from '@/img/personIcon.svg'
-import logOutIcon from '@/img/logOutIcon/logOutIcon.svg'
+import logOutIcon from '@/img/logOutIcon.svg'
 import s from './DropDown.module.scss'
 import { Typography } from '../Typography'
 type Props = { variant: 'Settings' | 'Profile'; nickName?: string; email?: string }

@@ -39,10 +39,10 @@ export const Input = ({
   const [searchIconStyle, setSearchIconStyle] = useState<any>(s.searchUnfocused)
 
   const onfocus = () => {
-    setSearchIconStyle(s.searchFocused)
+    // setSearchIconStyle(s.searchFocused)
   }
   const onBlur = () => {
-    setSearchIconStyle(s.searchUnfocused)
+    // setSearchIconStyle(s.searchUnfocused)
   }
 
   return (

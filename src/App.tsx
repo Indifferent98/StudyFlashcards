@@ -7,21 +7,33 @@ import { SuperSlider } from './components/ui/Slider/Slider'
 
 export const App = () => {
   return (
-    <div style={{ margin: '250px' }}>
-      <div>hello</div>
-      <SuperCheckBox title={'hohhohooh'} />
-      <SuperCheckBox />
-      <SuperSlider />
-
-      <Input disabled variant={'search'} />
-      <div>helo</div>
-      <div>helo</div>
-      <div>helo</div>
-      <div>helo</div>
-      <div>helo</div>
-      <div>helo</div>
-      <div>helo</div>
-      <div>helo</div>
-    </div>
+    <>
+      <div style={{ marginLeft: '300px', marginTop: '100px' }}>
+        <DropDown variant="Profile" />
+      </div>
+      <div style={{ margin: '100px' }}>
+        {' '}
+        <DropDown variant="Settings" />
+      </div>
+      <div style={{ margin: '100px' }}>
+        <SuperSlider />
+      </div>
+      <div style={{ margin: '100px' }}>
+        <Input />
+      </div>
+      <div style={{ margin: '100px' }}>
+        <SuperCheckBox />
+      </div>
+      <div style={{ margin: '100px' }}>
+        <SuperCheckBox title="hello" />
+      </div>
+      <div style={{ margin: '100px' }}>
+        <Input variant="search" />
+      </div>
+      <div style={{ margin: '100px' }}>
+        <Input variant="password" />
+      </div>
+      <div style={{ margin: '100px' }}></div>
+    </>
   )
 }

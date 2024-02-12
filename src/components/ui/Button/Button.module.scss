@@ -71,5 +71,12 @@ a:focus {
 
 .logo {
   margin-right: 10px;
-  fill: red;
+  display: inline-block;
+}
+
+.disabledLogo {
+  fill: #c3c1c7;
+}
+.defaultLogo {
+  fill: white;
 }
