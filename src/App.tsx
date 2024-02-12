@@ -2,7 +2,7 @@ import React from 'react'
 
 import { SuperCheckBox } from './components/ui/CheckBox'
 import { Input } from './components/ui/Input'
-import { SettingsDropDown } from './components/ui/SettingsDropDown/SettingsDropDown'
+import { DropDown } from './components/ui/DropDown/DropDown'
 import { SuperSlider } from './components/ui/Slider/Slider'
 
 export const App = () => {
