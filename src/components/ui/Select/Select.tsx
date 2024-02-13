@@ -8,8 +8,16 @@ type Props = {
   selectName: string
   helperText?: string
   selectedItems: string[]
+  isInlineBlock?: boolean
+  width?: 'fullWidth' | 'max-content' | 'default'
 }
-export const Select = ({ selectName, helperText, selectedItems }: Props) => {
+export const Select = ({
+  selectName,
+  helperText,
+  selectedItems,
+  isInlineBlock = false,
+  width = 'default',
+}: Props) => {
   const changeSelectItem = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (showMode && e.key === 'ArrowDown' && !(hoveredItem >= selectedItems.length - 1)) {
       setHoveredItem(hoveredItem + 1)
@@ -39,16 +47,25 @@ export const Select = ({ selectName, helperText, selectedItems }: Props) => {
     setShowMode(showMode ? false : true)
   }
 
-  console.log(showMode, '3')
   return (
-    <div className={s.wrapper}>
+    <div
+      className={`${s.wrapper} ${isInlineBlock && s.inlineDiv} ${
+        width === 'fullWidth' ? s.fullWidth : width === 'max-content' ? s.maxContent : ''
+      }`}
+    >
+      {<Typography variant="Body2" children={helperText} color="#808080" />}
       <button
-        className={`${s.header} ${s.button} ${showMode ? s.buttonClose : s.buttonOpen}`}
+        className={` ${s.header} ${s.button} ${showMode ? s.buttonClose : s.buttonOpen}`}
         onClick={changeShowMode}
         onKeyDown={changeSelectItem}
         // onMouseMove={mouseMove}
       >
-        <Typography variant="Body1" children={currentSelectedItem} as="span" />
+        <Typography
+          variant="Body1"
+          children={currentSelectedItem}
+          as="span"
+          style={{ paddingRight: '5px' }}
+        />
         <ReactSVG src={showMode ? arrowDown : arrowUp} className={s.svg} />
       </button>
       {showMode && (

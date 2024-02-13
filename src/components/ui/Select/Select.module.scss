@@ -2,6 +2,9 @@
   background-color: var(--color-dark-900);
   text-align: start;
 }
+.button:hover {
+  background-color: var(--color-dark-500);
+}
 .buttonOpen {
   border-radius: 2px;
 }
@@ -12,7 +15,6 @@
 .svg {
   display: inline-block;
   position: relative;
-  // padding-right: 15px;
   top: 1px;
   float: right;
 }
@@ -20,13 +22,16 @@
 .wrapper {
   width: 210px;
 }
+.maxContent {
+  width: max-content;
+}
 
 .test {
   border: 1px solid var(--color-dark-300);
   border-top: none;
   position: absolute;
   background-color: black;
-  width: 210px;
+  width: inherit;
 }
 
 .item {
@@ -41,7 +46,7 @@
 .header {
   border: 1px solid var(--color-dark-300);
   display: inline-block;
-  width: 210px;
+  width: inherit;
   padding: 6px 12px;
 }
 
@@ -53,4 +58,12 @@
 .hoveredItem {
   color: var(--color-primary-300);
   background-color: var(--color-primary-900);
+}
+
+.inlineDiv {
+  display: inline-block;
+}
+
+.fullWidth {
+  width: 100%;
 }

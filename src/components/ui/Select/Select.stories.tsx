@@ -21,6 +21,7 @@ type Story = StoryObj<typeof meta>
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const DefaultSelect: Story = {
   args: {
+    helperText: 'select',
     selectName: 'fruits',
     selectedItems: ['banana', 'apple', 'pineapple', 'carrot', 'potato', 'cucumber'],
   },
