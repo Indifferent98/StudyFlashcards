@@ -1,21 +1,28 @@
 import { ReactSVG } from 'react-svg'
-import s from './Pagination.module.scss'
+
 import leftArrowIcon from '@/img/leftArrow.svg'
 import rightArrowIcon from '@/img/rightArrow.svg'
+
+import s from './Pagination.module.scss'
 import { Select } from '../Select'
-export const Pagination = () => {
+
+type Props = {
+  itemCount: number
+}
+export const Pagination = ({ itemCount }: Props) => {
   return (
     <div className={s.wrapper}>
-      <ReactSVG src={leftArrowIcon} className={s.svg} />
-      <ReactSVG src={rightArrowIcon} className={s.svg} />
+      <ReactSVG className={s.svg} src={leftArrowIcon} />
+      <ReactSVG className={s.svg} src={rightArrowIcon} />
       <div className={s.rightSide}>
-        Показать{' '}
+        Показать
         <Select
-          width="max-content"
-          isInlineBlock={true}
-          selectName="100"
+          isInlineBlock
+          selectName={'100'}
           selectedItems={['10', '20', '30', '50', '100']}
-        />{' '}
+          size={'small'}
+          style={{ margin: '0px 6px' }}
+        />
         на странице
       </div>
     </div>

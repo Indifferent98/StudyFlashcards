@@ -1,5 +1,4 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react'
-import React from 'react'
 
 import s from './Typography.module.scss'
 

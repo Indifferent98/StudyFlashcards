@@ -1,20 +1,23 @@
 import React from 'react'
 import { ReactSVG } from 'react-svg'
+
+import profileAvatar from '@/img/30142bfde5bdcdb7549cf75f7a51d100.png'
 import editIcon from '@/img/editIcon.svg'
+import logOutIcon from '@/img/logOutIcon.svg'
+import personIcon from '@/img/personIcon.svg'
 import playIcon from '@/img/playCircleIcon.svg'
 import settingIcon from '@/img/settings.svg'
 import trashIcon from '@/img/trashIcon.svg'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import profileAvatar from '@/img/30142bfde5bdcdb7549cf75f7a51d100.png'
-import personIcon from '@/img/personIcon.svg'
-import logOutIcon from '@/img/logOutIcon.svg'
+
 import s from './DropDown.module.scss'
+
 import { Typography } from '../Typography'
-type Props = { variant: 'Settings' | 'Profile'; nickName?: string; email?: string }
+type Props = { email?: string; nickName?: string; variant: 'Profile' | 'Settings' }
 export const DropDown = ({
-  variant,
-  nickName = 'Ivan',
   email = 'LongTeeeestEmail@gmail.com',
+  nickName = 'Ivan',
+  variant,
 }: Props) => {
   return (
     <DropdownMenu.Root>
@@ -23,7 +26,7 @@ export const DropDown = ({
           {variant === 'Settings' ? (
             <ReactSVG src={settingIcon} />
           ) : (
-            <img src={profileAvatar} alt="profileLogo" className={s.profileAvatar} />
+            <img alt={'profileLogo'} className={s.profileAvatar} src={profileAvatar} />
           )}
         </button>
       </DropdownMenu.Trigger>
@@ -46,14 +49,14 @@ export const DropDown = ({
               <div className={s.profileDropDownItem}>
                 <div className={s.leftSlot}>
                   <img
-                    src={profileAvatar}
-                    alt="profileLogo"
+                    alt={'profileLogo'}
                     className={`${s.profileAvatar} ${s.avatarItem}`}
+                    src={profileAvatar}
                   />
                 </div>
                 <div className={s.profileInfoBlock}>
-                  <Typography variant="Subtitle2" children={nickName} />
-                  <Typography variant="Caption" color={'#808080'} children={email} />
+                  <Typography children={nickName} variant={'Subtitle2'} />
+                  <Typography children={email} color={'#808080'} variant={'Caption'} />
                 </div>
               </div>
             )}
@@ -86,7 +89,7 @@ export const DropDown = ({
             ) : (
               <>
                 <div className={s.leftSlot}>
-                  <ReactSVG src={logOutIcon} className={s.logOutSvg} />
+                  <ReactSVG className={s.logOutSvg} src={logOutIcon} />
                 </div>
                 <span>Sign Out</span>
               </>

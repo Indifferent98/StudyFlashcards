@@ -1,23 +1,31 @@
+import { ComponentPropsWithoutRef, MouseEvent, useEffect, useState } from 'react'
 import { ReactSVG } from 'react-svg'
-import { Typography } from '../Typography'
-import s from './Select.module.scss'
-import arrowUp from '@/img/arrowUpIcon.svg'
+
 import arrowDown from '@/img/arrowDown.svg'
-import { useEffect, useState, MouseEvent } from 'react'
+import arrowUp from '@/img/arrowUpIcon.svg'
+
+import s from './Select.module.scss'
+
+import { Typography } from '../Typography'
 type Props = {
-  selectName: string
   helperText?: string
-  selectedItems: string[]
   isInlineBlock?: boolean
-  width?: 'fullWidth' | 'max-content' | 'default'
-}
-export const Select = ({
-  selectName,
-  helperText,
-  selectedItems,
-  isInlineBlock = false,
-  width = 'default',
-}: Props) => {
+  pixelWidth?: number
+  selectName: string
+  selectedItems: string[]
+  size?: 'small'
+  width?: 'default' | 'fullWidth' | 'max-content'
+} & ComponentPropsWithoutRef<'div'>
+export const Select = (props: Props) => {
+  const {
+    helperText,
+    isInlineBlock = false,
+    selectName,
+    selectedItems,
+    size,
+    width = 'default',
+    ...restProps
+  } = props
   const changeSelectItem = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (showMode && e.key === 'ArrowDown' && !(hoveredItem >= selectedItems.length - 1)) {
       setHoveredItem(hoveredItem + 1)
@@ -34,8 +42,10 @@ export const Select = ({
   const closeDropDownSelectMenu = () => {
     setShowMode(false)
   }
+
   useEffect(() => {
     window.addEventListener('click', closeDropDownSelectMenu)
+
     return () => window.removeEventListener('click', closeDropDownSelectMenu)
   }, [])
 
@@ -51,22 +61,24 @@ export const Select = ({
     <div
       className={`${s.wrapper} ${isInlineBlock && s.inlineDiv} ${
         width === 'fullWidth' ? s.fullWidth : width === 'max-content' ? s.maxContent : ''
-      }`}
+      } ${size === 'small' && s.small}`}
+      {...restProps}
     >
-      {<Typography variant="Body2" children={helperText} color="#808080" />}
+      {<Typography children={helperText} color={'#808080'} variant={'Body2'} />}
       <button
-        className={` ${s.header} ${s.button} ${showMode ? s.buttonClose : s.buttonOpen}`}
+        className={` ${s.header} ${s.button} ${showMode ? s.buttonClose : s.buttonOpen} ${
+          size === 'small' && s.smallButton
+        }`}
         onClick={changeShowMode}
         onKeyDown={changeSelectItem}
-        // onMouseMove={mouseMove}
       >
         <Typography
-          variant="Body1"
+          as={'span'}
           children={currentSelectedItem}
-          as="span"
           style={{ paddingRight: '5px' }}
+          variant={'Body1'}
         />
-        <ReactSVG src={showMode ? arrowDown : arrowUp} className={s.svg} />
+        <ReactSVG className={s.svg} src={showMode ? arrowDown : arrowUp} />
       </button>
       {showMode && (
         <div className={s.test}>
@@ -79,6 +91,7 @@ export const Select = ({
               setCurrentSelectedItem(item)
               setShowMode(false)
             }
+
             return (
               <div
                 className={`${s.item} ${hoveredItem === i && s.hoveredItem}`}

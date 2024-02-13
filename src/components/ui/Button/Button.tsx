@@ -1,17 +1,19 @@
 import React from 'react'
 import { ComponentPropsWithoutRef, ElementType } from 'react'
+
 import LogOutIcon from '@/img/logOutIcon.svg'
 // import { LogOutIcon } from '@/img/logOutIcon'
 
-import s from './Button.module.scss'
 import { ReactSVG } from 'react-svg'
+
+import s from './Button.module.scss'
 
 type Props<T extends ElementType> = {
   as?: T
+  disabled?: boolean
   fullWidth?: boolean
   variant?: 'primary' | 'secondary'
   withIcon?: boolean
-  disabled?: boolean
 } & ComponentPropsWithoutRef<T>
 
 export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
@@ -19,10 +21,10 @@ export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
     as: Component = 'button',
     children,
     className,
+    disabled = false,
     fullWidth = false,
     variant = 'primary',
     withIcon = false,
-    disabled = false,
     ...restProps
   } = props
 
@@ -32,10 +34,10 @@ export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
         <>
           {withIcon && (
             <ReactSVG
-              src={LogOutIcon}
               className={`${s.logo} ${disabled ? s.disabledLogo : s.defaultLogo} ${
                 Component === 'button' && s.button
               }`}
+              src={LogOutIcon}
             />
           )}
           {props.children}
