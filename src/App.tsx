@@ -1,39 +1,19 @@
 import React from 'react'
 
-import { SuperCheckBox } from './components/ui/CheckBox'
-import { Input } from './components/ui/Input'
-import { DropDown } from './components/ui/DropDown/DropDown'
-import { SuperSlider } from './components/ui/Slider/Slider'
+import { Select } from './components/ui/Select'
+import { Button } from './components/ui/Button'
 
 export const App = () => {
   return (
-    <>
-      <div style={{ marginLeft: '300px', marginTop: '100px' }}>
-        <DropDown variant="Profile" />
-      </div>
+    <div>
+      <Button children="heeee" />
       <div style={{ margin: '100px' }}>
-        {' '}
-        <DropDown variant="Settings" />
+        <Select
+          selectName="fruits"
+          selectedItems={['banana', 'apple', 'pineapple', 'carrot', 'potato', 'cucumber']}
+        />
+        <div>hlelo</div>
       </div>
-      <div style={{ margin: '100px' }}>
-        <SuperSlider />
-      </div>
-      <div style={{ margin: '100px' }}>
-        <Input />
-      </div>
-      <div style={{ margin: '100px' }}>
-        <SuperCheckBox />
-      </div>
-      <div style={{ margin: '100px' }}>
-        <SuperCheckBox title="hello" />
-      </div>
-      <div style={{ margin: '100px' }}>
-        <Input variant="search" />
-      </div>
-      <div style={{ margin: '100px' }}>
-        <Input variant="password" />
-      </div>
-      <div style={{ margin: '100px' }}></div>
-    </>
+    </div>
   )
 }

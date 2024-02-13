@@ -1,4 +1,4 @@
-button {
+.button {
   border: none;
   color: var(--color-light-100);
   padding: 6px 28px;
@@ -9,7 +9,7 @@ button {
   cursor: pointer;
 }
 
-button:focus {
+.button:focus {
   outline: 2px solid var(--color-info-700);
 }
 
@@ -70,8 +70,10 @@ a:focus {
 }
 
 .logo {
+  position: relative;
   margin-right: 10px;
   display: inline-block;
+  top: 3px;
 }
 
 .disabledLogo {

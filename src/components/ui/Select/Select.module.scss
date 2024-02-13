@@ -1,0 +1,56 @@
+.button {
+  background-color: var(--color-dark-900);
+  text-align: start;
+}
+.buttonOpen {
+  border-radius: 2px;
+}
+.buttonClose {
+  border-radius: 2px 2px 0px 0px;
+}
+
+.svg {
+  display: inline-block;
+  position: relative;
+  // padding-right: 15px;
+  top: 1px;
+  float: right;
+}
+
+.wrapper {
+  width: 210px;
+}
+
+.test {
+  border: 1px solid var(--color-dark-300);
+  border-top: none;
+  position: absolute;
+  background-color: black;
+  width: 210px;
+}
+
+.item {
+  padding: 6px 12px;
+}
+
+// .item:hover {
+//   color: var(--color-primary-300);
+//   background-color: var(--color-primary-900);
+// }
+
+.header {
+  border: 1px solid var(--color-dark-300);
+  display: inline-block;
+  width: 210px;
+  padding: 6px 12px;
+}
+
+.button:focus {
+  outline: none;
+  // all: unset;
+}
+
+.hoveredItem {
+  color: var(--color-primary-300);
+  background-color: var(--color-primary-900);
+}

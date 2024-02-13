@@ -26,9 +26,7 @@ export const SuperSlider = () => {
           <Slider.Track className={s.SliderTrack}>
             <Slider.Range className={s.SliderRange} />
           </Slider.Track>
-
           <Slider.Thumb className={s.SliderThumb} />
-
           <Slider.Thumb className={s.SliderThumb} />
         </Slider.Root>
       </form>

@@ -33,15 +33,17 @@ export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
           {withIcon && (
             <ReactSVG
               src={LogOutIcon}
-              className={`${s.logo} ${disabled ? s.disabledLogo : s.defaultLogo}`}
+              className={`${s.logo} ${disabled ? s.disabledLogo : s.defaultLogo} ${
+                Component === 'button' && s.button
+              }`}
             />
           )}
           {props.children}
         </>
       }
-      className={`${Component === 'button' ? s[variant] : ''} ${fullWidth ? s.fullWidth : ''} ${
-        withIcon ? s.withIcon : s.withoutIcon
-      }  ${className}`}
+      className={`${Component === 'button' && s.button} ${s[variant]} ${
+        fullWidth ? s.fullWidth : ''
+      } ${withIcon ? s.withIcon : s.withoutIcon}  ${className}`}
       {...restProps}
     />
   )
