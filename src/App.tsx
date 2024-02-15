@@ -8,7 +8,7 @@ export const App = () => {
     <div>
       <Button children={'heeee'} />
       <div style={{ margin: '100px' }}>
-        <Pagination />
+        <Pagination totalItems={101} />
         <div>hlelo</div>
       </div>
     </div>

@@ -3,9 +3,31 @@
 }
 
 .svg {
+  width: 16px;
+  height: 16px;
   fill: white;
   display: inline-block;
+
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
 }
 .rightSide {
   display: inline-block;
+}
+
+.pageButtons {
+  display: inline-block;
+}
+
+.pageButton {
+  border: none;
+  width: 24px;
+  height: 24px;
+  margin-left: 12px;
+  background-color: black;
+}
+
+.pageButton:focus {
+  outline: 2px solid var(--color-info-900);
 }
