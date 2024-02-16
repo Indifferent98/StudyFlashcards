@@ -11,10 +11,11 @@ type Props = {
   helperText?: string
   isInlineBlock?: boolean
   pixelWidth?: number
-  selectName: string
+  selectName: string | number
   selectedItems: string[]
   size?: 'small'
   width?: 'default' | 'fullWidth' | 'max-content'
+  setChooseItem?: (page: number) => void
 } & ComponentPropsWithoutRef<'div'>
 export const Select = (props: Props) => {
   const {
@@ -24,8 +25,10 @@ export const Select = (props: Props) => {
     selectedItems,
     size,
     width = 'default',
+    setChooseItem,
     ...restProps
   } = props
+
   const changeSelectItem = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (showMode && e.key === 'ArrowDown' && !(hoveredItem >= selectedItems.length - 1)) {
       setHoveredItem(hoveredItem + 1)
@@ -55,6 +58,9 @@ export const Select = (props: Props) => {
   const changeShowMode = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
     setShowMode(showMode ? false : true)
+  }
+  const chooseItem = (item: number) => {
+    setChooseItem && setChooseItem(item)
   }
 
   return (
@@ -90,6 +96,7 @@ export const Select = (props: Props) => {
               e.stopPropagation()
               setCurrentSelectedItem(item)
               setShowMode(false)
+              setChooseItem && setChooseItem(+item)
             }
 
             return (

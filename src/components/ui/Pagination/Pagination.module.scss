@@ -1,23 +1,26 @@
 .wrapper {
   width: max-content;
+  display: flex;
+  height: 24px;
+
+  text-align: center;
 }
 
 .svg {
   width: 16px;
   height: 16px;
   fill: white;
-  display: inline-block;
-
   vertical-align: middle;
   position: relative;
-  top: -2px;
+  top: 3px;
 }
 .rightSide {
-  display: inline-block;
+  margin-left: 24px;
+  align-self: center;
 }
 
 .pageButtons {
-  display: inline-block;
+  display: flex;
 }
 
 .pageButton {
@@ -26,8 +29,26 @@
   height: 24px;
   margin-left: 12px;
   background-color: black;
+  justify-content: center;
+  align-self: center;
+  display: flex;
+  align-items: center;
 }
 
 .pageButton:focus {
   outline: 2px solid var(--color-info-900);
+}
+
+.pageButton:hover {
+  background-color: var(--color-dark-500);
+}
+
+.currentPage {
+  background-color: white;
+  color: black;
+  pointer-events: none;
+}
+
+.rightArrow {
+  margin-left: 12px;
 }
