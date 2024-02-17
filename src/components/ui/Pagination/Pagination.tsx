@@ -1,8 +1,6 @@
 import { ReactSVG } from 'react-svg'
-
 import leftArrowIcon from '@/img/leftArrow.svg'
 import rightArrowIcon from '@/img/rightArrow.svg'
-
 import s from './Pagination.module.scss'
 import { Select } from '../Select'
 import { useState } from 'react'
@@ -16,7 +14,6 @@ export const Pagination = ({ totalItems }: Props) => {
 
   let pagesCount = Math.ceil(totalItems / pageSize)
   let mappedPages = []
-  // debugger
   let i = 1
   while (i <= pagesCount) {
     mappedPages.push(i)

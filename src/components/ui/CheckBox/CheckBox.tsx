@@ -34,7 +34,7 @@ export const SuperCheckBox = ({ disabled = false, title }: Props) => {
             </Checkbox.Indicator>
           </Checkbox.Root>
         )}
-        {!disabled && <span className={s.circle}></span>}
+        {!disabled && <span className={`${disabled ? s.LabelDisabled : s.Label}`}></span>}
       </div>
       {title && (
         <Typography
