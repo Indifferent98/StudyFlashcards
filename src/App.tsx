@@ -5,7 +5,7 @@ import { Header } from './components/ui/Header'
 
 export const App = () => {
   return (
-    <div style={{ margin: '70px' }}>
+    <div>
       <Header />
 
       <RadioGroup disabled={false} />
