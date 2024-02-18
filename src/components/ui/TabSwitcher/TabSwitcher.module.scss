@@ -1,0 +1,36 @@
+.button {
+  all: unset;
+}
+
+.activeTab {
+  display: inline-block;
+  padding: 6px 24px;
+  border: 1px solid var(--color-primary-500);
+  background-color: var(--color-primary-500);
+}
+.defaultTab {
+  display: inline-block;
+  padding: 6px 24px;
+  border: 1px solid var(--color-dark-300);
+  background-color: black;
+}
+
+.leftItem {
+  border-radius: 2px 0px 0px 2px;
+}
+.rightItem {
+  border-radius: 0px 2px 2px 0px;
+}
+
+.wrapper {
+  width: max-content;
+}
+
+.helperText {
+  margin-bottom: 5px;
+}
+
+.button:hover {
+  border: 1px solid var(--color-dark-100);
+  background-color: var(--color-dark-100);
+}
