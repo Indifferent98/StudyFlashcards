@@ -1,0 +1,17 @@
+.star {
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.star:last-child {
+  margin-right: 0px;
+}
+
+.wrapper {
+  width: max-content;
+}
+
+.activeStar {
+  fill: gold;
+}
