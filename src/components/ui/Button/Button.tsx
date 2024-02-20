@@ -14,6 +14,7 @@ type Props<T extends ElementType> = {
   fullWidth?: boolean
   variant?: 'primary' | 'secondary'
   withIcon?: boolean
+  height?: string
 } & ComponentPropsWithoutRef<T>
 
 export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
@@ -25,6 +26,7 @@ export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
     fullWidth = false,
     variant = 'primary',
     withIcon = false,
+    height,
     ...restProps
   } = props
 
@@ -47,6 +49,7 @@ export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
         fullWidth ? s.fullWidth : ''
       } ${withIcon ? s.withIcon : s.withoutIcon}  ${className}`}
       {...restProps}
+      style={{ height: `${height && height}` }}
     />
   )
 }

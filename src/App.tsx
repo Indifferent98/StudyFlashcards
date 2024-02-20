@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { RadioGroup } from './components/ui/RadioGroup'
 import { Header } from './components/ui/Header'
@@ -7,8 +7,11 @@ import { Select } from './components/ui/Select'
 import { TableItem } from './components/ui/Table/TableItem'
 import { Stars } from './components/ui/Table/Stars'
 import { Table } from './components/ui/Table/Table'
-
+import { Card } from './components/ui/Card'
+import s from './App.module.scss'
 export const App = () => {
+  // const [cardIsOpen, setCardIsOpen] = useState(true)
+
   return (
     <div>
       <Header />
@@ -18,8 +21,13 @@ export const App = () => {
       <div>
         <Select selectedItems={['234234', '223434', '2', 'aqweqweq']} selectName={'tutle'} />
       </div>
-
       <Table />
+
+      <Card
+        deckName="Planets"
+        question={'how much planets exists'}
+        answer="Planets count is eight"
+      />
     </div>
   )
 }

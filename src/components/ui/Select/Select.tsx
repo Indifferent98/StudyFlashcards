@@ -48,7 +48,6 @@ export const Select = (props: Props) => {
 
   useEffect(() => {
     window.addEventListener('click', closeDropDownSelectMenu)
-
     return () => window.removeEventListener('click', closeDropDownSelectMenu)
   }, [])
 
