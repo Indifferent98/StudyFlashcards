@@ -77,13 +77,15 @@ export const Select = (props: Props) => {
         onClick={changeShowMode}
         onKeyDown={changeSelectItem}
       >
-        <Typography
-          as={'span'}
-          children={currentSelectedItem}
-          style={{ paddingRight: '5px' }}
-          variant={'Body1'}
-        />
-        <ReactSVG className={s.svg} src={showMode ? arrowDown : arrowUp} />
+        <div style={{ padding: '6px 12px' }}>
+          <Typography
+            as={'span'}
+            children={currentSelectedItem}
+            style={{ paddingRight: '5px' }}
+            variant={'Body1'}
+          />
+          <ReactSVG className={s.svg} src={showMode ? arrowDown : arrowUp} />
+        </div>
       </button>
       {showMode && (
         <div className={s.test}>
