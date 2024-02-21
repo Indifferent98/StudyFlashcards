@@ -89,8 +89,9 @@ export const Pagination = ({ totalItems }: Props) => {
           size={'small'}
           style={{ margin: '0px 6px' }}
           setChooseItem={setPageSize}
+          width="max-content"
         />
-        на странице
+        <span style={{ marginLeft: '10px' }}>на странице</span>
       </div>
     </div>
   )

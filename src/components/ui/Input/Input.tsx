@@ -46,7 +46,7 @@ export const Input = ({
   }
 
   return (
-    <div className={s.wrapper}>
+    <div className={`${s.wrapper} ${fullWidth && s.fullWidth}`}>
       {helperMessage && (
         <div className={s.top}>
           <Typography
@@ -61,7 +61,7 @@ export const Input = ({
       <input
         className={`${s[variant]} ${disabled ? s.disabled : errorMessage ? s.error : s.input} ${
           variant === 'search' || variant === 'password' ? s.withIcon : ''
-        }`}
+        } ${fullWidth && s.fullWidth}`}
         disabled={disabled}
         onBlur={onBlur}
         onChange={changeValue}
