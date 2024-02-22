@@ -10,6 +10,7 @@ import { Table } from './components/ui/Table/Table'
 import { Card } from './components/ui/Card'
 import s from './App.module.scss'
 import { Modal } from './components/ui/Modal'
+import { Button } from './components/ui/Button'
 export const App = () => {
   // const [cardIsOpen, setCardIsOpen] = useState(true)
 
@@ -31,6 +32,7 @@ export const App = () => {
         question={'how much planets exists'}
         answer="Planets count is eight"
       />
+      <Button variant="primary" withIcon={true} children={'hello'} />
     </div>
   )
 }

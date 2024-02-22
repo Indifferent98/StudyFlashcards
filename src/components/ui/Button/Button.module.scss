@@ -7,7 +7,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  height: 24px;
+  box-sizing: border-box;
+  height: 36px;
 }
 
 .button:focus {
@@ -55,12 +56,13 @@ a {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--color-primary-500);
+  color: var(--color-primary-900);
   width: max-content;
+  color: white;
 }
 
 a:hover {
-  color: var(--color-primary-300);
+  color: var(--color-primary-500);
 }
 a:active {
   color: var(--color-primary-700);
@@ -73,10 +75,15 @@ a:focus {
 }
 
 .logo {
-  position: relative;
-  margin-right: 10px;
+  // display: inline-block;
+
   display: inline-block;
-  top: 3px;
+  position: relative;
+
+  padding: 0px;
+  margin-right: 10px;
+
+  top: 9px;
 }
 
 .disabledLogo {
@@ -87,5 +94,9 @@ a:focus {
 }
 
 .inlineBlock {
+  display: inline-block;
+}
+
+.childrenWrapper {
   display: inline-block;
 }

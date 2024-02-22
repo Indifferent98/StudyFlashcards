@@ -44,7 +44,7 @@ export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
               src={LogOutIcon}
             />
           )}
-          {props.children}
+          <div className={s.childrenWrapper}>{props.children}</div>
         </>
       }
       className={`${Component === 'button' && s.button} ${s[variant]} ${
