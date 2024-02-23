@@ -1,16 +1,10 @@
-import React, { useState } from 'react'
-
-import { RadioGroup } from './components/ui/RadioGroup'
-import { Header } from './components/ui/Header'
-import { TabSwitcher } from './components/ui/TabSwitcher'
-import { Select } from './components/ui/Select'
-import { TableItem } from './components/ui/Table/TableItem'
-import { Stars } from './components/ui/Table/Stars'
-import { Table } from './components/ui/Table/Table'
-import { Card } from './components/ui/Card'
-import s from './App.module.scss'
-import { Modal } from './components/ui/Modal'
 import { Button } from './components/ui/Button'
+import { Card } from './components/ui/Card'
+import { Header } from './components/ui/Header'
+import { Modal } from './components/ui/Modal'
+import { Select } from './components/ui/Select'
+import { TabSwitcher } from './components/ui/TabSwitcher'
+import { Table } from './components/ui/Table/Table'
 export const App = () => {
   // const [cardIsOpen, setCardIsOpen] = useState(true)
 
@@ -21,18 +15,18 @@ export const App = () => {
         <TabSwitcher />
       </div>
       <div>
-        <Select selectedItems={['234234', '223434', '2', 'aqweqweq']} selectName={'tutle'} />
+        <Select selectName={'tutle'} selectedItems={['234234', '223434', '2', 'aqweqweq']} />
       </div>
       <Table />
       <div style={{ marginLeft: '50px' }}>
-        <Modal variant="DeleteCard" />
+        <Modal variant={'Card'} />
       </div>
       <Card
-        deckName="Planets"
+        answer={'Planets count is eight'}
+        deckName={'Planets'}
         question={'how much planets exists'}
-        answer="Planets count is eight"
       />
-      <Button variant="primary" withIcon={true} children={'hello'} />
+      <Button children={'hello'} variant={'primary'} withIcon />
     </div>
   )
 }

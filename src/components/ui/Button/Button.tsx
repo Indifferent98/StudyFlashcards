@@ -11,11 +11,11 @@ import s from './Button.module.scss'
 type Props<T extends ElementType> = {
   as?: T
   disabled?: boolean
+  display?: 'inlineBlock'
   fullWidth?: boolean
+  height?: string
   variant?: 'primary' | 'secondary'
   withIcon?: boolean
-  height?: string
-  display?: 'inlineBlock'
 } & ComponentPropsWithoutRef<T>
 
 export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
@@ -24,11 +24,11 @@ export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
     children,
     className,
     disabled = false,
+    display,
     fullWidth = false,
+    height,
     variant = 'primary',
     withIcon = false,
-    height,
-    display,
     ...restProps
   } = props
 

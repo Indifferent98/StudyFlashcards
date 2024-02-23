@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import { ReactSVG } from 'react-svg'
+
 import leftArrowIcon from '@/img/leftArrow.svg'
 import rightArrowIcon from '@/img/rightArrow.svg'
+
 import s from './Pagination.module.scss'
+
 import { Select } from '../Select'
-import { useState } from 'react'
 
 type Props = {
   totalItems: number
@@ -12,21 +15,22 @@ export const Pagination = ({ totalItems }: Props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(100)
 
-  let pagesCount = Math.ceil(totalItems / pageSize)
+  const pagesCount = Math.ceil(totalItems / pageSize)
   let mappedPages = []
   let i = 1
+
   while (i <= pagesCount) {
     mappedPages.push(i)
     i++
   }
   mappedPages = mappedPages.map((elem, i) => (
     <button
-      onClick={() => {
-        setCurrentPage(i)
-      }}
       className={`${s.pageButton} ${i + 1 === currentPage && s.currentPage} ${
         !(i + 1 === currentPage) && s.hoveredButton
       }`}
+      onClick={() => {
+        setCurrentPage(i)
+      }}
     >
       <div>{++i}</div>
     </button>
@@ -44,7 +48,8 @@ export const Pagination = ({ totalItems }: Props) => {
   }
 
   let filteredMappedPages: any = []
-  const ellipsisDiv = <div style={{ width: '24px', height: '24px', marginLeft: '12px' }}>...</div>
+  const ellipsisDiv = <div style={{ height: '24px', marginLeft: '12px', width: '24px' }}>...</div>
+
   if (mappedPages.length <= 7) {
     filteredMappedPages = mappedPages
   }
@@ -71,11 +76,11 @@ export const Pagination = ({ totalItems }: Props) => {
   return (
     <div className={s.wrapper}>
       <div className={s.pageButtons}>
-        <ReactSVG onClick={leftArrowHandler} className={s.svg} src={leftArrowIcon} />
+        <ReactSVG className={s.svg} onClick={leftArrowHandler} src={leftArrowIcon} />
         {filteredMappedPages}
         <ReactSVG
-          onClick={rightArrowHandler}
           className={`${s.svg} ${s.rightArrow}`}
+          onClick={rightArrowHandler}
           src={rightArrowIcon}
         />
       </div>
@@ -86,10 +91,10 @@ export const Pagination = ({ totalItems }: Props) => {
           isInlineBlock
           selectName={pageSize}
           selectedItems={['10', '20', '30', '50', '100']}
+          setChooseItem={setPageSize}
           size={'small'}
           style={{ margin: '0px 6px' }}
-          setChooseItem={setPageSize}
-          width="max-content"
+          width={'max-content'}
         />
         <span style={{ marginLeft: '10px' }}>на странице</span>
       </div>

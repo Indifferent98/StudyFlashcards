@@ -23,6 +23,7 @@
     "@radix-ui/react-slider": "^1.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.50.1",
     "react-svg": "^16.1.33"
   },
   "devDependencies": {

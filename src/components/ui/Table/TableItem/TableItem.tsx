@@ -1,16 +1,18 @@
-import { Stars } from '../Stars'
-import s from './TableItem.module.scss'
 import picture from '@/img/tablePicture.png'
 
+import s from './TableItem.module.scss'
+
+import { Stars } from '../Stars'
+
 type Props = {
-  withImg: boolean
-  question?: string
   answer?: string
-  lastUpdated: string
   grade?: string
+  lastUpdated: string
+  question?: string
+  withImg: boolean
 }
 
-export const TableItem = ({ withImg = false, question, answer, lastUpdated, grade }: Props) => {
+export const TableItem = ({ answer, grade, lastUpdated, question, withImg = false }: Props) => {
   return (
     <div className={`${s.wrapper} ${grade && s.header}`}>
       <div className={`${s.question} ${s.item}`}>

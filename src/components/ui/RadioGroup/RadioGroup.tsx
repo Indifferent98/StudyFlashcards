@@ -1,6 +1,8 @@
-import * as Radio from '@radix-ui/react-radio-group'
-import s from './RadioGroup.module.scss'
 import { useState } from 'react'
+
+import * as Radio from '@radix-ui/react-radio-group'
+
+import s from './RadioGroup.module.scss'
 
 type Props = {
   disabled?: boolean
@@ -11,28 +13,30 @@ export const RadioGroup = ({ disabled = false }: Props) => {
   const changeValue = (item: string) => {
     setCurrentValue(item)
   }
+
   console.log(currentValue)
+
   return (
     <form className={s.wrapper}>
       <Radio.Root
+        aria-label={'View density'}
         className={s.RadioGroupRoot}
-        defaultValue="default"
-        aria-label="View density"
+        defaultValue={'default'}
         onValueChange={changeValue}
       >
         <div className={`${currentValue === 'Did not know' ? s.activeItemWrapper : s.itemWrapper}`}>
           <Radio.Item
             className={`${disabled ? s.RadioGroupItemDisabled : s.RadioGroupItem}`}
-            value="Did not know"
-            id="r1"
             disabled={disabled}
+            id={'r1'}
+            value={'Did not know'}
           >
             <Radio.Indicator
               className={`${disabled ? s.RadioGroupIndicatorDisabled : s.RadioGroupIndicator}`}
             />
           </Radio.Item>
 
-          <label className={`${disabled ? s.LabelDisabled : s.Label}`} htmlFor="r1">
+          <label className={`${disabled ? s.LabelDisabled : s.Label}`} htmlFor={'r1'}>
             Did not know
           </label>
           {!disabled && (
@@ -46,15 +50,15 @@ export const RadioGroup = ({ disabled = false }: Props) => {
         <div className={`${currentValue === 'Forgot' ? s.activeItemWrapper : s.itemWrapper}`}>
           <Radio.Item
             className={`${disabled ? s.RadioGroupItemDisabled : s.RadioGroupItem}`}
-            value="Forgot"
-            id="r2"
             disabled={disabled}
+            id={'r2'}
+            value={'Forgot'}
           >
             <Radio.Indicator
               className={`${disabled ? s.RadioGroupIndicatorDisabled : s.RadioGroupIndicator}`}
             />
           </Radio.Item>
-          <label className={`${disabled ? s.LabelDisabled : s.Label}`} htmlFor="r2">
+          <label className={`${disabled ? s.LabelDisabled : s.Label}`} htmlFor={'r2'}>
             Forgot
           </label>
           {!disabled && (
@@ -68,15 +72,15 @@ export const RadioGroup = ({ disabled = false }: Props) => {
         >
           <Radio.Item
             className={`${disabled ? s.RadioGroupItemDisabled : s.RadioGroupItem}`}
-            value="A lot of though"
-            id="r3"
             disabled={disabled}
+            id={'r3'}
+            value={'A lot of though'}
           >
             <Radio.Indicator
               className={`${disabled ? s.RadioGroupIndicatorDisabled : s.RadioGroupIndicator}`}
             />
           </Radio.Item>
-          <label className={`${disabled ? s.LabelDisabled : s.Label}`} htmlFor="r3">
+          <label className={`${disabled ? s.LabelDisabled : s.Label}`} htmlFor={'r3'}>
             A lot of though
           </label>
           {!disabled && (
@@ -90,15 +94,15 @@ export const RadioGroup = ({ disabled = false }: Props) => {
         <div className={`${currentValue === 'Confused' ? s.activeItemWrapper : s.itemWrapper}`}>
           <Radio.Item
             className={`${disabled ? s.RadioGroupItemDisabled : s.RadioGroupItem}`}
-            value="Confused"
-            id="r4"
             disabled={disabled}
+            id={'r4'}
+            value={'Confused'}
           >
             <Radio.Indicator
               className={`${disabled ? s.RadioGroupIndicatorDisabled : s.RadioGroupIndicator}`}
             />
           </Radio.Item>
-          <label className={`${disabled ? s.LabelDisabled : s.Label}`} htmlFor="r4">
+          <label className={`${disabled ? s.LabelDisabled : s.Label}`} htmlFor={'r4'}>
             Confused
           </label>
           {!disabled && (
@@ -112,15 +116,15 @@ export const RadioGroup = ({ disabled = false }: Props) => {
         >
           <Radio.Item
             className={`${disabled ? s.RadioGroupItemDisabled : s.RadioGroupItem}`}
-            value="Knew the answer"
-            id="r5"
             disabled={disabled}
+            id={'r5'}
+            value={'Knew the answer'}
           >
             <Radio.Indicator
               className={`${disabled ? s.RadioGroupIndicatorDisabled : s.RadioGroupIndicator}`}
             />
           </Radio.Item>
-          <label className={`${disabled ? s.LabelDisabled : s.Label}`} htmlFor="r5">
+          <label className={`${disabled ? s.LabelDisabled : s.Label}`} htmlFor={'r5'}>
             Knew the answer
           </label>
           {!disabled && (

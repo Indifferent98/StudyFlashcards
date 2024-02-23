@@ -11,11 +11,11 @@ type Props = {
   helperText?: string
   isInlineBlock?: boolean
   pixelWidth?: number
-  selectName: string | number
+  selectName: number | string
   selectedItems: string[]
+  setChooseItem?: (page: number) => void
   size?: 'small'
   width?: 'default' | 'fullWidth' | 'max-content'
-  setChooseItem?: (page: number) => void
 } & ComponentPropsWithoutRef<'div'>
 export const Select = (props: Props) => {
   const {
@@ -23,9 +23,9 @@ export const Select = (props: Props) => {
     isInlineBlock = false,
     selectName,
     selectedItems,
+    setChooseItem,
     size,
     width = 'default',
-    setChooseItem,
     ...restProps
   } = props
 
@@ -48,6 +48,7 @@ export const Select = (props: Props) => {
 
   useEffect(() => {
     window.addEventListener('click', closeDropDownSelectMenu)
+
     return () => window.removeEventListener('click', closeDropDownSelectMenu)
   }, [])
 

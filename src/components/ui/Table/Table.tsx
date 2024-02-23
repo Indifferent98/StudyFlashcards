@@ -1,23 +1,34 @@
+import s from './Table.module.scss'
+
 import { Pagination } from '../Pagination'
 import { TableItem } from './TableItem'
-import s from './Table.module.scss'
 export const Table = () => {
   return (
     <div>
       <div>
         <TableItem
+          answer={'Answer'}
+          grade={'Grade'}
+          lastUpdated={'Last Updated'}
+          question={'Question'}
           withImg={false}
-          question="Question"
-          answer="Answer"
-          lastUpdated="Last Updated"
-          grade="Grade"
         />
       </div>
-      <TableItem withImg={true} lastUpdated="19.02.24" answer="helweoerw" />
-      <TableItem withImg={true} lastUpdated="19.02.24" answer="helweoerw" />
-      <TableItem withImg={false} lastUpdated="19.02.24" question="QWEQweqwqeQ" answer="helweoerw" />
-      <TableItem withImg={true} lastUpdated="19.02.24" answer="helweoerw" />
-      <TableItem withImg={false} lastUpdated="19.02.24" answer="helweoerw" question="safasfasafs" />
+      <TableItem answer={'helweoerw'} lastUpdated={'19.02.24'} withImg />
+      <TableItem answer={'helweoerw'} lastUpdated={'19.02.24'} withImg />
+      <TableItem
+        answer={'helweoerw'}
+        lastUpdated={'19.02.24'}
+        question={'QWEQweqwqeQ'}
+        withImg={false}
+      />
+      <TableItem answer={'helweoerw'} lastUpdated={'19.02.24'} withImg />
+      <TableItem
+        answer={'helweoerw'}
+        lastUpdated={'19.02.24'}
+        question={'safasfasafs'}
+        withImg={false}
+      />
       <div className={s.Pagination}>
         <Pagination totalItems={205} />
       </div>

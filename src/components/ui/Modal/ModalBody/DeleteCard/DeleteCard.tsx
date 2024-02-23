@@ -9,7 +9,7 @@ export const DeleteCard = ({ cardName }: Props) => {
       <Typography
         children={`${cardName}?`}
         style={{ display: 'inline-block' }}
-        variant="Subtitle1"
+        variant={'Subtitle1'}
       />
       <div>All card will be deleted.</div>
     </div>
