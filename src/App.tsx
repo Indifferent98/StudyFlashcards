@@ -26,7 +26,7 @@ export const App = () => {
         deckName={'Planets'}
         question={'how much planets exists'}
       />
-      <Button children={'hello'} variant={'primary'} withIcon />
+      {/* <Button children={'hello'} variant={'primary'} withIcon /> */}
     </div>
   )
 }
