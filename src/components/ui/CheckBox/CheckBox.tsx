@@ -11,24 +11,39 @@ import { Typography } from '../Typography'
 type Props = {
   disabled?: boolean
   title?: string
-  onValueChange: (checked: boolean) => void
-  checked: boolean
+  onValueChange?: (checked: boolean) => void
+  checked?: boolean
+  demo?: boolean
 }
-export const SuperCheckBox = ({ disabled = false, title, onValueChange, checked }: Props) => {
-  const onClickHanlder = () => {
-    onValueChange(!checked)
+export const SuperCheckBox = ({
+  disabled = false,
+  title,
+  onValueChange,
+  checked = false,
+  demo = false,
+}: Props) => {
+  const [demoChecked, setDemoChecked] = useState(false)
+  const onClickHandler = () => {
+    if (onValueChange) {
+      onValueChange(!checked)
+    } else if (demo) {
+      // debugger
+      setDemoChecked(!demoChecked)
+    }
   }
 
   return (
-    <div className={s.superWrapper} onClick={disabled ? () => {} : onClickHanlder}>
+    <div className={s.superWrapper} onClick={disabled ? () => {} : onClickHandler}>
       <div className={s.wrapper}>
-        {!checked ? (
+        {!checked && demoChecked === false ? (
           <div className={`${s.unChecked} ${disabled && s.disabledUnchecked}`}></div>
         ) : (
           <Checkbox.Root
-            checked={checked}
-            className={`${s.checkBox} ${checked ? s.checked : ''} ${disabled && s.disabled}`}
-            onClick={disabled ? () => {} : onClickHanlder}
+            checked={demo ? demoChecked : checked}
+            className={`${s.checkBox} ${checked || demoChecked ? s.checked : ''} ${
+              disabled && s.disabled
+            }`}
+            onClick={disabled ? () => {} : onClickHandler}
           >
             <Checkbox.Indicator className={s.CheckboxIndicator}>
               <ReactSVG className={`${disabled ? s.svgDisabled : s.svg}`} src={checkIcon} />

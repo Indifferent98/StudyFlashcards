@@ -20,18 +20,14 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const [checked, setChecked] = useState(false)
-const onValueChange = (newChecked: boolean) => setChecked(newChecked)
-
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const defaultCheckBox: Story = {
-  args: { checked, onValueChange },
+  args: { demo: true },
 }
 
 export const CheckBoxWithTitle: Story = {
   args: {
     title: 'Hello world',
-    checked,
-    onValueChange,
+    demo: true,
   },
 }
