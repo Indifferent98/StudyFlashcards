@@ -30,24 +30,20 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     },
     ref
   ) => {
-    const [inputType, setInputType] = useState<string>(variant === 'default' ? 'text' : 'password')
-    const [value, setValue] = useState('')
-    const changeValue = (e: ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value)
+    const [inputType, setInputType] = useState<string>(
+      variant === 'default' ? 'text' : variant === 'search' ? 'text' : 'password'
+    )
 
     const changeInputType = () => setInputType(inputType === 'text' ? 'password' : 'text')
     const currentImgSrc =
       inputType === 'password' ? offEyeIcon : variant === 'search' ? closeIcon : eyeIcon
+    console.log(currentImgSrc)
     const findItem = () => {}
-    const clearInput = () => setValue('')
+    const clearInput = () => {
+      if (restProps.onChange) restProps.onChange('' as any)
+    }
     const svgOnClick = disabled ? () => {} : variant === 'password' ? changeInputType : clearInput
     const [searchIconStyle, setSearchIconStyle] = useState<any>(s.searchUnfocused)
-
-    const onfocus = () => {
-      // setSearchIconStyle(s.searchFocused)
-    }
-    const onBlur = () => {
-      // setSearchIconStyle(s.searchUnfocused)
-    }
 
     return (
       <div className={`${s.wrapper} ${fullWidth && s.fullWidth}`}>
@@ -61,22 +57,16 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             />
           </div>
         )}
-
+        {/* <img src={currentImgSrc} style={{ fill: 'white' }} /> */}
         <input
           className={`${s[variant]} ${disabled ? s.disabled : errorMessage ? s.error : s.input} ${
             variant === 'search' || variant === 'password' ? s.withIcon : ''
           } ${fullWidth && s.fullWidth}`}
           disabled={disabled}
-          // onBlur={onBlur}
-
-          onFocus={onfocus}
           type={inputType}
-          // value={value}
-          // onChange={changeValue}
           {...restProps}
-          ref={ref}
         />
-        {(variant === 'password' || (variant === 'search' && value && !disabled)) && (
+        {(variant === 'password' || (variant === 'search' && restProps.value && !disabled)) && (
           <ReactSVG
             className={disabled && variant !== 'search' ? s.svg2 : s.svg}
             onClick={svgOnClick}

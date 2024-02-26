@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
+import React, { useState } from 'react'
 import { ReactSVG } from 'react-svg'
 
 import checkIcon from '@/img/checkIcon.svg'
@@ -27,7 +27,6 @@ export const SuperCheckBox = ({
     if (onValueChange) {
       onValueChange(!checked)
     } else if (demo) {
-      // debugger
       setDemoChecked(!demoChecked)
     }
   }

@@ -12,7 +12,21 @@ type FormValues = {
 export const LoginForm = () => {
   const { control, register, handleSubmit } = useForm<FormValues>()
 
-  const { field } = useController({ name: 'rememberMe', control, defaultValue: false })
+  const { field: rememberField } = useController({
+    name: 'rememberMe',
+    control,
+    defaultValue: false,
+  })
+  const { field: emailField } = useController({
+    name: 'email',
+    control,
+    defaultValue: '',
+  })
+  const { field: passwordField } = useController({
+    name: 'password',
+    control,
+    defaultValue: '',
+  })
 
   const onSubmit = (data: FormValues) => {
     console.log(data)
@@ -20,17 +34,15 @@ export const LoginForm = () => {
   console.log(register('email'))
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {/* <input {...register('email')} /> */}
-      <Input {...register('email')} variant="default" aria-label="email" />
-      <Input {...register('password')} variant="password" aria-label="password" />
-      {/* <input {...register('password')} /> */}
-      {/* <Input {...register('email')} label={'email'} />
-      // <Input {...register('password')} label={'password'} /> */}
+      <Input {...emailField} variant="search" helperMessage="Email" fullWidth={true} />
+      <Input {...passwordField} variant="password" helperMessage="Password" fullWidth={true} />
       <SuperCheckBox
-        checked={field.value}
-        onValueChange={field.onChange}
+        checked={rememberField.value}
+        onValueChange={rememberField.onChange}
+        title="Remember me"
         {...register('rememberMe')}
       />
+
       <Button type="submit" children={'Submit'} />
     </form>
   )

@@ -75,14 +75,17 @@
   position: absolute;
   cursor: pointer;
   bottom: 0px;
-  left: 275px;
+  // left: 275px;
+  right: 10px;
 }
 .svg2 {
+  border: 1px solid #a14e4e;
   fill: var(--color-light-100);
   position: absolute;
   cursor: pointer;
   bottom: 0px;
-  left: 275px;
+  // left: 275px;
+  right: 10px;
 }
 
 .searchIcon {
