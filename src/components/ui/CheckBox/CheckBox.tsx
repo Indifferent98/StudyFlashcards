@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
 import { ReactSVG } from 'react-svg'
 
 import checkIcon from '@/img/checkIcon.svg'
@@ -11,23 +11,24 @@ import { Typography } from '../Typography'
 type Props = {
   disabled?: boolean
   title?: string
+  onValueChange: (checked: boolean) => void
+  checked: boolean
 }
-
-export const SuperCheckBox = ({ disabled = false, title }: Props) => {
-  const [checked, setChecked] = useState<boolean>(false)
+export const SuperCheckBox = ({ disabled = false, title, onValueChange, checked }: Props) => {
   const onClickHanlder = () => {
-    setChecked(checked ? false : true)
+    onValueChange(!checked)
   }
 
   return (
-    <div className={s.superWrapper}>
-      <div className={s.wrapper} onClick={disabled ? () => {} : onClickHanlder}>
+    <div className={s.superWrapper} onClick={disabled ? () => {} : onClickHanlder}>
+      <div className={s.wrapper}>
         {!checked ? (
           <div className={`${s.unChecked} ${disabled && s.disabledUnchecked}`}></div>
         ) : (
           <Checkbox.Root
             checked={checked}
             className={`${s.checkBox} ${checked ? s.checked : ''} ${disabled && s.disabled}`}
+            onClick={disabled ? () => {} : onClickHanlder}
           >
             <Checkbox.Indicator className={s.CheckboxIndicator}>
               <ReactSVG className={`${disabled ? s.svgDisabled : s.svg}`} src={checkIcon} />

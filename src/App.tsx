@@ -1,3 +1,4 @@
+import { LoginForm } from './components/auth/login-form'
 import { Button } from './components/ui/Button'
 import { Card } from './components/ui/Card'
 import { Header } from './components/ui/Header'
@@ -27,6 +28,7 @@ export const App = () => {
         question={'how much planets exists'}
       />
       {/* <Button children={'hello'} variant={'primary'} withIcon /> */}
+      <LoginForm />
     </div>
   )
 }

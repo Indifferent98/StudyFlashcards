@@ -1,37 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SuperCheckBox } from './CheckBox'
-import { useState } from 'react'
+import { LoginForm } from './Login-form'
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {},
-  component: SuperCheckBox,
+  component: LoginForm,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    // layout: 'centered',
+    layout: 'centered',
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
-  title: 'Example/SuperCheckBox',
-} satisfies Meta<typeof SuperCheckBox>
+  title: 'Example/LoginForm',
+} satisfies Meta<typeof LoginForm>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-const [checked, setChecked] = useState(false)
-const onValueChange = (newChecked: boolean) => setChecked(newChecked)
-
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const defaultCheckBox: Story = {
-  args: { checked, onValueChange },
-}
-
-export const CheckBoxWithTitle: Story = {
-  args: {
-    title: 'Hello world',
-    checked,
-    onValueChange,
-  },
+export const defaultLoginForm: Story = {
+  args: {},
 }
