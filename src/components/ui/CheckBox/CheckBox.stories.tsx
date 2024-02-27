@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { SuperCheckBox } from './CheckBox'
 import { useState } from 'react'
+
+import { SuperCheckBox } from './CheckBox'
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -27,7 +28,7 @@ export const defaultCheckBox: Story = {
 
 export const CheckBoxWithTitle: Story = {
   args: {
-    title: 'Hello world',
     demo: true,
+    title: 'Hello world',
   },
 }

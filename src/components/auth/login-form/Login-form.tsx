@@ -1,7 +1,8 @@
+import { Controller, useController, useForm } from 'react-hook-form'
+
 import { Button } from '@/components/ui/Button'
 import { SuperCheckBox } from '@/components/ui/CheckBox'
 import { Input } from '@/components/ui/Input'
-import { useController, useForm } from 'react-hook-form'
 
 type FormValues = {
   email: string
@@ -10,40 +11,88 @@ type FormValues = {
 }
 
 export const LoginForm = () => {
-  const { control, register, handleSubmit } = useForm<FormValues>()
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<FormValues>()
 
   const { field: rememberField } = useController({
-    name: 'rememberMe',
     control,
     defaultValue: false,
+    name: 'rememberMe',
   })
-  const { field: emailField } = useController({
-    name: 'email',
-    control,
-    defaultValue: '',
-  })
-  const { field: passwordField } = useController({
-    name: 'password',
-    control,
-    defaultValue: '',
-  })
+  // const { field: emailField } = useController({
+  //   control,
+  //   defaultValue: '',
+  //   name: 'email',
+  // })
+  // const { field: passwordField } = useController({
+  //   control,
+  //   defaultValue: '',
+  //   name: 'password',
+  // })
+
+  const emailRegex =
+    /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
 
   const onSubmit = (data: FormValues) => {
     console.log(data)
   }
-  console.log(register('email'))
+  console.log(errors, 'Errors is ')
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Input {...emailField} variant="search" helperMessage="Email" fullWidth={true} />
-      <Input {...passwordField} variant="password" helperMessage="Password" fullWidth={true} />
-      <SuperCheckBox
-        checked={rememberField.value}
-        onValueChange={rememberField.onChange}
-        title="Remember me"
-        {...register('rememberMe')}
-      />
+      <div style={{ marginBottom: '24px' }}>
+        <Controller
+          name="email"
+          control={control}
+          rules={{
+            required: 'Enter email',
+            pattern: { value: emailRegex, message: 'Invalid email' },
+          }}
+          render={({ field }) => (
+            <Input
+              fullWidth
+              helperMessage={'Email'}
+              variant={'default'}
+              {...field}
+              errorMessage={errors.email?.message}
+            />
+          )}
+        />
+      </div>
+      <div style={{ marginBottom: '24px' }}>
+        <Controller
+          name="password"
+          control={control}
+          rules={{
+            required: 'Enter password',
+            minLength: { value: 5, message: 'Password should be longer or equal 5 symbols' },
+            maxLength: { value: 30, message: 'Password too long' },
+          }}
+          render={({ field }) => (
+            <Input
+              {...field}
+              fullWidth
+              helperMessage={'Password'}
+              variant={'password'}
+              errorMessage={errors.password?.message}
+            />
+          )}
+        />
+      </div>
 
-      <Button type="submit" children={'Submit'} />
+      <div>
+        <SuperCheckBox
+          checked={rememberField.value}
+          onValueChange={rememberField.onChange}
+          title={'Remember me'}
+          {...register('rememberMe')}
+        />
+        <Button children={'Submit'} type={'submit'} />
+      </div>
     </form>
   )
 }

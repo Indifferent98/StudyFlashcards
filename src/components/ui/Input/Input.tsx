@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import React, { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 import { ReactSVG } from 'react-svg'
 
 import closeIcon from '@/img/closeIcon.svg'
@@ -37,10 +37,13 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     const changeInputType = () => setInputType(inputType === 'text' ? 'password' : 'text')
     const currentImgSrc =
       inputType === 'password' ? offEyeIcon : variant === 'search' ? closeIcon : eyeIcon
+
     console.log(currentImgSrc)
     const findItem = () => {}
     const clearInput = () => {
-      if (restProps.onChange) restProps.onChange('' as any)
+      if (restProps.onChange) {
+        restProps.onChange('' as any)
+      }
     }
     const svgOnClick = disabled ? () => {} : variant === 'password' ? changeInputType : clearInput
     const [searchIconStyle, setSearchIconStyle] = useState<any>(s.searchUnfocused)
@@ -80,6 +83,11 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             src={searchIcon}
           />
         )}
+        <div>
+          <Typography variant="Caption" color="#F23D61">
+            {errorMessage}
+          </Typography>
+        </div>
       </div>
     )
   }

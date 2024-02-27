@@ -25,9 +25,6 @@
 // .input:active {
 
 // }
-.fullWidth {
-  width: 100%;
-}
 
 .error {
   outline: none;
@@ -38,7 +35,9 @@
   color: var(--color-danger-300);
   width: 300px;
 }
-
+.fullWidth {
+  width: 100%;
+}
 .disabled {
   // border: none;
   width: 300px;
@@ -74,7 +73,7 @@
   fill: var(--color-light-100);
   position: absolute;
   cursor: pointer;
-  bottom: 0px;
+  top: 30px;
   // left: 275px;
   right: 10px;
 }
@@ -83,7 +82,7 @@
   fill: var(--color-light-100);
   position: absolute;
   cursor: pointer;
-  bottom: 0px;
+  top: 30px;
   // left: 275px;
   right: 10px;
 }
@@ -93,7 +92,7 @@
   position: absolute;
   cursor: pointer;
   left: 8px;
-  bottom: 0px;
+  top: 0px;
 }
 .searchFocused {
   fill: var(--color-light-100);

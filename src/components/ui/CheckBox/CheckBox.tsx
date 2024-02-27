@@ -9,18 +9,18 @@ import s from './CheckBox.module.scss'
 import { Typography } from '../Typography'
 
 type Props = {
-  disabled?: boolean
-  title?: string
-  onValueChange?: (checked: boolean) => void
   checked?: boolean
   demo?: boolean
+  disabled?: boolean
+  onValueChange?: (checked: boolean) => void
+  title?: string
 }
 export const SuperCheckBox = ({
-  disabled = false,
-  title,
-  onValueChange,
   checked = false,
   demo = false,
+  disabled = false,
+  onValueChange,
+  title,
 }: Props) => {
   const [demoChecked, setDemoChecked] = useState(false)
   const onClickHandler = () => {
