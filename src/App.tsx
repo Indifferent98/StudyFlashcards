@@ -1,4 +1,4 @@
-import { LoginForm } from './components/auth/login-form'
+import { LoginForm } from './components/auth/login-form/SignIn'
 import { Button } from './components/ui/Button'
 import { Card } from './components/ui/Card'
 import { Header } from './components/ui/Header'

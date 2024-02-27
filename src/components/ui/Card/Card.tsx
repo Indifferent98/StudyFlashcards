@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import s from './Card.module.scss'
 import { AnswerCard, CardProps } from './CardsType/AnswerCard'
-import { LoginForm } from '@/components/auth/login-form'
+import { SignIn } from '@/components/auth/login-form/SignIn/SignIn'
 
 type Props = { variant: 'Answer' | 'SignIn' } & Partial<CardProps>
 export const Card = ({ answer = '', deckName = '', question = '', variant }: Props) => {
@@ -27,7 +27,7 @@ export const Card = ({ answer = '', deckName = '', question = '', variant }: Pro
         {variant === 'Answer' ? (
           <AnswerCard answer={answer} deckName={deckName} question={question} />
         ) : variant === 'SignIn' ? (
-          <LoginForm />
+          <SignIn />
         ) : (
           false
         )}

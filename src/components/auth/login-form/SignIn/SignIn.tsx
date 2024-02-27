@@ -2,12 +2,12 @@ import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/Button'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ControlledInput } from './controlled/controlledInput'
-import { ControlledCheckBox } from './controlled/controlledCheckBox'
+import { ControlledInput } from '../controlled/controlledInput'
+import { ControlledCheckBox } from '../controlled/controlledCheckBox'
 import { DevTool } from '@hookform/devtools'
 import { Typography } from '@/components/ui/Typography'
 
-export const LoginForm = () => {
+export const SignIn = () => {
   type FormValues = z.infer<typeof loginSchema>
 
   const onSubmit = (data: FormValues) => {
