@@ -4,6 +4,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ControlledInput } from './controlled/controlledInput'
 import { ControlledCheckBox } from './controlled/controlledCheckBox'
+import { DevTool } from '@hookform/devtools'
 
 export const LoginForm = () => {
   type FormValues = z.infer<typeof loginSchema>
@@ -25,31 +26,35 @@ export const LoginForm = () => {
   } = useForm<FormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: '', password: '', rememberMe: false },
+    mode: 'onSubmit',
   })
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div style={{ marginBottom: '24px' }}>
-        <ControlledInput
-          control={control}
-          errorMessage={errors.email?.message}
-          name="email"
-          helperMessage="Email"
-        />
-      </div>
-      <div style={{ marginBottom: '24px' }}>
-        <ControlledInput
-          control={control}
-          errorMessage={errors.password?.message}
-          variant="password"
-          name="password"
-          helperMessage="Password"
-        />
-      </div>
-      <div style={{ marginBottom: '24px' }}>
-        <ControlledCheckBox name="rememberMe" control={control} title="Remember me" />
-      </div>
-      <Button children={'Submit'} type={'submit'} />
-    </form>
+    <>
+      <DevTool control={control} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div style={{ marginBottom: '24px' }}>
+          <ControlledInput
+            control={control}
+            errorMessage={errors.email?.message}
+            name="email"
+            helperMessage="Email"
+          />
+        </div>
+        <div style={{ marginBottom: '24px' }}>
+          <ControlledInput
+            control={control}
+            errorMessage={errors.password?.message}
+            variant="password"
+            name="password"
+            helperMessage="Password"
+          />
+        </div>
+        <div style={{ marginBottom: '24px' }}>
+          <ControlledCheckBox name="rememberMe" control={control} title="Remember me" />
+        </div>
+        <Button children={'Submit'} type={'submit'} />
+      </form>
+    </>
   )
 }

@@ -1,5 +1,5 @@
 import { SuperCheckBox } from '@/components/ui/CheckBox'
-import { Controller, useController } from 'react-hook-form'
+import { Controller } from 'react-hook-form'
 
 type Props = {
   control: any
