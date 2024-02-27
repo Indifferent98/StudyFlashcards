@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ComponentPropsWithoutRef, useState } from 'react'
 import { ReactSVG } from 'react-svg'
 
 import checkIcon from '@/img/checkIcon.svg'
@@ -43,6 +43,7 @@ export const SuperCheckBox = ({
               disabled && s.disabled
             }`}
             onClick={disabled ? () => {} : onClickHandler}
+            // name="rememberMe"
           >
             <Checkbox.Indicator className={s.CheckboxIndicator}>
               <ReactSVG className={`${disabled ? s.svgDisabled : s.svg}`} src={checkIcon} />

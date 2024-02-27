@@ -10,12 +10,14 @@ import s from './Input.module.scss'
 
 import { Typography } from '../Typography'
 
+export type InputVariant = 'search' | 'default' | 'password'
+
 type Props = {
   disabled?: boolean
   errorMessage?: null | string
   fullWidth?: boolean
   helperMessage?: string
-  variant?: 'default' | 'password' | 'search'
+  variant?: InputVariant
 } & ComponentPropsWithoutRef<'input'>
 
 export const Input = forwardRef<HTMLInputElement, Props>(
@@ -38,7 +40,6 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     const currentImgSrc =
       inputType === 'password' ? offEyeIcon : variant === 'search' ? closeIcon : eyeIcon
 
-    console.log(currentImgSrc)
     const findItem = () => {}
     const clearInput = () => {
       if (restProps.onChange) {

@@ -14,8 +14,6 @@ export const RadioGroup = ({ disabled = false }: Props) => {
     setCurrentValue(item)
   }
 
-  console.log(currentValue)
-
   return (
     <form className={s.wrapper}>
       <Radio.Root
