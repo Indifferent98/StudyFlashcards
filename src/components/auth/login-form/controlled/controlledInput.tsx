@@ -22,6 +22,7 @@ export const ControlledInput = ({ control, errorMessage, variant, name, helperMe
           helperMessage={helperMessage}
           variant={variant}
           errorMessage={errorMessage}
+          style={{ backgroundColor: '#171717' }}
         />
       )}
     />
