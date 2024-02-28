@@ -29,7 +29,6 @@ export const SignUp = () => {
       message: `Passwords don't match`,
       path: ['confirmError'],
     })
-  // loginSchema.parse({ password: 'asdf', confirm: 'qwer' })
 
   const {
     control,
@@ -46,7 +45,7 @@ export const SignUp = () => {
       <DevTool control={control} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div style={{ textAlign: 'center', marginBottom: '27px' }}>
-          <Typography variant="H1" children={'Sign in'} />
+          <Typography variant="H1" children={'Sign Up'} />
         </div>
         <div style={{ marginBottom: '24px' }}>
           <ControlledInput
