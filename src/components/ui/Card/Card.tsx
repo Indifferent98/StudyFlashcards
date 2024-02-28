@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
 
-import s from './Card.module.scss'
-import { AnswerCard, CardProps } from './CardsType/AnswerCard'
+import { CheckEmail } from '@/components/auth/login-form/CheckEmail/CheckEmail'
+import { CreateNewPassword } from '@/components/auth/login-form/CreateNewPassword'
+import { ForgotPassword } from '@/components/auth/login-form/ForgotPassword'
 import { SignIn } from '@/components/auth/login-form/SignIn/SignIn'
 import { SignUp } from '@/components/auth/login-form/SignUp'
-import { ForgotPassword } from '@/components/auth/login-form/ForgotPassword'
-import { CheckEmail } from '@/components/auth/login-form/CheckEmail/CheckEmail'
+
+import s from './Card.module.scss'
+
+import { AnswerCard, CardProps } from './CardsType/AnswerCard'
 
 type Props = {
-  variant: 'Answer' | 'SignIn' | 'SignUp' | 'forgotPassword' | 'CheckEmail'
+  variant: 'Answer' | 'CheckEmail' | 'CreateNewPassword' | 'SignIn' | 'SignUp' | 'forgotPassword'
 } & Partial<CardProps>
 export const Card = ({ answer = '', deckName = '', question = '', variant }: Props) => {
   const [showCard, setShowCard] = useState(true)
@@ -40,6 +43,8 @@ export const Card = ({ answer = '', deckName = '', question = '', variant }: Pro
           <ForgotPassword />
         ) : variant === 'CheckEmail' ? (
           <CheckEmail />
+        ) : variant === 'CreateNewPassword' ? (
+          <CreateNewPassword />
         ) : (
           false
         )}

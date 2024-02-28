@@ -10,7 +10,7 @@ import s from './Input.module.scss'
 
 import { Typography } from '../Typography'
 
-export type InputVariant = 'search' | 'default' | 'password'
+export type InputVariant = 'default' | 'password' | 'search'
 
 type Props = {
   disabled?: boolean
@@ -38,7 +38,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
 
     const changeInputType = () => setInputType(inputType === 'text' ? 'password' : 'text')
     const currentImgSrc =
-      inputType === 'password' ? offEyeIcon : variant === 'search' ? closeIcon : eyeIcon
+      inputType === 'password' ? eyeIcon : variant === 'search' ? closeIcon : offEyeIcon
 
     const findItem = () => {}
     const clearInput = () => {
@@ -85,7 +85,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           />
         )}
         <div>
-          <Typography variant="Caption" color="#F23D61">
+          <Typography color={'#F23D61'} variant={'Caption'}>
             {errorMessage}
           </Typography>
         </div>

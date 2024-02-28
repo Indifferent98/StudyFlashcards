@@ -1,7 +1,8 @@
-import { Typography } from '../../Typography'
-import { Button } from '../../Button'
 import s from './AnswerCard.module.scss'
+
+import { Button } from '../../Button'
 import { RadioGroup } from '../../RadioGroup'
+import { Typography } from '../../Typography'
 export type CardProps = {
   answer: string
   deckName: string

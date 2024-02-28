@@ -78,7 +78,7 @@ export const Select = (props: Props) => {
         onClick={changeShowMode}
         onKeyDown={changeSelectItem}
       >
-        <div style={{ padding: '6px 12px' }}>
+        <div style={size === 'small' ? { padding: '0px 12px' } : { padding: '6px 12px' }}>
           <Typography
             as={'span'}
             children={currentSelectedItem}

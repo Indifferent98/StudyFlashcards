@@ -1,18 +1,19 @@
 import { useForm } from 'react-hook-form'
-import { Button } from '@/components/ui/Button'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { ControlledInput } from '../controlled/controlledInput'
 
-import { DevTool } from '@hookform/devtools'
+import { Button } from '@/components/ui/Button'
 import { Typography } from '@/components/ui/Typography'
+import { DevTool } from '@hookform/devtools'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
+import { ControlledInput } from '../controlled/controlledInput'
 
 export const SignUp = () => {
   type FormValues = {
+    confirmError: string
+    confirmPassword: string
     email: string
     password: string
-    confirmPassword: string
-    confirmError: string
   }
 
   const onSubmit = (data: FormValues) => {
@@ -21,9 +22,9 @@ export const SignUp = () => {
 
   const loginSchema = z
     .object({
+      confirmPassword: z.string().min(3, 'Too short password').max(30),
       email: z.string().email({ message: 'Invalid email address' }),
       password: z.string().min(3, 'Too short password').max(30),
-      confirmPassword: z.string().min(3, 'Too short password').max(30),
     })
     .refine(data => data.password === data.confirmPassword, {
       message: `Passwords don't match`,
@@ -32,27 +33,29 @@ export const SignUp = () => {
 
   const {
     control,
-    handleSubmit,
     formState: { errors },
+    handleSubmit,
   } = useForm<FormValues>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: { email: '', password: '', confirmPassword: '' },
+    defaultValues: { confirmPassword: '', email: '', password: '' },
     mode: 'onSubmit',
+    resolver: zodResolver(loginSchema),
   })
+
   console.log(errors)
+
   return (
     <>
       <DevTool control={control} />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ textAlign: 'center', marginBottom: '27px' }}>
-          <Typography variant="H1" children={'Sign Up'} />
+        <div style={{ marginBottom: '27px', textAlign: 'center' }}>
+          <Typography children={'Sign Up'} variant={'H1'} />
         </div>
         <div style={{ marginBottom: '24px' }}>
           <ControlledInput
             control={control}
             errorMessage={errors.email?.message}
-            name="email"
-            helperMessage="Email"
+            helperMessage={'Email'}
+            name={'email'}
           />
         </div>
         <div style={{ marginBottom: '24px' }}>
@@ -61,9 +64,9 @@ export const SignUp = () => {
             errorMessage={
               errors.confirmError?.message ? errors.confirmError?.message : errors.password?.message
             }
-            variant="password"
-            name="password"
-            helperMessage="Password"
+            helperMessage={'Password'}
+            name={'password'}
+            variant={'password'}
           />
         </div>
         <div style={{ marginBottom: '60px' }}>
@@ -74,20 +77,20 @@ export const SignUp = () => {
                 ? errors.confirmError?.message
                 : errors.confirmPassword?.message
             }
-            variant="password"
-            name="confirmPassword"
-            helperMessage="Confirm Password"
+            helperMessage={'Confirm Password'}
+            name={'confirmPassword'}
+            variant={'password'}
           />
         </div>
 
         <div style={{ marginBottom: '20px' }}>
-          <Button children={'Sign Up'} type={'submit'} fullWidth />
+          <Button children={'Sign Up'} fullWidth type={'submit'} />
         </div>
-        <div style={{ textAlign: 'center', marginBottom: '7px' }}>
-          <Typography variant="Body2" children={`Already have an account?`} color="#C3C1C7" />
+        <div style={{ marginBottom: '7px', textAlign: 'center' }}>
+          <Typography children={`Already have an account?`} color={'#C3C1C7'} variant={'Body2'} />
         </div>
-        <div style={{ textDecoration: 'underLine', textAlign: 'center' }}>
-          <Typography variant="Body1" children={`Sign In`} color="#8C61FF" />
+        <div style={{ textAlign: 'center', textDecoration: 'underLine' }}>
+          <Typography children={`Sign In`} color={'#8C61FF'} variant={'Body1'} />
         </div>
       </form>
     </>

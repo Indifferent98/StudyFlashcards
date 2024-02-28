@@ -1,28 +1,29 @@
+import { Controller } from 'react-hook-form'
+
 import { Input } from '@/components/ui/Input'
 import { InputVariant } from '@/components/ui/Input/Input'
-import { Controller } from 'react-hook-form'
 
 type Props = {
   control: any
   errorMessage?: string
-  variant?: InputVariant
   helperMessage?: string
   name: string
+  variant?: InputVariant
 }
 
-export const ControlledInput = ({ control, errorMessage, variant, name, helperMessage }: Props) => {
+export const ControlledInput = ({ control, errorMessage, helperMessage, name, variant }: Props) => {
   return (
     <Controller
-      name={name}
       control={control}
+      name={name}
       render={({ field }) => (
         <Input
           {...field}
+          errorMessage={errorMessage}
           fullWidth
           helperMessage={helperMessage}
-          variant={variant}
-          errorMessage={errorMessage}
           style={{ backgroundColor: '#171717' }}
+          variant={variant}
         />
       )}
     />
