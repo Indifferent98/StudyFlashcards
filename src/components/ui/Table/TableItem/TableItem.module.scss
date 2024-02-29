@@ -15,6 +15,14 @@
   padding-left: 24px;
   // display: flex;
 }
+
+.name {
+  flex: 30%;
+
+  align-self: center;
+  padding-left: 24px;
+}
+
 .answer {
   flex: 30%;
 
@@ -55,4 +63,8 @@
 
 .header {
   background-color: var(--color-dark-300);
+}
+
+.settings {
+  flex: 10%;
 }
