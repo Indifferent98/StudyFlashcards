@@ -15,7 +15,7 @@ export interface Item {
   author: Author
 }
 
-export interface Pagination {
+export interface pagination {
   totalItems: number
   currentPage: number
   itemsPerPage: number
@@ -24,5 +24,5 @@ export interface Pagination {
 
 export interface getDecksResponse {
   items: Item[]
-  pagination: Pagination
+  pagination: pagination
 }

@@ -2,12 +2,14 @@ import s from './Table.module.scss'
 
 import { Pagination } from '../Pagination'
 import { TableItem } from './TableItem'
+import { pagination } from '@/services/flashcards.types'
 
 type Props = {
   children: React.ReactNode
+  pagination: pagination
 }
 
-export const Table = ({ children }: Props) => {
+export const Table = ({ children, pagination }: Props) => {
   return (
     <div>
       {children}
@@ -40,7 +42,7 @@ export const Table = ({ children }: Props) => {
         emptySlot
       /> */}
       <div className={s.Pagination}>
-        <Pagination totalItems={205} />
+        <Pagination totalItems={pagination?.totalItems} />
       </div>
     </div>
   )

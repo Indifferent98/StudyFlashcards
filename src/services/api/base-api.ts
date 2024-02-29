@@ -17,6 +17,7 @@ export const baseApi = createApi({
     }
   },
   reducerPath: 'baseApi',
+  refetchOnFocus: true,
 })
 
 export const { useGetDecksQuery } = baseApi

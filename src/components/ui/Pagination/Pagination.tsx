@@ -25,6 +25,7 @@ export const Pagination = ({ totalItems }: Props) => {
   }
   mappedPages = mappedPages.map((elem, i) => (
     <button
+      key={i}
       className={`${s.pageButton} ${i + 1 === currentPage && s.currentPage} ${
         !(i + 1 === currentPage) && s.hoveredButton
       }`}
