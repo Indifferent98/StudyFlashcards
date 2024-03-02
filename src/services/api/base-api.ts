@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { getDecksResponse } from '../flashcards.types'
+import { getDeckArgs, getDecksResponse } from '../flashcards.types'
 
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -9,15 +9,16 @@ export const baseApi = createApi({
       headers.append('x-auth-skip', 'true')
     },
   }),
-  endpoints: builder => {
-    return {
-      getDecks: builder.query<getDecksResponse, void>({
-        query: () => `v2/decks`,
-      }),
-    }
-  },
+  endpoints: builder => ({
+    getDecks: builder.query<getDecksResponse, getDeckArgs | void>({
+      query: (args: getDeckArgs) => ({ url: `v2/decks`, params: args ?? {} }),
+    }),
+    getDeckById: builder.query<getDecksResponse, { id: string }>({
+      query: ({ id }) => ({ url: `v1/decks/${id}` }),
+    }),
+  }),
   reducerPath: 'baseApi',
   refetchOnFocus: true,
 })
 
-export const { useGetDecksQuery } = baseApi
+export const { useGetDecksQuery, useGetDeckByIdQuery } = baseApi

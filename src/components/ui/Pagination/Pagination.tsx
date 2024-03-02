@@ -7,6 +7,7 @@ import rightArrowIcon from '@/img/rightArrow.svg'
 import s from './Pagination.module.scss'
 
 import { Select } from '../Select'
+import { useGetDecksQuery } from '@/services/api/base-api'
 
 type Props = {
   totalItems: number
@@ -19,6 +20,7 @@ export const Pagination = ({ totalItems }: Props) => {
   let mappedPages = []
   let i = 1
 
+  const { refetch } = useGetDecksQuery({ currentPage: currentPage })
   while (i <= pagesCount) {
     mappedPages.push(i)
     i++
@@ -31,6 +33,7 @@ export const Pagination = ({ totalItems }: Props) => {
       }`}
       onClick={() => {
         setCurrentPage(i)
+        refetch()
       }}
     >
       <div>{++i}</div>
