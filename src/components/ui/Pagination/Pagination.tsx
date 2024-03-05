@@ -13,10 +13,17 @@ type Props = {
   totalItems: number
   currentPage: number
   setCurrentPage: (page: number) => void
+  pageSize: number
+  setPageSize: (page: number) => void
 }
-export const Pagination = ({ totalItems, currentPage, setCurrentPage }: Props) => {
+export const Pagination = ({
+  totalItems,
+  currentPage,
+  setCurrentPage,
+  pageSize,
+  setPageSize,
+}: Props) => {
   // const [currentPage, setCurrentPage] = useState(1)
-  const [pageSize, setPageSize] = useState(100)
 
   const pagesCount = Math.ceil(totalItems / pageSize)
   let mappedPages = []

@@ -1,7 +1,6 @@
 import s from './Table.module.scss'
 
 import { Pagination } from '../Pagination'
-import { TableItem } from './TableItem'
 import { pagination } from '@/services/flashcards.types'
 
 type Props = {
@@ -9,9 +8,18 @@ type Props = {
   pagination: pagination
   currentPage: number
   setCurrentPage: (page: number) => void
+  pageSize: number
+  setPageSize: (page: number) => void
 }
 
-export const Table = ({ children, pagination, currentPage, setCurrentPage }: Props) => {
+export const Table = ({
+  children,
+  pagination,
+  currentPage,
+  setCurrentPage,
+  pageSize,
+  setPageSize,
+}: Props) => {
   return (
     <div>
       {children}
@@ -45,6 +53,8 @@ export const Table = ({ children, pagination, currentPage, setCurrentPage }: Pro
       /> */}
       <div className={s.Pagination}>
         <Pagination
+          pageSize={pageSize}
+          setPageSize={setPageSize}
           totalItems={pagination?.totalItems}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}

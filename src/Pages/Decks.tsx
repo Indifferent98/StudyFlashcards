@@ -6,17 +6,23 @@ import { useState } from 'react'
 
 export const Decks = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const { isLoading, data, error } = useGetDecksQuery({ currentPage })
+  const [pageSize, setPageSize] = useState(10)
+  const { isLoading, data, error, isFetching } = useGetDecksQuery({
+    currentPage,
+    itemsPerPage: pageSize,
+  })
 
   if (error) {
     return <Typography variant="H1">{JSON.stringify(error)}</Typography>
   }
 
-  return isLoading ? (
+  return isFetching ? (
     <Typography variant="H1">...Loading</Typography>
   ) : (
     <div>
       <Table
+        pageSize={pageSize}
+        setPageSize={setPageSize}
         pagination={data!.pagination}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

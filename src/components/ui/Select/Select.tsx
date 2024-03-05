@@ -13,7 +13,7 @@ type Props = {
   pixelWidth?: number
   selectName: number | string
   selectedItems: string[]
-  setChooseItem?: (page: number) => void
+  setChooseItem: (page: number) => void
   size?: 'small'
   width?: 'default' | 'fullWidth' | 'max-content'
 } & ComponentPropsWithoutRef<'div'>
@@ -25,6 +25,7 @@ export const Select = (props: Props) => {
     selectedItems,
     setChooseItem,
     size,
+
     width = 'default',
     ...restProps
   } = props
@@ -98,7 +99,8 @@ export const Select = (props: Props) => {
               e.stopPropagation()
               setCurrentSelectedItem(item)
               setShowMode(false)
-              setChooseItem && setChooseItem(+item)
+
+              setChooseItem(+item)
             }
 
             return (
