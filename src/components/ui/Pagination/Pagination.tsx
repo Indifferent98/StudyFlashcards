@@ -42,7 +42,7 @@ export const Pagination = ({
       <div>{++i}</div>
     </button>
   ))
-
+  console.log('test')
   const leftArrowHandler = () => {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1)
