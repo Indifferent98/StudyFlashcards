@@ -1,13 +1,11 @@
-import { useState } from 'react'
 import { ReactSVG } from 'react-svg'
 
 import leftArrowIcon from '@/img/leftArrow.svg'
 import rightArrowIcon from '@/img/rightArrow.svg'
 
 import s from './Pagination.module.scss'
-
+import { v1 } from 'uuid'
 import { Select } from '../Select'
-import { useGetDecksQuery } from '@/services/api/base-api'
 
 type Props = {
   totalItems: number
@@ -23,20 +21,17 @@ export const Pagination = ({
   pageSize,
   setPageSize,
 }: Props) => {
-  // const [currentPage, setCurrentPage] = useState(1)
-
   const pagesCount = Math.ceil(totalItems / pageSize)
   let mappedPages = []
   let i = 1
 
-  // const { refetch } = useGetDecksQuery({ currentPage: currentPage })
   while (i <= pagesCount) {
     mappedPages.push(i)
     i++
   }
   mappedPages = mappedPages.map((elem, i) => (
     <button
-      key={i}
+      key={v1()}
       className={`${s.pageButton} ${i + 1 === currentPage && s.currentPage} ${
         !(i + 1 === currentPage) && s.hoveredButton
       }`}
@@ -87,7 +82,7 @@ export const Pagination = ({
 
   return (
     <div className={s.wrapper}>
-      <div className={s.pageButtons}>
+      <div className={s.pageButtons} key={v1()}>
         <ReactSVG className={s.svg} onClick={leftArrowHandler} src={leftArrowIcon} />
         {filteredMappedPages}
         <ReactSVG
