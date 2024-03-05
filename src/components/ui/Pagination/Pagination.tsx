@@ -11,16 +11,18 @@ import { useGetDecksQuery } from '@/services/api/base-api'
 
 type Props = {
   totalItems: number
+  currentPage: number
+  setCurrentPage: (page: number) => void
 }
-export const Pagination = ({ totalItems }: Props) => {
-  const [currentPage, setCurrentPage] = useState(1)
+export const Pagination = ({ totalItems, currentPage, setCurrentPage }: Props) => {
+  // const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(100)
 
   const pagesCount = Math.ceil(totalItems / pageSize)
   let mappedPages = []
   let i = 1
 
-  const { refetch } = useGetDecksQuery({ currentPage: currentPage })
+  // const { refetch } = useGetDecksQuery({ currentPage: currentPage })
   while (i <= pagesCount) {
     mappedPages.push(i)
     i++
@@ -33,7 +35,6 @@ export const Pagination = ({ totalItems }: Props) => {
       }`}
       onClick={() => {
         setCurrentPage(i)
-        refetch()
       }}
     >
       <div>{++i}</div>

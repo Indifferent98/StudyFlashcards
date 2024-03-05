@@ -2,9 +2,11 @@ import { Table } from '@/components/ui/Table'
 import { TableItem } from '@/components/ui/Table/TableItem'
 import { Typography } from '@/components/ui/Typography'
 import { useGetDecksQuery } from '@/services/api/base-api'
+import { useState } from 'react'
 
 export const Decks = () => {
-  const { isLoading, data, error } = useGetDecksQuery()
+  const [currentPage, setCurrentPage] = useState(1)
+  const { isLoading, data, error } = useGetDecksQuery({ currentPage })
 
   if (error) {
     return <Typography variant="H1">{JSON.stringify(error)}</Typography>
@@ -14,7 +16,11 @@ export const Decks = () => {
     <Typography variant="H1">...Loading</Typography>
   ) : (
     <div>
-      <Table pagination={data!.pagination}>
+      <Table
+        pagination={data!.pagination}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      >
         <TableItem
           isHeader
           name={'Name'}
