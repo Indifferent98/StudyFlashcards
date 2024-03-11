@@ -4,21 +4,21 @@ export interface Author {
 }
 
 export interface Item {
-  id: string
-  userId: string
-  name: string
-  isPrivate: boolean
+  author: Author
+  cardsCount: number
   cover?: null
   created: string
+  id: string
+  isPrivate: boolean
+  name: string
   updated: string
-  cardsCount: number
-  author: Author
+  userId: string
 }
 
 export interface pagination {
-  totalItems: number
   currentPage: number
   itemsPerPage: number
+  totalItems: number
   totalPages: number
 }
 
@@ -28,11 +28,11 @@ export interface getDecksResponse {
 }
 
 export type getDeckArgs = {
-  name?: string
   authorId?: string
-  minCardsCount?: number
-  maxCardsCount?: number
   currentPage?: number
   itemsPerPage?: number
+  maxCardsCount?: number
+  minCardsCount?: number
+  name?: string
   orderBy?: string
 }

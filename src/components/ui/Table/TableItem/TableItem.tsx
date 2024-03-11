@@ -5,31 +5,31 @@ import s from './TableItem.module.scss'
 import { Stars } from '../Stars'
 
 type Props = {
-  answer?: string | number
-  name?: string
+  answer?: number | string
   cardsCount: number | string
+  changeSetting?: boolean
   createdBy: string
+  emptySlot?: boolean
   grade?: string
+  isHeader?: boolean
   lastUpdated: string
+  name?: string
   question?: string
   withImg?: boolean
-  changeSetting?: boolean
-  emptySlot?: boolean
-  isHeader?: boolean
 }
 
 export const TableItem = ({
   answer,
+  cardsCount,
+  changeSetting = false,
+  createdBy,
+  emptySlot = false,
   grade,
+  isHeader = false,
   lastUpdated,
+  name,
   question,
   withImg = false,
-  changeSetting = false,
-  emptySlot = false,
-  isHeader = false,
-  cardsCount,
-  name,
-  createdBy,
 }: Props) => {
   return (
     <div className={`${s.wrapper} ${isHeader && s.header}`}>

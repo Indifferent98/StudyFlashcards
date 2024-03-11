@@ -3,12 +3,12 @@ import { ReactSVG } from 'react-svg'
 
 import arrowDown from '@/img/arrowDown.svg'
 import arrowUp from '@/img/arrowUpIcon.svg'
+import { useAppDispatch } from '@/services/hooks'
+import { paginationAction } from '@/services/slices/PaginationSlice'
 
 import s from './Select.module.scss'
 
 import { Typography } from '../Typography'
-import { useAppDispatch } from '@/services/hooks'
-import { paginationAction } from '@/services/slices/PaginationSlice'
 
 type Props = {
   helperText?: string
@@ -16,7 +16,6 @@ type Props = {
   pixelWidth?: number
   selectName: number | string
   selectedItems: string[]
-  // setChooseItem: (payload: { newPageSize: number }) => void
   size?: 'small'
   width?: 'default' | 'fullWidth' | 'max-content'
 } & ComponentPropsWithoutRef<'div'>
@@ -26,9 +25,7 @@ export const Select = (props: Props) => {
     isInlineBlock = false,
     selectName,
     selectedItems,
-    // setChooseItem,
     size,
-
     width = 'default',
     ...restProps
   } = props
@@ -65,9 +62,6 @@ export const Select = (props: Props) => {
     e.stopPropagation()
     setShowMode(showMode ? false : true)
   }
-  // const chooseItem = (item: number) => {
-  //   setChooseItem && setChooseItem({ newPageSize: item })
-  // }
 
   const { changePageSize } = paginationAction
 

@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { setupListeners } from '@reduxjs/toolkit/query/react'
 
 import { baseApi } from './api/base-api'
-import { setupListeners } from '@reduxjs/toolkit/query/react'
 import { paginationSlice } from './slices/PaginationSlice'
 
 export const store = configureStore({

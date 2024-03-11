@@ -6,11 +6,11 @@ type Pagination = {
 }
 
 const slice = createSlice({
-  name: 'Pagination',
   initialState: {
     currentPage: 1,
     pageSize: 10,
   } as Pagination,
+  name: 'Pagination',
   reducers: {
     changeCurrentPage(state, action: PayloadAction<{ newPage: number }>) {
       state.currentPage = action.payload.newPage

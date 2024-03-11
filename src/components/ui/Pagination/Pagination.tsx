@@ -1,15 +1,16 @@
+import { useSelector } from 'react-redux'
 import { ReactSVG } from 'react-svg'
 
 import leftArrowIcon from '@/img/leftArrow.svg'
 import rightArrowIcon from '@/img/rightArrow.svg'
-
-import s from './Pagination.module.scss'
-import { v1 } from 'uuid'
-import { Select } from '../Select'
-import { useSelector } from 'react-redux'
+import { useAppDispatch } from '@/services/hooks'
 import { selectCurrentPage, selectPageSize } from '@/services/selectors/paginationSelectors'
 import { paginationAction } from '@/services/slices/PaginationSlice'
-import { useAppDispatch } from '@/services/hooks'
+import { v1 } from 'uuid'
+
+import s from './Pagination.module.scss'
+
+import { Select } from '../Select'
 
 type Props = {
   totalItems: number
@@ -30,10 +31,10 @@ export const Pagination = ({ totalItems }: Props) => {
   }
   mappedPages = mappedPages.map((elem, i) => (
     <button
-      key={v1()}
       className={`${s.pageButton} ${i + 1 === currentPage && s.currentPage} ${
         !(i + 1 === currentPage) && s.hoveredButton
       }`}
+      key={v1()}
       onClick={() => {
         dispatch(changeCurrentPage({ newPage: i }))
       }}
@@ -97,7 +98,6 @@ export const Pagination = ({ totalItems }: Props) => {
           isInlineBlock
           selectName={pageSize}
           selectedItems={['10', '20', '30', '50', '100']}
-          // setChooseItem={changePageSize}
           size={'small'}
           style={{ margin: '0px 6px' }}
           width={'max-content'}
