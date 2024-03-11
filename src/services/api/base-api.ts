@@ -1,11 +1,20 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { getDeckArgs, getDecksResponse } from '../flashcards.types'
+import {
+  CreateDeckResponse,
+  createDeckArgs,
+  getDeckArgs,
+  getDecksResponse,
+} from '../flashcards.types'
 
 export const baseApi = createApi({
+  reducerPath: 'cardsApi',
+  // refetchOnFocus: true,
+  tagTypes: ['Decks'],
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.flashcards.andrii.es',
     credentials: 'include',
+
     prepareHeaders: headers => {
       headers.append('x-auth-skip', 'true')
     },
@@ -16,10 +25,13 @@ export const baseApi = createApi({
     }),
     getDecks: builder.query<getDecksResponse, getDeckArgs | void>({
       query: (args: getDeckArgs) => ({ params: args ?? {}, url: `v2/decks` }),
+      providesTags: ['Decks'],
+    }),
+    createDeck: builder.mutation<CreateDeckResponse, createDeckArgs>({
+      query: args => ({ method: 'POST', url: `v1/decks`, body: args }),
+      invalidatesTags: ['Decks'],
     }),
   }),
-  reducerPath: 'baseApi',
-  refetchOnFocus: true,
 })
 
-export const { useGetDeckByIdQuery, useGetDecksQuery } = baseApi
+export const { useGetDeckByIdQuery, useGetDecksQuery, useCreateDeckMutation } = baseApi

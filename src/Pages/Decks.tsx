@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux'
-
 import { Table } from '@/components/ui/Table'
 import { TableItem } from '@/components/ui/Table/TableItem'
 import { Typography } from '@/components/ui/Typography'
-import { useGetDecksQuery } from '@/services/api/base-api'
+import { useCreateDeckMutation, useGetDecksQuery } from '@/services/api/base-api'
 import { selectCurrentPage, selectPageSize } from '@/services/selectors/paginationSelectors'
+import { Button } from '@/components/ui/Button'
 
 export const Decks = () => {
   const currentPage = useSelector(selectCurrentPage)
@@ -15,6 +15,8 @@ export const Decks = () => {
     itemsPerPage: pageSize,
   })
 
+  const [createDeck, deckCreationStatus] = useCreateDeckMutation()
+
   if (error) {
     return <Typography variant={'H1'}>{JSON.stringify(error)}</Typography>
   }
@@ -23,6 +25,14 @@ export const Decks = () => {
     <Typography variant={'H1'}>...Loading</Typography>
   ) : (
     <div>
+      <div></div>
+      <Button
+        children={'+'}
+        onClick={() => {
+          createDeck({ name: '6712qwe' })
+        }}
+        disabled={deckCreationStatus.isLoading}
+      />
       <Table pagination={data!.pagination}>
         <TableItem
           cardsCount={'Cards'}

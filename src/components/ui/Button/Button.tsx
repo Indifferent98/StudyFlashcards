@@ -51,6 +51,7 @@ export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
         fullWidth ? s.fullWidth : ''
       } ${withIcon ? s.withIcon : s.withoutIcon}  ${className} ${display && s.inlineBlock}`}
       {...restProps}
+      disabled={disabled}
       style={{ height: `${height && height}` }}
     />
   )
