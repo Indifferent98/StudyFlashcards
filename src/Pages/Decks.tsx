@@ -29,7 +29,7 @@ export const Decks = () => {
       <Button
         children={'+'}
         onClick={() => {
-          createDeck({ name: 'newDeck3' })
+          createDeck({ name: '6712qwe' })
         }}
         disabled={deckCreationStatus.isLoading}
       />
