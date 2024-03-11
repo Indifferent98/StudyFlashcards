@@ -13,17 +13,8 @@ import { useAppDispatch } from '@/services/hooks'
 
 type Props = {
   totalItems: number
-  // currentPage: number
-  // setCurrentPage: (page: number) => void
-  // pageSize: number
-  // setPageSize: (page: number) => void
 }
-export const Pagination = ({
-  totalItems, // currentPage,
-  // pageSize,
-} // setCurrentPage,
-// setPageSize,
-: Props) => {
+export const Pagination = ({ totalItems }: Props) => {
   const currentPage = useSelector(selectCurrentPage)
   const pageSize = useSelector(selectPageSize)
   const dispatch = useAppDispatch()
