@@ -7,13 +7,16 @@ import arrowUp from '@/img/arrowUpIcon.svg'
 import s from './Select.module.scss'
 
 import { Typography } from '../Typography'
+import { useAppDispatch } from '@/services/hooks'
+import { paginationAction } from '@/services/slices/PaginationSlice'
+
 type Props = {
   helperText?: string
   isInlineBlock?: boolean
   pixelWidth?: number
   selectName: number | string
   selectedItems: string[]
-  setChooseItem: (page: number) => void
+  // setChooseItem: (payload: { newPageSize: number }) => void
   size?: 'small'
   width?: 'default' | 'fullWidth' | 'max-content'
 } & ComponentPropsWithoutRef<'div'>
@@ -23,12 +26,14 @@ export const Select = (props: Props) => {
     isInlineBlock = false,
     selectName,
     selectedItems,
-    setChooseItem,
+    // setChooseItem,
     size,
 
     width = 'default',
     ...restProps
   } = props
+
+  const dispatch = useAppDispatch()
 
   const changeSelectItem = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (showMode && e.key === 'ArrowDown' && !(hoveredItem >= selectedItems.length - 1)) {
@@ -60,9 +65,11 @@ export const Select = (props: Props) => {
     e.stopPropagation()
     setShowMode(showMode ? false : true)
   }
-  const chooseItem = (item: number) => {
-    setChooseItem && setChooseItem(item)
-  }
+  // const chooseItem = (item: number) => {
+  //   setChooseItem && setChooseItem({ newPageSize: item })
+  // }
+
+  const { changePageSize } = paginationAction
 
   return (
     <div
@@ -100,7 +107,7 @@ export const Select = (props: Props) => {
               setCurrentSelectedItem(item)
               setShowMode(false)
 
-              setChooseItem(+item)
+              dispatch(changePageSize({ newPageSize: +item }))
             }
 
             return (

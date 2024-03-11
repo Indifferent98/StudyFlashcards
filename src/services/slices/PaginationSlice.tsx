@@ -16,9 +16,11 @@ const slice = createSlice({
       state.currentPage = action.payload.newPage
     },
     changePageSize(state, action: PayloadAction<{ newPageSize: number }>) {
-      state.currentPage = action.payload.newPageSize
+      state.pageSize = action.payload.newPageSize
+      state.currentPage = 1
     },
   },
 })
 
 export const paginationAction = slice.actions
+export const paginationSlice = slice.reducer

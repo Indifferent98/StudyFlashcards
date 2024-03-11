@@ -6,19 +6,19 @@ import { pagination } from '@/services/flashcards.types'
 type Props = {
   children: React.ReactNode
   pagination: pagination
-  currentPage: number
-  setCurrentPage: (page: number) => void
-  pageSize: number
-  setPageSize: (page: number) => void
+  // currentPage: number
+
+  // pageSize: number
+  // setPageSize: (page: number) => void
 }
 
 export const Table = ({
   children,
   pagination,
-  currentPage,
-  setCurrentPage,
-  pageSize,
-  setPageSize,
+  // currentPage,
+  // setCurrentPage,
+  // pageSize,
+  // setPageSize,
 }: Props) => {
   return (
     <div>
@@ -53,11 +53,11 @@ export const Table = ({
       /> */}
       <div className={s.Pagination}>
         <Pagination
-          pageSize={pageSize}
-          setPageSize={setPageSize}
+          // pageSize={pageSize}
+          // setPageSize={setPageSize}
           totalItems={pagination?.totalItems}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
+          // currentPage={currentPage}
+          // setCurrentPage={setCurrentPage}
         />
       </div>
     </div>

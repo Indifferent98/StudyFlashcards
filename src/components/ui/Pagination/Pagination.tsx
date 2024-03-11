@@ -6,21 +6,29 @@ import rightArrowIcon from '@/img/rightArrow.svg'
 import s from './Pagination.module.scss'
 import { v1 } from 'uuid'
 import { Select } from '../Select'
+import { useSelector } from 'react-redux'
+import { selectCurrentPage, selectPageSize } from '@/services/selectors/paginationSelectors'
+import { paginationAction } from '@/services/slices/PaginationSlice'
+import { useAppDispatch } from '@/services/hooks'
 
 type Props = {
   totalItems: number
-  currentPage: number
-  setCurrentPage: (page: number) => void
-  pageSize: number
-  setPageSize: (page: number) => void
+  // currentPage: number
+  // setCurrentPage: (page: number) => void
+  // pageSize: number
+  // setPageSize: (page: number) => void
 }
 export const Pagination = ({
-  totalItems,
-  currentPage,
-  setCurrentPage,
-  pageSize,
-  setPageSize,
-}: Props) => {
+  totalItems, // currentPage,
+  // pageSize,
+} // setCurrentPage,
+// setPageSize,
+: Props) => {
+  const currentPage = useSelector(selectCurrentPage)
+  const pageSize = useSelector(selectPageSize)
+  const dispatch = useAppDispatch()
+  const { changeCurrentPage } = paginationAction
+
   const pagesCount = Math.ceil(totalItems / pageSize)
   let mappedPages = []
   let i = 1
@@ -36,7 +44,7 @@ export const Pagination = ({
         !(i + 1 === currentPage) && s.hoveredButton
       }`}
       onClick={() => {
-        setCurrentPage(i)
+        dispatch(changeCurrentPage({ newPage: i }))
       }}
     >
       <div>{++i}</div>
@@ -45,12 +53,12 @@ export const Pagination = ({
 
   const leftArrowHandler = () => {
     if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1)
+      dispatch(changeCurrentPage({ newPage: currentPage - 1 }))
     }
   }
   const rightArrowHandler = () => {
     if (currentPage !== mappedPages.length) {
-      setCurrentPage(currentPage + 1)
+      dispatch(changeCurrentPage({ newPage: currentPage + 1 }))
     }
   }
 
@@ -98,7 +106,7 @@ export const Pagination = ({
           isInlineBlock
           selectName={pageSize}
           selectedItems={['10', '20', '30', '50', '100']}
-          setChooseItem={setPageSize}
+          // setChooseItem={changePageSize}
           size={'small'}
           style={{ margin: '0px 6px' }}
           width={'max-content'}

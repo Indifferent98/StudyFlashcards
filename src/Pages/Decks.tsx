@@ -2,11 +2,15 @@ import { Table } from '@/components/ui/Table'
 import { TableItem } from '@/components/ui/Table/TableItem'
 import { Typography } from '@/components/ui/Typography'
 import { useGetDecksQuery } from '@/services/api/base-api'
+import { selectCurrentPage, selectPageSize } from '@/services/selectors/paginationSelectors'
+import { paginationAction } from '@/services/slices/PaginationSlice'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 export const Decks = () => {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pageSize, setPageSize] = useState(10)
+  const currentPage = useSelector(selectCurrentPage)
+  const pageSize = useSelector(selectPageSize)
+
   const { isLoading, data, error, isFetching } = useGetDecksQuery({
     currentPage,
     itemsPerPage: pageSize,
@@ -20,13 +24,7 @@ export const Decks = () => {
     <Typography variant="H1">...Loading</Typography>
   ) : (
     <div>
-      <Table
-        pageSize={pageSize}
-        setPageSize={setPageSize}
-        pagination={data!.pagination}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      >
+      <Table pagination={data!.pagination}>
         <TableItem
           isHeader
           name={'Name'}
