@@ -8,7 +8,7 @@ export const App = () => {
   return (
     <>
       <Header />
-      <div style={{ marginTop: '10%' }}>
+      <div style={{ marginTop: '2%', marginBottom: '5%' }}>
         <Provider store={store}>
           <Router />
         </Provider>
