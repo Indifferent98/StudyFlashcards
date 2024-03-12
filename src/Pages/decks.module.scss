@@ -1,0 +1,21 @@
+.header {
+  width: 1006px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.body {
+  width: 1006px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
+.item {
+  align-self: flex-end;
+}

@@ -6,11 +6,14 @@ import s from './Slider.module.scss'
 
 import { Typography } from '../Typography'
 
-export const SuperSlider = () => {
+type SuperSlider = {
+  range: number[]
+}
+export const SuperSlider = ({ range }: SuperSlider) => {
   const onChangeHandler = (value: number[]) => {
     setSliderValue(value)
   }
-  const [sliderValue, setSliderValue] = useState([0, 100])
+  const [sliderValue, setSliderValue] = useState(range)
 
   return (
     <div className={s.wrapper}>

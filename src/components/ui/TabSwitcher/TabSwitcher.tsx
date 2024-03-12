@@ -3,6 +3,7 @@ import { ChangeEvent, KeyboardEvent, useState } from 'react'
 import s from './TabSwitcher.module.scss'
 
 import { Typography } from '../Typography'
+
 export const TabSwitcher = () => {
   const [currentTab, setCurrentTab] = useState(1)
   const changeTab = (e: KeyboardEvent<HTMLButtonElement>) => {

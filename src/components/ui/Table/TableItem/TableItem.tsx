@@ -3,6 +3,7 @@ import picture from '@/img/tablePicture.png'
 import s from './TableItem.module.scss'
 
 import { Stars } from '../Stars'
+import { Link, Navigate } from 'react-router-dom'
 
 type Props = {
   answer?: number | string
@@ -16,6 +17,7 @@ type Props = {
   name?: string
   question?: string
   withImg?: boolean
+  authorId?: string
 }
 
 export const TableItem = ({
@@ -30,7 +32,9 @@ export const TableItem = ({
   name,
   question,
   withImg = false,
+  authorId,
 }: Props) => {
+  console.log(authorId)
   return (
     <div className={`${s.wrapper} ${isHeader && s.header}`}>
       {question && (
@@ -62,7 +66,11 @@ export const TableItem = ({
       {!createdBy && (
         <div className={`${s.grade} ${s.item}`}>{grade && isHeader ? grade : <Stars />}</div>
       )}
-      {createdBy && <div className={`${s.grade} ${s.item}`}>{createdBy}</div>}
+      {createdBy && (
+        <Link className={`${s.grade} ${s.item}`} to={`${authorId}`}>
+          {createdBy}
+        </Link>
+      )}
 
       {changeSetting && <div className={`${s.settings} ${s.item}`}>settings</div>}
       {emptySlot && <div className={`${s.settings} ${s.item}`}></div>}
