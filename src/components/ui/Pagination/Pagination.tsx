@@ -4,7 +4,7 @@ import { ReactSVG } from 'react-svg'
 import leftArrowIcon from '@/img/leftArrow.svg'
 import rightArrowIcon from '@/img/rightArrow.svg'
 import { useAppDispatch } from '@/services/hooks'
-import { selectCurrentPage, selectPageSize } from '@/services/selectors/paginationSelectors'
+import { selectCurrentPage, selectPageSize } from '@/services/selectors'
 import { paginationAction } from '@/services/slices/PaginationSlice'
 import { v1 } from 'uuid'
 

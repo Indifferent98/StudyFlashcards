@@ -34,7 +34,6 @@ export const TableItem = ({
   withImg = false,
   authorId,
 }: Props) => {
-  console.log(authorId)
   return (
     <div className={`${s.wrapper} ${isHeader && s.header}`}>
       {question && (

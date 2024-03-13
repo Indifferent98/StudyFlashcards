@@ -2,7 +2,12 @@ import { useSelector } from 'react-redux'
 import { Table } from '@/components/ui/Table'
 import { TableItem } from '@/components/ui/Table/TableItem'
 import { Typography } from '@/components/ui/Typography'
-import { selectCurrentPage, selectPageSize } from '@/services/selectors/paginationSelectors'
+import {
+  selectCurrentPage,
+  selectMaxCards,
+  selectMinCards,
+  selectPageSize,
+} from '@/services/selectors'
 import { Button } from '@/components/ui/Button'
 import { useGetDecksQuery, useCreateDeckMutation } from '@/services/api/decks.service'
 import s from './decks.module.scss'
@@ -11,19 +16,25 @@ import { TabSwitcher } from '@/components/ui/TabSwitcher'
 import { SuperSlider } from '@/components/ui/Slider'
 import trashIcon from '@/img/trashIcon.svg'
 import { ReactSVG } from 'react-svg'
+import { filtersAction } from '@/services/slices/filterSlice'
+import { useAppDispatch } from '@/services/hooks'
 
 export const Decks = () => {
   const currentPage = useSelector(selectCurrentPage)
   const pageSize = useSelector(selectPageSize)
+  const minCards = useSelector(selectMinCards)
+  const maxCards = useSelector(selectMaxCards)
 
   const { data, error, isFetching } = useGetDecksQuery({
     currentPage,
     itemsPerPage: pageSize,
+    minCardsCount: minCards,
+    maxCardsCount: maxCards,
   })
-  // const maxCardCount = data?.items.sort((a, b) => b.cardsCount - a.cardsCount)[0]
+  const dispatch = useAppDispatch()
 
   const [createDeck, deckCreationStatus] = useCreateDeckMutation()
-  console.log(data)
+  console.log([minCards, maxCards])
   if (error) {
     return <Typography variant={'H1'}>{JSON.stringify(error)}</Typography>
   }
@@ -52,11 +63,11 @@ export const Decks = () => {
 
         <TabSwitcher />
         <div className={s.item}>
-          {/* <SuperSlider range={[0, maxCardCount!.cardsCount ? maxCardCount!.cardsCount : 100]} /> */}
+          <SuperSlider range={[minCards, maxCards]} />
         </div>
 
         <div className={s.item}>
-          <Button variant="secondary">
+          <Button variant="secondary" onClick={() => dispatch(filtersAction.clearFilter())}>
             <ReactSVG src={trashIcon} style={{ display: 'inline-block' }} /> Clear Filter
           </Button>
         </div>
