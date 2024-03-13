@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import * as Slider from '@radix-ui/react-slider'
 
 import s from './Slider.module.scss'
 
-import { Typography } from '../Typography'
 import { filtersAction } from '@/services/slices/filterSlice'
 import { useAppDispatch } from '@/services/hooks'
 import { selectMinCards, selectMaxCards } from '@/services/selectors'
 import { useSelector } from 'react-redux'
+import { EditableSpan } from '../EditableSpan/EditableSpan'
 
 type SuperSlider = {
   range: number[]
@@ -17,8 +17,14 @@ export const SuperSlider = ({ range }: SuperSlider) => {
   const { changeMaxCardsCount, changeMinCardsCount } = filtersAction
   const dispatch = useAppDispatch()
   const [timerId, setTimerId] = useState<string | number | NodeJS.Timeout | undefined>()
+
   const minCards = useSelector(selectMinCards)
   const maxCards = useSelector(selectMaxCards)
+  useEffect(() => {
+    if (minCards === 1 && maxCards === 100) {
+      setSliderValue([minCards, maxCards])
+    }
+  }, [minCards, maxCards])
 
   const onChangeHandler = (value: number[]) => {
     console.log(value)
@@ -38,7 +44,7 @@ export const SuperSlider = ({ range }: SuperSlider) => {
   console.log(maxCards, 'maxxxxxx')
   return (
     <div className={s.wrapper}>
-      <Typography children={sliderValue[0]} className={s.valueBox} variant={'Body1'} />
+      <EditableSpan value={sliderValue[0]} type="min" />
       <form>
         <Slider.Root
           className={s.SliderRoot}
@@ -55,7 +61,8 @@ export const SuperSlider = ({ range }: SuperSlider) => {
           <Slider.Thumb className={s.SliderThumb} />
         </Slider.Root>
       </form>
-      <Typography children={sliderValue[1]} className={s.valueBox} variant={'Body1'} />
+      <EditableSpan value={sliderValue[1]} type="max" />
+      {/* <Typography children={sliderValue[1]} className={s.valueBox} variant={'Body1'} /> */}
     </div>
   )
 }
