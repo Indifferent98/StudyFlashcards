@@ -7,6 +7,7 @@ import {
   selectMaxCards,
   selectMinCards,
   selectPageSize,
+  selectTabs,
 } from '@/services/selectors'
 import { Button } from '@/components/ui/Button'
 import { useGetDecksQuery, useCreateDeckMutation } from '@/services/api/decks.service'
@@ -18,23 +19,27 @@ import trashIcon from '@/img/trashIcon.svg'
 import { ReactSVG } from 'react-svg'
 import { filtersAction } from '@/services/slices/filterSlice'
 import { useAppDispatch } from '@/services/hooks'
+import { paginationAction } from '@/services/slices/PaginationSlice'
+import { useState } from 'react'
 
 export const Decks = () => {
   const currentPage = useSelector(selectCurrentPage)
   const pageSize = useSelector(selectPageSize)
   const minCards = useSelector(selectMinCards)
   const maxCards = useSelector(selectMaxCards)
-
+  const { resetPagination } = paginationAction
+  const tabs = useSelector(selectTabs)
   const { data, error, isFetching } = useGetDecksQuery({
     currentPage,
     itemsPerPage: pageSize,
     minCardsCount: minCards,
     maxCardsCount: maxCards,
+    authorId: tabs === 'myCards' ? 'f2be95b9-4d07-4751-a775-bd612fc9553a' : '',
   })
   const dispatch = useAppDispatch()
-
   const [createDeck, deckCreationStatus] = useCreateDeckMutation()
   console.log([minCards, maxCards])
+
   if (error) {
     return <Typography variant={'H1'}>{JSON.stringify(error)}</Typography>
   }
@@ -44,13 +49,13 @@ export const Decks = () => {
   ) : (
     <div style={{ marginTop: '33px' }}>
       <div className={s.header}>
-        {/* <Button
+        <Button
           children={'+'}
           onClick={() => {
-            createDeck({ name: '6712qwe' })
+            createDeck({ name: 'kukusDeck?' })
           }}
           disabled={deckCreationStatus.isLoading}
-        /> */}
+        />
         <Typography variant="H1" as="span">
           Deck list
         </Typography>
@@ -58,16 +63,21 @@ export const Decks = () => {
       </div>
       <div className={s.body}>
         <div className={s.item}>
-          <Input placeholder="Input search" variant="search" />
+          <Input placeholder="Input search" variant="search" value={'searchTitle'} />
         </div>
-
         <TabSwitcher />
         <div className={s.item}>
           <SuperSlider range={[minCards, maxCards]} />
         </div>
 
         <div className={s.item}>
-          <Button variant="secondary" onClick={() => dispatch(filtersAction.clearFilter())}>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              dispatch(filtersAction.clearFilter())
+              dispatch(resetPagination())
+            }}
+          >
             <ReactSVG src={trashIcon} style={{ display: 'inline-block' }} /> Clear Filter
           </Button>
         </div>

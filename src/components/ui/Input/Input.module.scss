@@ -73,7 +73,7 @@
   fill: var(--color-light-100);
   position: absolute;
   cursor: pointer;
-  top: 30px;
+  top: 7px;
   // left: 275px;
   right: 10px;
 }
@@ -92,7 +92,7 @@
   position: absolute;
   cursor: pointer;
   left: 8px;
-  top: 0px;
+  top: 6px;
 }
 .searchFocused {
   fill: var(--color-light-100);
@@ -106,6 +106,7 @@
   position: absolute;
   cursor: pointer;
   left: 8px;
-  bottom: 0px;
+  top: 6px;
+  // bottom: 0px;
   fill: var(--color-dark-300);
 }

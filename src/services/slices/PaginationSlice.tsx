@@ -19,6 +19,10 @@ const slice = createSlice({
       state.pageSize = action.payload.newPageSize
       state.currentPage = 1
     },
+    resetPagination(state) {
+      state.pageSize = 10
+      state.currentPage = 1
+    },
   },
 })
 
