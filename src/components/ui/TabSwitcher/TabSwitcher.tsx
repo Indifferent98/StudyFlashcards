@@ -1,15 +1,17 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+
+import { useAppDispatch } from '@/services/hooks'
+import { selectTabs } from '@/services/selectors'
+import { filtersAction } from '@/services/slices/filterSlice'
 
 import s from './TabSwitcher.module.scss'
 
 import { Typography } from '../Typography'
-import { useSelector } from 'react-redux'
-import { selectTabs } from '@/services/selectors'
-import { filtersAction } from '@/services/slices/filterSlice'
-import { useAppDispatch } from '@/services/hooks'
 
 export const TabSwitcher = () => {
   const tabs = useSelector(selectTabs)
+
   useEffect(() => {
     setCurrentTab(tabs === 'allCards' ? 1 : 0)
   }, [tabs])

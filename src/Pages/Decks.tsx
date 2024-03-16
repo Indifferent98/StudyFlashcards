@@ -1,7 +1,17 @@
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { ReactSVG } from 'react-svg'
+
+import { Button } from '@/components/ui/Button'
+import { Input } from '@/components/ui/Input'
+import { SuperSlider } from '@/components/ui/Slider'
+import { TabSwitcher } from '@/components/ui/TabSwitcher'
 import { Table } from '@/components/ui/Table'
 import { TableItem } from '@/components/ui/Table/TableItem'
 import { Typography } from '@/components/ui/Typography'
+import trashIcon from '@/img/trashIcon.svg'
+import { useCreateDeckMutation, useGetDecksQuery } from '@/services/api/decks.service'
+import { useAppDispatch } from '@/services/hooks'
 import {
   selectCurrentPage,
   selectMaxCards,
@@ -9,18 +19,10 @@ import {
   selectPageSize,
   selectTabs,
 } from '@/services/selectors'
-import { Button } from '@/components/ui/Button'
-import { useGetDecksQuery, useCreateDeckMutation } from '@/services/api/decks.service'
-import s from './decks.module.scss'
-import { Input } from '@/components/ui/Input'
-import { TabSwitcher } from '@/components/ui/TabSwitcher'
-import { SuperSlider } from '@/components/ui/Slider'
-import trashIcon from '@/img/trashIcon.svg'
-import { ReactSVG } from 'react-svg'
-import { filtersAction } from '@/services/slices/filterSlice'
-import { useAppDispatch } from '@/services/hooks'
 import { paginationAction } from '@/services/slices/PaginationSlice'
-import { useState } from 'react'
+import { filtersAction } from '@/services/slices/filterSlice'
+
+import s from './decks.module.scss'
 
 export const Decks = () => {
   const currentPage = useSelector(selectCurrentPage)
@@ -30,14 +32,15 @@ export const Decks = () => {
   const { resetPagination } = paginationAction
   const tabs = useSelector(selectTabs)
   const { data, error, isFetching } = useGetDecksQuery({
+    authorId: tabs === 'myCards' ? 'f2be95b9-4d07-4751-a775-bd612fc9553a' : '',
     currentPage,
     itemsPerPage: pageSize,
-    minCardsCount: minCards,
     maxCardsCount: maxCards,
-    authorId: tabs === 'myCards' ? 'f2be95b9-4d07-4751-a775-bd612fc9553a' : '',
+    minCardsCount: minCards,
   })
   const dispatch = useAppDispatch()
   const [createDeck, deckCreationStatus] = useCreateDeckMutation()
+
   console.log([minCards, maxCards])
 
   if (error) {
@@ -51,19 +54,19 @@ export const Decks = () => {
       <div className={s.header}>
         <Button
           children={'+'}
+          disabled={deckCreationStatus.isLoading}
           onClick={() => {
             createDeck({ name: 'kukusDeck?' })
           }}
-          disabled={deckCreationStatus.isLoading}
         />
-        <Typography variant="H1" as="span">
+        <Typography as={'span'} variant={'H1'}>
           Deck list
         </Typography>
-        <Button display="inlineBlock">Add new Deck</Button>
+        <Button display={'inlineBlock'}>Add new Deck</Button>
       </div>
       <div className={s.body}>
         <div className={s.item}>
-          <Input placeholder="Input search" variant="search" value={'searchTitle'} />
+          <Input placeholder={'Input search'} value={'searchTitle'} variant={'search'} />
         </div>
         <TabSwitcher />
         <div className={s.item}>
@@ -72,11 +75,11 @@ export const Decks = () => {
 
         <div className={s.item}>
           <Button
-            variant="secondary"
             onClick={() => {
               dispatch(filtersAction.clearFilter())
               dispatch(resetPagination())
             }}
+            variant={'secondary'}
           >
             <ReactSVG src={trashIcon} style={{ display: 'inline-block' }} /> Clear Filter
           </Button>
@@ -93,10 +96,10 @@ export const Decks = () => {
         />
         {data?.items.map(item => (
           <TableItem
+            authorId={item.userId}
             cardsCount={item.cardsCount}
             changeSetting
             createdBy={item.author.name}
-            authorId={item.userId}
             key={item.id}
             lastUpdated={new Date(item.updated).toLocaleDateString()}
             name={item.name}

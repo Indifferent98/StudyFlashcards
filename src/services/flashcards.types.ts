@@ -39,18 +39,18 @@ export type getDeckArgs = {
 
 export interface CreateDeckResponse {
   author: Author
-  id: string
-  userId: string
-  name: string
-  isPrivate: boolean
+  cardsCount: number
   cover: string
   created: string
+  id: string
+  isPrivate: boolean
+  name: string
   updated: string
-  cardsCount: number
+  userId: string
 }
 
 export interface createDeckArgs {
-  name: string
-  isPrivate?: boolean
   cover?: string
+  isPrivate?: boolean
+  name: string
 }

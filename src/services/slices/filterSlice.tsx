@@ -1,26 +1,26 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 type filters = {
-  minCardsCount: number
   maxCardsCount: number
+  minCardsCount: number
   tabsState: 'allCards' | 'myCards'
 }
 
 const slice = createSlice({
   initialState: {
-    minCardsCount: 0,
     maxCardsCount: 100,
+    minCardsCount: 0,
     tabsState: 'allCards',
   } as filters,
   name: 'filters',
   reducers: {
-    changeMinCardsCount(state, action: PayloadAction<{ minCard: number }>) {
-      state.minCardsCount = action.payload.minCard
-    },
     changeMaxCardsCount(state, action: PayloadAction<{ maxCard: number }>) {
       state.maxCardsCount = action.payload.maxCard
     },
-    changeTabs(state, action: PayloadAction<{ tab: 'myCards' | 'allCards' }>) {
+    changeMinCardsCount(state, action: PayloadAction<{ minCard: number }>) {
+      state.minCardsCount = action.payload.minCard
+    },
+    changeTabs(state, action: PayloadAction<{ tab: 'allCards' | 'myCards' }>) {
       state.tabsState = action.payload.tab
     },
 

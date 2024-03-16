@@ -9,8 +9,8 @@ export const store = configureStore({
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
-    paginationSlice,
     filtersSlice,
+    paginationSlice,
   },
 })
 setupListeners(store.dispatch)

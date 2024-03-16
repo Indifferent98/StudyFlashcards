@@ -1,12 +1,14 @@
+import { Link, Navigate } from 'react-router-dom'
+
 import picture from '@/img/tablePicture.png'
 
 import s from './TableItem.module.scss'
 
 import { Stars } from '../Stars'
-import { Link, Navigate } from 'react-router-dom'
 
 type Props = {
   answer?: number | string
+  authorId?: string
   cardsCount: number | string
   changeSetting?: boolean
   createdBy: string
@@ -17,11 +19,11 @@ type Props = {
   name?: string
   question?: string
   withImg?: boolean
-  authorId?: string
 }
 
 export const TableItem = ({
   answer,
+  authorId,
   cardsCount,
   changeSetting = false,
   createdBy,
@@ -32,7 +34,6 @@ export const TableItem = ({
   name,
   question,
   withImg = false,
-  authorId,
 }: Props) => {
   return (
     <div className={`${s.wrapper} ${isHeader && s.header}`}>

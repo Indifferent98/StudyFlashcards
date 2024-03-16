@@ -1,18 +1,21 @@
 import React, { ChangeEvent, useState } from 'react'
-import s from '../Slider/Slider.module.scss'
-import { Typography } from '../Typography'
-import f from './editableSpan.module.scss'
+
 import { useAppDispatch } from '@/services/hooks'
 import { filtersAction } from '@/services/slices/filterSlice'
 
+import s from '../Slider/Slider.module.scss'
+import f from './editableSpan.module.scss'
+
+import { Typography } from '../Typography'
+
 type Props = {
+  type: 'max' | 'min'
   value: number
-  type: 'min' | 'max'
 }
 
-export const EditableSpan = React.memo(({ value, type }: Props) => {
-  let [editMode, setEditMode] = useState(false)
-  let [title, setTitle] = useState(value)
+export const EditableSpan = React.memo(({ type, value }: Props) => {
+  const [editMode, setEditMode] = useState(false)
+  const [title, setTitle] = useState(value)
   const dispatch = useAppDispatch()
   const { changeMaxCardsCount, changeMinCardsCount } = filtersAction
   const activateEditMode = () => {
@@ -39,17 +42,17 @@ export const EditableSpan = React.memo(({ value, type }: Props) => {
 
   return editMode ? (
     <input
-      value={title}
-      onChange={changeTitle}
       autoFocus
-      onBlur={activateViewMode}
       className={`${s.valueBox} ${f.boxInput}`}
+      onBlur={activateViewMode}
+      onChange={changeTitle}
+      value={title}
     />
   ) : (
     <Typography
       children={value}
-      onDoubleClick={activateEditMode}
       className={s.valueBox}
+      onDoubleClick={activateEditMode}
       variant={'Body1'}
     />
   )
