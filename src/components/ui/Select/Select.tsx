@@ -30,6 +30,9 @@ export const Select = (props: Props) => {
     ...restProps
   } = props
 
+  useEffect(() => {
+    setCurrentSelectedItem(selectName)
+  }, [selectName])
   const dispatch = useAppDispatch()
 
   const changeSelectItem = (e: React.KeyboardEvent<HTMLButtonElement>) => {

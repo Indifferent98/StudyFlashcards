@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux'
 import { useAppDispatch } from '@/services/hooks'
 import { selectMaxCards, selectMinCards } from '@/services/selectors'
 import { filtersAction } from '@/services/slices/filterSlice'
+import { RootState } from '@/services/store'
 import * as Slider from '@radix-ui/react-slider'
 
 import s from './Slider.module.scss'
 
 import { EditableSpan } from '../EditableSpan/EditableSpan'
-import { RootState } from '@/services/store'
 
 type SuperSlider = {
   range: number[]
@@ -41,8 +41,6 @@ export const SuperSlider = ({ range }: SuperSlider) => {
       }, 1000)
     )
   }
-
-  // const [sliderValue, setSliderValue] = useState([minCards, maxCards])
 
   console.log(minCards, 'miiiiiin')
   console.log(maxCards, 'maxxxxxx')

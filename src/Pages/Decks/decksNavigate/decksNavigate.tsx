@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { ReactSVG } from 'react-svg'
+
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { SuperSlider } from '@/components/ui/Slider'
@@ -9,6 +10,7 @@ import { useAppDispatch } from '@/services/hooks'
 import { selectMaxCards, selectMinCards } from '@/services/selectors'
 import { paginationAction } from '@/services/slices/PaginationSlice'
 import { filtersAction } from '@/services/slices/filterSlice'
+
 import s from '../decks.module.scss'
 
 export const DecksNavigate = () => {
