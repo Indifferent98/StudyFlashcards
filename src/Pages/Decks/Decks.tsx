@@ -38,9 +38,11 @@ export const Decks = () => {
     return <Typography variant={'H1'}>{JSON.stringify(error)}</Typography>
   }
 
-  return isLoading ? (
-    <Typography variant={'H1'}>...Loading</Typography>
-  ) : (
+  if (isLoading) {
+    return <Typography variant={'H1'}>...Loading</Typography>
+  }
+
+  return (
     <div style={{ marginTop: '33px' }}>
       <div className={s.header}>
         <Button

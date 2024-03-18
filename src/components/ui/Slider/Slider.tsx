@@ -9,28 +9,30 @@ import * as Slider from '@radix-ui/react-slider'
 import s from './Slider.module.scss'
 
 import { EditableSpan } from '../EditableSpan/EditableSpan'
+import { RootState } from '@/services/store'
 
 type SuperSlider = {
   range: number[]
 }
 export const SuperSlider = ({ range }: SuperSlider) => {
-  const { changeMaxCardsCount, changeMinCardsCount } = filtersAction
+  const { changeMaxCardsCount, changeMinCardsCount, changeSliderValue } = filtersAction
   const dispatch = useAppDispatch()
   const [timerId, setTimerId] = useState<NodeJS.Timeout | number | string | undefined>()
-
+  const sliderValue = useSelector<RootState, number[]>(state => state.filtersSlice.sliderValue)
   const minCards = useSelector(selectMinCards)
   const maxCards = useSelector(selectMaxCards)
 
   useEffect(() => {
     if (minCards === 1 && maxCards === 100) {
-      setSliderValue([minCards, maxCards])
+      dispatch(changeSliderValue({ value: [minCards, maxCards] }))
     }
   }, [minCards, maxCards])
 
   const onChangeHandler = (value: number[]) => {
     console.log(value)
     clearTimeout(timerId)
-    setSliderValue(value)
+    dispatch(changeSliderValue({ value }))
+
     setTimerId(
       setTimeout(() => {
         console.log('timer is')
@@ -40,7 +42,7 @@ export const SuperSlider = ({ range }: SuperSlider) => {
     )
   }
 
-  const [sliderValue, setSliderValue] = useState([minCards, maxCards])
+  // const [sliderValue, setSliderValue] = useState([minCards, maxCards])
 
   console.log(minCards, 'miiiiiin')
   console.log(maxCards, 'maxxxxxx')
