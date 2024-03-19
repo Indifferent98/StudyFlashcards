@@ -1,19 +1,16 @@
 import { useSelector } from 'react-redux'
 import { ReactSVG } from 'react-svg'
-
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { SuperSlider } from '@/components/ui/Slider'
 import { TabSwitcher } from '@/components/ui/TabSwitcher'
 import trashIcon from '@/img/trashIcon.svg'
 import { useAppDispatch } from '@/services/hooks'
-import { selectMaxCards, selectMinCards } from '@/services/selectors'
+import { selectMaxCards, selectMinCards, selectSearchValue } from '@/services/selectors'
 import { paginationAction } from '@/services/slices/PaginationSlice'
 import { filtersAction } from '@/services/slices/filterSlice'
-
 import s from '../decks.module.scss'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { RootState } from '@/services/store'
 
 export const DecksNavigate = () => {
   const { resetPagination } = paginationAction
@@ -22,22 +19,24 @@ export const DecksNavigate = () => {
   const dispatch = useAppDispatch()
   const [searchValue, setSearchValue] = useState('')
   const [timerId, setTimerId] = useState<any>()
-  const searchItem = useSelector<RootState, string>(state => state.filtersSlice.searchValue)
+  const searchItem = useSelector(selectSearchValue)
   const { clearFilter, changeSearchValue } = filtersAction
   const changeSearchParams = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value)
   }
+
   useEffect(() => {
     if (searchItem === '') {
       setSearchValue('')
     }
   }, [searchItem])
+
   useEffect(() => {
     clearTimeout(timerId)
     setTimerId(
       setTimeout(() => {
         dispatch(changeSearchValue({ value: searchValue }))
-      }, 1200)
+      }, 800)
     )
   }, [searchValue])
 

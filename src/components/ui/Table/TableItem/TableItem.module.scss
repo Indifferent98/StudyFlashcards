@@ -29,6 +29,14 @@
   align-self: center;
   padding-left: 24px;
 }
+
+.cards {
+  flex: 12%;
+
+  align-self: center;
+  padding-left: 24px;
+}
+
 .lastUpdated {
   flex: 20%;
 
@@ -39,6 +47,17 @@
   flex: 20%;
   align-self: center;
   padding-left: 24px;
+  max-width: 20%;
+  overflow: hidden;
+}
+
+.createdBy {
+  flex: 20%;
+  align-self: flex-start;
+  padding-left: 24px;
+  max-width: 20%;
+  overflow: hidden;
+  justify-content: start;
 }
 
 .img {
@@ -67,4 +86,12 @@
 
 .settings {
   flex: 10%;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerButton {
+  cursor: pointer;
 }

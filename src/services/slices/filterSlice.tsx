@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { orderBy } from '../flashcards.types'
 
 type filters = {
   maxCardsCount: number
@@ -6,6 +7,7 @@ type filters = {
   sliderValue: number[]
   tabsState: 'allCards' | 'myCards'
   searchValue: string
+  orderBy: orderBy
 }
 
 const slice = createSlice({
@@ -15,6 +17,7 @@ const slice = createSlice({
     sliderValue: [0, 100],
     tabsState: 'allCards',
     searchValue: '',
+    orderBy: null,
   } as filters,
   name: 'filters',
   reducers: {
@@ -32,6 +35,9 @@ const slice = createSlice({
     },
     changeSearchValue(state, action: PayloadAction<{ value: string }>) {
       state.searchValue = action.payload.value
+    },
+    changeOrderByValue(state, action: PayloadAction<{ orderBy: orderBy }>) {
+      state.orderBy = action.payload.orderBy
     },
     clearFilter(state) {
       state.maxCardsCount = 100

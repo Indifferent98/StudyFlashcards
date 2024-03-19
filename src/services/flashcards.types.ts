@@ -34,8 +34,21 @@ export type getDeckArgs = {
   maxCardsCount?: number
   minCardsCount?: number
   name?: string
-  orderBy?: string
+  orderBy?: orderBy
 }
+
+export type orderBy =
+  | 'cardsCount-asc'
+  | 'updated-asc'
+  | 'name-asc'
+  | 'author.name-asc'
+  | 'created-asc'
+  | 'cardsCount-desc'
+  | 'updated-desc'
+  | 'name-desc'
+  | 'author.name-desc'
+  | 'created-desc'
+  | null
 
 export interface CreateDeckResponse {
   author: Author

@@ -1,0 +1,21 @@
+.item {
+  display: inline-block;
+  margin-right: 12px;
+}
+
+.item:last-child {
+  margin-right: 0px;
+}
+
+.button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+}
+
+.wrapper {
+  width: 78px;
+  height: 16px;
+}
