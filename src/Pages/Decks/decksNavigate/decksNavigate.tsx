@@ -12,17 +12,44 @@ import { paginationAction } from '@/services/slices/PaginationSlice'
 import { filtersAction } from '@/services/slices/filterSlice'
 
 import s from '../decks.module.scss'
+import { ChangeEvent, useEffect, useState } from 'react'
+import { RootState } from '@/services/store'
 
 export const DecksNavigate = () => {
   const { resetPagination } = paginationAction
   const minCards = useSelector(selectMinCards)
   const maxCards = useSelector(selectMaxCards)
   const dispatch = useAppDispatch()
+  const [searchValue, setSearchValue] = useState('')
+  const [timerId, setTimerId] = useState<any>()
+  const searchItem = useSelector<RootState, string>(state => state.filtersSlice.searchValue)
+  const { clearFilter, changeSearchValue } = filtersAction
+  const changeSearchParams = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.currentTarget.value)
+  }
+  useEffect(() => {
+    if (searchItem === '') {
+      setSearchValue('')
+    }
+  }, [searchItem])
+  useEffect(() => {
+    clearTimeout(timerId)
+    setTimerId(
+      setTimeout(() => {
+        dispatch(changeSearchValue({ value: searchValue }))
+      }, 1200)
+    )
+  }, [searchValue])
 
   return (
     <div className={s.body}>
       <div className={s.item}>
-        <Input placeholder={'Input search'} value={'searchTitle'} variant={'search'} />
+        <Input
+          placeholder={'Input search'}
+          value={searchValue}
+          onChange={changeSearchParams}
+          variant={'search'}
+        />
       </div>
       <TabSwitcher />
       <div className={s.item}>
@@ -32,7 +59,7 @@ export const DecksNavigate = () => {
       <div className={s.item}>
         <Button
           onClick={() => {
-            dispatch(filtersAction.clearFilter())
+            dispatch(clearFilter())
             dispatch(resetPagination())
           }}
           variant={'secondary'}

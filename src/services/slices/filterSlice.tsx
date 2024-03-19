@@ -5,6 +5,7 @@ type filters = {
   minCardsCount: number
   sliderValue: number[]
   tabsState: 'allCards' | 'myCards'
+  searchValue: string
 }
 
 const slice = createSlice({
@@ -13,6 +14,7 @@ const slice = createSlice({
     minCardsCount: 0,
     sliderValue: [0, 100],
     tabsState: 'allCards',
+    searchValue: '',
   } as filters,
   name: 'filters',
   reducers: {
@@ -28,11 +30,15 @@ const slice = createSlice({
     changeTabs(state, action: PayloadAction<{ tab: 'allCards' | 'myCards' }>) {
       state.tabsState = action.payload.tab
     },
+    changeSearchValue(state, action: PayloadAction<{ value: string }>) {
+      state.searchValue = action.payload.value
+    },
     clearFilter(state) {
       state.maxCardsCount = 100
       state.minCardsCount = 0
       state.tabsState = 'allCards'
       state.sliderValue = [0, 100]
+      state.searchValue = ''
     },
   },
 })

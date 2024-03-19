@@ -29,13 +29,11 @@ export const SuperSlider = ({ range }: SuperSlider) => {
   }, [minCards, maxCards])
 
   const onChangeHandler = (value: number[]) => {
-    console.log(value)
     clearTimeout(timerId)
     dispatch(changeSliderValue({ value }))
 
     setTimerId(
       setTimeout(() => {
-        console.log('timer is')
         dispatch(changeMinCardsCount({ minCard: value[0] }))
         dispatch(changeMaxCardsCount({ maxCard: value[1] }))
       }, 1000)

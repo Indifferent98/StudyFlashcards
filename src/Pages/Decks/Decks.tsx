@@ -16,12 +16,14 @@ import {
 import s from './decks.module.scss'
 
 import { DecksNavigate } from './decksNavigate'
+import { RootState } from '@/services/store'
 
 export const Decks = () => {
   const currentPage = useSelector(selectCurrentPage)
   const pageSize = useSelector(selectPageSize)
   const minCards = useSelector(selectMinCards)
   const maxCards = useSelector(selectMaxCards)
+  const searchValue = useSelector<RootState, string>(state => state.filtersSlice.searchValue)
 
   const tabs = useSelector(selectTabs)
   const { data, error, isFetching, isLoading } = useGetDecksQuery({
@@ -30,6 +32,7 @@ export const Decks = () => {
     itemsPerPage: pageSize,
     maxCardsCount: maxCards,
     minCardsCount: minCards,
+    name: searchValue,
   })
 
   const [createDeck, deckCreationStatus] = useCreateDeckMutation()
