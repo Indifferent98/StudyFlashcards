@@ -6,6 +6,7 @@ import { TableItem } from '@/components/ui/Table/TableItem'
 import { Typography } from '@/components/ui/Typography'
 import { useCreateDeckMutation, useGetDecksQuery } from '@/services/api/decks.service'
 import {
+  selectBackGroundDarkMode,
   selectCurrentPage,
   selectMaxCards,
   selectMinCards,
@@ -18,6 +19,10 @@ import {
 import s from './decks.module.scss'
 
 import { DecksNavigate } from './decksNavigate'
+import { Modal } from '@/components/ui/Modal'
+import { useState } from 'react'
+import { appAction } from '@/services/slices/appSlice'
+import { useAppDispatch } from '@/services/hooks'
 
 export const Decks = () => {
   const currentPage = useSelector(selectCurrentPage)
@@ -37,9 +42,10 @@ export const Decks = () => {
     name: searchValue,
     orderBy: orderBy,
   })
+  const backGroundDarkMode = useSelector(selectBackGroundDarkMode)
 
-  const [createDeck, deckCreationStatus] = useCreateDeckMutation()
-
+  const { changeBackGroundDarkMode } = appAction
+  const dispatch = useAppDispatch()
   if (error) {
     return <Typography variant={'H1'}>{JSON.stringify(error)}</Typography>
   }
@@ -50,18 +56,30 @@ export const Decks = () => {
 
   return (
     <div style={{ marginTop: '33px' }}>
+      {backGroundDarkMode && (
+        <>
+          <div className={s.background}></div> <Modal variant="Deck" />
+        </>
+      )}
       <div className={s.header}>
-        <Button
+        {/* <Button
           children={'+'}
           disabled={deckCreationStatus.isLoading}
           onClick={() => {
             createDeck({ name: 'kukusDeck?' })
           }}
-        />
+        /> */}
         <Typography as={'span'} variant={'H1'}>
           Deck list
         </Typography>
-        <Button display={'inlineBlock'}>Add new Deck</Button>
+        <Button
+          display={'inlineBlock'}
+          onClick={() => {
+            dispatch(changeBackGroundDarkMode({ mode: true }))
+          }}
+        >
+          Add new Deck
+        </Button>
       </div>
       <DecksNavigate />
       <Table pagination={data!.pagination}>

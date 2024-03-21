@@ -81,7 +81,7 @@ export const TableItem = ({
         <div
           className={`${s.name} ${s.item} ${s.headerButton}`}
           onClick={() => {
-            changeOrderByHandler(orderBy === 'name-asc' ? 'name-desc' : 'name-asc')
+            isHeader && changeOrderByHandler(orderBy === 'name-asc' ? 'name-desc' : 'name-asc')
           }}
         >
           {withImg ? (
@@ -105,9 +105,10 @@ export const TableItem = ({
         <div
           className={`${s.cards} ${s.item} ${s.headerButton}`}
           onClick={() => {
-            changeOrderByHandler(
-              orderBy === 'cardsCount-asc' ? 'cardsCount-desc' : 'cardsCount-asc'
-            )
+            isHeader &&
+              changeOrderByHandler(
+                orderBy === 'cardsCount-asc' ? 'cardsCount-desc' : 'cardsCount-asc'
+              )
           }}
         >
           {cardsCount}
@@ -121,7 +122,8 @@ export const TableItem = ({
       <div
         className={`${s.lastUpdated} ${s.item} ${s.headerButton}`}
         onClick={() => {
-          changeOrderByHandler(orderBy === 'updated-asc' ? 'updated-desc' : 'updated-asc')
+          isHeader &&
+            changeOrderByHandler(orderBy === 'updated-asc' ? 'updated-desc' : 'updated-asc')
         }}
       >
         {lastUpdated}

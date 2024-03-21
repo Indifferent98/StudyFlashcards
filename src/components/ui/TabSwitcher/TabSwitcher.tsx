@@ -8,6 +8,7 @@ import { filtersAction } from '@/services/slices/filterSlice'
 import s from './TabSwitcher.module.scss'
 
 import { Typography } from '../Typography'
+import { paginationAction } from '@/services/slices/PaginationSlice'
 
 export const TabSwitcher = () => {
   const tabs = useSelector(selectTabs)
@@ -17,6 +18,7 @@ export const TabSwitcher = () => {
   }, [tabs])
   const [currentTab, setCurrentTab] = useState(tabs === 'allCards' ? 1 : 0)
   const { changeTabs } = filtersAction
+  const { changeCurrentPage } = paginationAction
   const dispatch = useAppDispatch()
   const changeTab = (e: KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === 'ArrowRight' && currentTab === 0) {
@@ -25,6 +27,7 @@ export const TabSwitcher = () => {
     } else if (e.key === 'ArrowLeft' && currentTab === 1) {
       setCurrentTab(0)
       dispatch(changeTabs({ tab: 'myCards' }))
+      dispatch(changeCurrentPage({ newPage: 1 }))
     }
   }
 
@@ -39,6 +42,7 @@ export const TabSwitcher = () => {
           onClick={() => {
             setCurrentTab(0)
             dispatch(changeTabs({ tab: 'myCards' }))
+            dispatch(changeCurrentPage({ newPage: 1 }))
           }}
           onKeyDown={changeTab}
         >
