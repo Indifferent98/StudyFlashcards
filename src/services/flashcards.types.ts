@@ -67,3 +67,14 @@ export interface createDeckArgs {
   isPrivate?: boolean
   name: string
 }
+
+export interface removeResponse {
+  id: string
+  userId: string
+  name: string
+  isPrivate: boolean
+  cover: string
+  created: string
+  updated: string
+  cardsCount: number
+}

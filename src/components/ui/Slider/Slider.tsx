@@ -10,12 +10,14 @@ import * as Slider from '@radix-ui/react-slider'
 import s from './Slider.module.scss'
 
 import { EditableSpan } from '../EditableSpan/EditableSpan'
+import { paginationAction } from '@/services/slices/PaginationSlice'
 
 type SuperSlider = {
   range: number[]
 }
 export const SuperSlider = ({ range }: SuperSlider) => {
   const { changeMaxCardsCount, changeMinCardsCount, changeSliderValue } = filtersAction
+  const { changeCurrentPage } = paginationAction
   const dispatch = useAppDispatch()
   const [timerId, setTimerId] = useState<NodeJS.Timeout | number | string | undefined>()
   const sliderValue = useSelector<RootState, number[]>(state => state.filtersSlice.sliderValue)
@@ -23,9 +25,9 @@ export const SuperSlider = ({ range }: SuperSlider) => {
   const maxCards = useSelector(selectMaxCards)
 
   useEffect(() => {
-    if (minCards === 1 && maxCards === 100) {
-      dispatch(changeSliderValue({ value: [minCards, maxCards] }))
-    }
+    // if (minCards === 1 && maxCards === 100) {
+    dispatch(changeSliderValue({ value: [minCards, maxCards] }))
+    // }
   }, [minCards, maxCards])
 
   const onChangeHandler = (value: number[]) => {
@@ -36,6 +38,7 @@ export const SuperSlider = ({ range }: SuperSlider) => {
       setTimeout(() => {
         dispatch(changeMinCardsCount({ minCard: value[0] }))
         dispatch(changeMaxCardsCount({ maxCard: value[1] }))
+        dispatch(changeCurrentPage({ newPage: 1 }))
       }, 1000)
     )
   }
