@@ -20,7 +20,7 @@ import s from './decks.module.scss'
 
 import { DecksNavigate } from './decksNavigate'
 import { Modal } from '@/components/ui/Modal'
-import { useState } from 'react'
+
 import { appAction } from '@/services/slices/appSlice'
 import { useAppDispatch } from '@/services/hooks'
 
