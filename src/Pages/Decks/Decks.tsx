@@ -33,7 +33,7 @@ export const Decks = () => {
   const tabs = useSelector(selectTabs)
   const orderBy = useSelector(selectOrderBy)
 
-  const { data, error, isFetching, isLoading } = useGetDecksQuery({
+  const { data, error, isLoading } = useGetDecksQuery({
     authorId: tabs === 'myCards' ? 'f2be95b9-4d07-4751-a775-bd612fc9553a' : '',
     currentPage,
     itemsPerPage: pageSize,
