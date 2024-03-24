@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { useAppDispatch } from '@/services/hooks'
 import { selectMaxCards, selectMinCards } from '@/services/selectors'
+import { paginationAction } from '@/services/slices/PaginationSlice'
 import { filtersAction } from '@/services/slices/filterSlice'
 import { RootState } from '@/services/store'
 import * as Slider from '@radix-ui/react-slider'
@@ -10,7 +11,6 @@ import * as Slider from '@radix-ui/react-slider'
 import s from './Slider.module.scss'
 
 import { EditableSpan } from '../EditableSpan/EditableSpan'
-import { paginationAction } from '@/services/slices/PaginationSlice'
 
 type SuperSlider = {
   range: number[]

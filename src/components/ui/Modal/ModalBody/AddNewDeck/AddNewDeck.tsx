@@ -1,34 +1,35 @@
+import { ChangeEvent } from 'react'
 import { ReactSVG } from 'react-svg'
 
 import { Button } from '@/components/ui/Button'
 import { SuperCheckBox } from '@/components/ui/CheckBox'
 import { Input } from '@/components/ui/Input'
 import UploadIcon from '@/img/UploadIcon.svg'
-import { ChangeEvent } from 'react'
 
 type Props = {
   deckTitle: string
-  setDeckTitle: (title: string) => void
   isPrivatePack: boolean
+  setDeckTitle: (title: string) => void
   setIsPrivatePack: (isPrivate: boolean) => void
 }
 
-export const AddNewDeck = ({ deckTitle, setDeckTitle, isPrivatePack, setIsPrivatePack }: Props) => {
+export const AddNewDeck = ({ deckTitle, isPrivatePack, setDeckTitle, setIsPrivatePack }: Props) => {
   const changeDeckTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setDeckTitle(e.currentTarget.value)
   }
   const changePrivateStatus = (checked: boolean) => {
     setIsPrivatePack(checked)
   }
+
   return (
     <div>
       <div style={{ marginBottom: '24px', marginTop: '24px' }}>
         <Input
           fullWidth
           helperMessage={'Name Pack'}
+          onChange={changeDeckTitle}
           style={{ backgroundColor: '#141414' }}
           value={deckTitle}
-          onChange={changeDeckTitle}
         />
       </div>
       <div style={{ marginBottom: '24px' }}>
@@ -48,9 +49,9 @@ export const AddNewDeck = ({ deckTitle, setDeckTitle, isPrivatePack, setIsPrivat
         />
       </div>
       <SuperCheckBox
-        title={'Private pack'}
         checked={isPrivatePack}
         onValueChange={changePrivateStatus}
+        title={'Private pack'}
       />
     </div>
   )

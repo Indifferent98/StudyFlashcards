@@ -1,19 +1,19 @@
+import { useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
+import { ReactSVG } from 'react-svg'
 
+import arrowDown from '@/img/arrowDown.svg'
+import arrowUp from '@/img/arrowUpIcon.svg'
 import picture from '@/img/tablePicture.png'
+import { orderBy } from '@/services/flashcards.types'
+import { useAppDispatch } from '@/services/hooks'
+import { selectOrderBy } from '@/services/selectors'
+import { filtersAction } from '@/services/slices/filterSlice'
 
 import s from './TableItem.module.scss'
 
-import { Stars } from '../Stars'
-import { filtersAction } from '@/services/slices/filterSlice'
-import { useAppDispatch } from '@/services/hooks'
-import { orderBy } from '@/services/flashcards.types'
-import { useSelector } from 'react-redux'
-import { selectOrderBy } from '@/services/selectors'
-import { ReactSVG } from 'react-svg'
-import arrowUp from '@/img/arrowUpIcon.svg'
-import arrowDown from '@/img/arrowDown.svg'
 import { SettingsBlock } from '../../settingsBlock'
+import { Stars } from '../Stars'
 
 type Props = {
   answer?: number | string
@@ -28,6 +28,7 @@ type Props = {
   name?: string
   question?: string
   withImg?: boolean
+  deckId?: string
 }
 
 export const TableItem = ({
@@ -43,6 +44,7 @@ export const TableItem = ({
   name,
   question,
   withImg = false,
+  deckId = '',
 }: Props) => {
   const { changeOrderByValue } = filtersAction
   const dispatch = useAppDispatch()
@@ -143,7 +145,14 @@ export const TableItem = ({
       )}
 
       {changeSetting && (
-        <div className={`${s.settings} ${s.item}`}>{<SettingsBlock isOwner={true} />}</div>
+        <div className={`${s.settings} ${s.item}`}>
+          {
+            <SettingsBlock
+              isOwner={authorId === 'f2be95b9-4d07-4751-a775-bd612fc9553a'}
+              deckId={deckId}
+            />
+          }
+        </div>
       )}
       {emptySlot && <div className={`${s.settings} ${s.item}`}></div>}
     </div>

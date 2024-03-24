@@ -3,16 +3,16 @@ import { setupListeners } from '@reduxjs/toolkit/query/react'
 
 import { baseApi } from './api/base-api'
 import { paginationSlice } from './slices/PaginationSlice'
-import { filtersSlice } from './slices/filterSlice'
 import { appSlice } from './slices/appSlice'
+import { filtersSlice } from './slices/filterSlice'
 
 export const store = configureStore({
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
   reducer: {
+    appSlice,
     [baseApi.reducerPath]: baseApi.reducer,
     filtersSlice,
     paginationSlice,
-    appSlice,
   },
 })
 setupListeners(store.dispatch)
