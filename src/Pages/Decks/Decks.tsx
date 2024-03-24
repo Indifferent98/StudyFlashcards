@@ -1,12 +1,15 @@
 import { useSelector } from 'react-redux'
 
 import { Button } from '@/components/ui/Button'
+import { Modal } from '@/components/ui/Modal'
 import { Table } from '@/components/ui/Table'
 import { TableItem } from '@/components/ui/Table/TableItem'
 import { Typography } from '@/components/ui/Typography'
-import { useCreateDeckMutation, useGetDecksQuery } from '@/services/api/decks.service'
+import { useGetDecksQuery } from '@/services/api/decks.service'
+import { useAppDispatch } from '@/services/hooks'
 import {
   selectBackGroundDarkMode,
+  selectCurrentModal,
   selectCurrentPage,
   selectMaxCards,
   selectMinCards,
@@ -15,14 +18,11 @@ import {
   selectSearchValue,
   selectTabs,
 } from '@/services/selectors'
+import { appAction } from '@/services/slices/appSlice'
 
 import s from './decks.module.scss'
 
 import { DecksNavigate } from './decksNavigate'
-import { Modal } from '@/components/ui/Modal'
-import { useState } from 'react'
-import { appAction } from '@/services/slices/appSlice'
-import { useAppDispatch } from '@/services/hooks'
 
 export const Decks = () => {
   const currentPage = useSelector(selectCurrentPage)
@@ -43,9 +43,10 @@ export const Decks = () => {
     orderBy: orderBy,
   })
   const backGroundDarkMode = useSelector(selectBackGroundDarkMode)
-
-  const { changeBackGroundDarkMode } = appAction
+  const currentModal = useSelector(selectCurrentModal)
+  const { changeBackGroundDarkMode, changeCurrentModal } = appAction
   const dispatch = useAppDispatch()
+
   if (error) {
     return <Typography variant={'H1'}>{JSON.stringify(error)}</Typography>
   }
@@ -58,17 +59,10 @@ export const Decks = () => {
     <div style={{ marginTop: '33px' }}>
       {backGroundDarkMode && (
         <>
-          <div className={s.background}></div> <Modal variant="Deck" />
+          <div className={s.background}></div> <Modal variant={currentModal} />
         </>
       )}
       <div className={s.header}>
-        {/* <Button
-          children={'+'}
-          disabled={deckCreationStatus.isLoading}
-          onClick={() => {
-            createDeck({ name: 'kukusDeck?' })
-          }}
-        /> */}
         <Typography as={'span'} variant={'H1'}>
           Deck list
         </Typography>
@@ -76,6 +70,7 @@ export const Decks = () => {
           display={'inlineBlock'}
           onClick={() => {
             dispatch(changeBackGroundDarkMode({ mode: true }))
+            dispatch(changeCurrentModal({ variant: 'Deck' }))
           }}
         >
           Add new Deck
@@ -91,17 +86,20 @@ export const Decks = () => {
           lastUpdated={'Last Updated'}
           name={'Name'}
         />
-        {data?.items.map(item => (
-          <TableItem
-            authorId={item.userId}
-            cardsCount={item.cardsCount}
-            changeSetting
-            createdBy={item.author.name}
-            key={item.id}
-            lastUpdated={new Date(item.updated).toLocaleDateString()}
-            name={item.name}
-          />
-        ))}
+        {data?.items.map(item => {
+          return (
+            <TableItem
+              authorId={item.userId}
+              cardsCount={item.cardsCount}
+              changeSetting
+              createdBy={item.author.name}
+              key={item.id}
+              lastUpdated={new Date(item.updated).toLocaleDateString()}
+              name={item.name}
+              deckId={item.id}
+            />
+          )
+        })}
       </Table>
     </div>
   )

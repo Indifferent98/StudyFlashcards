@@ -1,5 +1,7 @@
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { ReactSVG } from 'react-svg'
+
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { SuperSlider } from '@/components/ui/Slider'
@@ -9,8 +11,8 @@ import { useAppDispatch } from '@/services/hooks'
 import { selectMaxCards, selectMinCards, selectSearchValue } from '@/services/selectors'
 import { paginationAction } from '@/services/slices/PaginationSlice'
 import { filtersAction } from '@/services/slices/filterSlice'
+
 import s from '../decks.module.scss'
-import { ChangeEvent, useEffect, useState } from 'react'
 
 export const DecksNavigate = () => {
   const { resetPagination } = paginationAction
@@ -20,7 +22,7 @@ export const DecksNavigate = () => {
   const [searchValue, setSearchValue] = useState('')
   const [timerId, setTimerId] = useState<any>()
   const searchItem = useSelector(selectSearchValue)
-  const { clearFilter, changeSearchValue } = filtersAction
+  const { changeSearchValue, clearFilter } = filtersAction
   const changeSearchParams = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value)
   }
@@ -44,9 +46,9 @@ export const DecksNavigate = () => {
     <div className={s.body}>
       <div className={s.item}>
         <Input
+          onChange={changeSearchParams}
           placeholder={'Input search'}
           value={searchValue}
-          onChange={changeSearchParams}
           variant={'search'}
         />
       </div>

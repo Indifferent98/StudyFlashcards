@@ -14,8 +14,8 @@ export const Table = ({ children, pagination }: Props) => {
   return (
     <div>
       {children}
-      <div style={{ width: '1006px', margin: '0 auto' }}>
-        <Typography variant="Body2" style={{ float: 'right' }}>
+      <div style={{ margin: '0 auto', width: '1006px' }}>
+        <Typography style={{ float: 'right' }} variant={'Body2'}>
           Total items : {pagination.totalItems}
         </Typography>
       </div>

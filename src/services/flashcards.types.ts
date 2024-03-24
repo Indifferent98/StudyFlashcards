@@ -38,16 +38,16 @@ export type getDeckArgs = {
 }
 
 export type orderBy =
-  | 'cardsCount-asc'
-  | 'updated-asc'
-  | 'name-asc'
   | 'author.name-asc'
-  | 'created-asc'
-  | 'cardsCount-desc'
-  | 'updated-desc'
-  | 'name-desc'
   | 'author.name-desc'
+  | 'cardsCount-asc'
+  | 'cardsCount-desc'
+  | 'created-asc'
   | 'created-desc'
+  | 'name-asc'
+  | 'name-desc'
+  | 'updated-asc'
+  | 'updated-desc'
   | null
 
 export interface CreateDeckResponse {
@@ -69,12 +69,12 @@ export interface createDeckArgs {
 }
 
 export interface removeResponse {
-  id: string
-  userId: string
-  name: string
-  isPrivate: boolean
+  cardsCount: number
   cover: string
   created: string
+  id: string
+  isPrivate: boolean
+  name: string
   updated: string
-  cardsCount: number
+  userId: string
 }

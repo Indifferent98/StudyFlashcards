@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux'
 
 import { useAppDispatch } from '@/services/hooks'
 import { selectTabs } from '@/services/selectors'
+import { paginationAction } from '@/services/slices/PaginationSlice'
 import { filtersAction } from '@/services/slices/filterSlice'
 
 import s from './TabSwitcher.module.scss'
 
 import { Typography } from '../Typography'
-import { paginationAction } from '@/services/slices/PaginationSlice'
 
 export const TabSwitcher = () => {
   const tabs = useSelector(selectTabs)
