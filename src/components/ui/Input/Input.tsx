@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import React, { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 import { ReactSVG } from 'react-svg'
 
 import closeIcon from '@/img/closeIcon.svg'
@@ -43,7 +43,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     const findItem = () => {}
     const clearInput = () => {
       if (restProps.onChange) {
-        restProps.onChange('' as any)
+        restProps.onChange({ currentTarget: { value: '' } } as ChangeEvent<HTMLInputElement>)
       }
     }
     const svgOnClick = disabled ? () => {} : variant === 'password' ? changeInputType : clearInput
