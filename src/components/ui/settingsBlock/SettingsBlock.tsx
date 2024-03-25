@@ -3,21 +3,23 @@ import { ReactSVG } from 'react-svg'
 import editIcon from '@/img/editIcon.svg'
 import playIcon from '@/img/playCircleIcon.svg'
 import trashIcon from '@/img/trashIcon.svg'
-
-import s from './Settings.module.scss'
 import { useAppDispatch } from '@/services/hooks'
 import { appAction } from '@/services/slices/appSlice'
 
+import s from './Settings.module.scss'
+
 type Props = {
-  isOwner: boolean
   deckId: string
+  isOwner: boolean
 }
 
-export const SettingsBlock = ({ isOwner, deckId }: Props) => {
+export const SettingsBlock = ({ deckId, isOwner }: Props) => {
   const dispatch = useAppDispatch()
   const { changeBackGroundDarkMode, changeCurrentModal } = appAction
+
   console.log(deckId)
   const { changeRemoveDeckModalId } = appAction
+
   return (
     <div className={s.wrapper}>
       <button className={`${s.item} ${s.button}`}>
@@ -32,7 +34,7 @@ export const SettingsBlock = ({ isOwner, deckId }: Props) => {
             className={`${s.item} ${s.button}`}
             onClick={() => {
               dispatch(changeBackGroundDarkMode({ mode: true }))
-              dispatch(changeCurrentModal({ variant: 'DeleteCard' }))
+              dispatch(changeCurrentModal({ variant: 'Delete Deck' }))
               dispatch(changeRemoveDeckModalId({ id: deckId }))
             }}
           >

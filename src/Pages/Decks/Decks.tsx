@@ -55,6 +55,8 @@ export const Decks = () => {
     return <Typography variant={'H1'}>...Loading</Typography>
   }
 
+  console.log(data?.items.map(t => t.cover))
+
   return (
     <div style={{ marginTop: '33px' }}>
       {backGroundDarkMode && (
@@ -93,10 +95,10 @@ export const Decks = () => {
               cardsCount={item.cardsCount}
               changeSetting
               createdBy={item.author.name}
+              deckId={item.id}
               key={item.id}
               lastUpdated={new Date(item.updated).toLocaleDateString()}
               name={item.name}
-              deckId={item.id}
             />
           )
         })}

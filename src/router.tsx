@@ -5,8 +5,8 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from 'react-router-dom'
-
-import { Decks } from './Pages/Decks/Decks'
+import { Cards } from './Pages/Cards'
+import { Decks } from './Pages/Decks'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -16,6 +16,10 @@ const publicRoutes: RouteObject[] = [
   {
     element: <Decks />,
     path: '/',
+  },
+  {
+    element: <Cards />,
+    path: '/Cards/*',
   },
 ]
 
