@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { ReactSVG } from 'react-svg'
 
 import closeIcon from '@/img/closeIcon.svg'
 import { useCreateDeckMutation, useRemoveDeckByIdMutation } from '@/services/api/decks.service'
 import { useAppDispatch } from '@/services/hooks'
+import { selectRemoveDeckModalId } from '@/services/selectors'
 import { appAction } from '@/services/slices/appSlice'
 
 import s from './Modal.module.scss'
@@ -13,16 +15,23 @@ import { Typography } from '../Typography'
 import { AddNewCard } from './ModalBody/AddNewCard'
 import { AddNewDeck } from './ModalBody/AddNewDeck'
 import { DeleteCard } from './ModalBody/DeleteCard'
-import { selectRemoveDeckModalId } from '@/services/selectors'
-import { useSelector } from 'react-redux'
+import { DeleteDeck } from './ModalBody/DeleteDeck'
 
-export type ModalVariant = 'Card' | 'Deck' | 'DeleteCard'
+export type ModalVariant = 'Card' | 'Deck' | 'DeleteCard' | 'Delete Deck'
 type Props = {
   variant: ModalVariant
+  deckName?: string
 }
-export const Modal = ({ variant }: Props) => {
+export const Modal = ({ variant, deckName }: Props) => {
   const Title =
-    variant === 'Deck' ? 'Add New Deck' : variant === 'Card' ? 'Add New Card' : 'Delete Card'
+    variant === 'Deck'
+      ? 'Add New Deck'
+      : variant === 'Card'
+      ? 'Add New Card'
+      : variant === 'Delete Deck'
+      ? 'Delete Deck'
+      : 'Delete Card'
+
   const [createDeck, deckCreationStatus] = useCreateDeckMutation()
   const [showModal, setShowModal] = useState(true)
   const closeModal = () => setShowModal(false)
@@ -33,6 +42,7 @@ export const Modal = ({ variant }: Props) => {
   const [removeDeck, removeDeckCretionStatus] = useRemoveDeckByIdMutation()
 
   const removeDeckModalId = useSelector(selectRemoveDeckModalId)
+
   return (
     showModal && (
       <div className={s.wrapper}>
@@ -58,6 +68,8 @@ export const Modal = ({ variant }: Props) => {
               setDeckTitle={setDeckTitle}
               setIsPrivatePack={setIsPrivatePack}
             />
+          ) : variant === 'Delete Deck' ? (
+            <DeleteDeck />
           ) : (
             <DeleteCard cardName={'Card name'} />
           )}

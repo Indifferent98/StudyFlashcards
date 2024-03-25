@@ -78,3 +78,15 @@ export interface removeResponse {
   updated: string
   userId: string
 }
+
+export interface getDeckByIdResponse {
+  id: string
+  userId: string
+  name: string
+  isPrivate: boolean
+  cover?: any
+  created: string
+  updated: string
+  cardsCount: number
+  _count: { card: number }
+}

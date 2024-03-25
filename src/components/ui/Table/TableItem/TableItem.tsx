@@ -21,6 +21,7 @@ type Props = {
   cardsCount: number | string
   changeSetting?: boolean
   createdBy: string
+  deckId?: string
   emptySlot?: boolean
   grade?: string
   isHeader?: boolean
@@ -28,7 +29,6 @@ type Props = {
   name?: string
   question?: string
   withImg?: boolean
-  deckId?: string
 }
 
 export const TableItem = ({
@@ -37,6 +37,7 @@ export const TableItem = ({
   cardsCount,
   changeSetting = false,
   createdBy,
+  deckId = '',
   emptySlot = false,
   grade,
   isHeader = false,
@@ -44,7 +45,6 @@ export const TableItem = ({
   name,
   question,
   withImg = false,
-  deckId = '',
 }: Props) => {
   const { changeOrderByValue } = filtersAction
   const dispatch = useAppDispatch()
@@ -79,9 +79,9 @@ export const TableItem = ({
         </div>
       )}
 
-      {(name || createdBy) && (
+      {(name || createdBy) && isHeader && (
         <div
-          className={`${s.name} ${s.item} ${s.headerButton}`}
+          className={`${s.name} ${isHeader ? false : s.deckName} ${s.item} ${s.headerButton}`}
           onClick={() => {
             isHeader && changeOrderByHandler(orderBy === 'name-asc' ? 'name-desc' : 'name-asc')
           }}
@@ -99,6 +99,21 @@ export const TableItem = ({
             </div>
           )}
         </div>
+      )}
+
+      {name && !isHeader && (
+        <Link
+          to={`cards/${deckId}`}
+          className={`${s.name} ${s.deckName} ${s.link} ${s.item} ${s.headerButton}`}
+        >
+          {
+            <div style={{ width: 'maxContent', float: 'left', height: '40px' }}>
+              {withImg && <img className={`${s.img} ${s.item}`} src={picture} />}
+
+              <div className={s.text}> {name}</div>
+            </div>
+          }
+        </Link>
       )}
 
       {answer && <div className={`${s.answer} ${s.item}`}>{answer}</div>}
@@ -148,8 +163,8 @@ export const TableItem = ({
         <div className={`${s.settings} ${s.item}`}>
           {
             <SettingsBlock
-              isOwner={authorId === 'f2be95b9-4d07-4751-a775-bd612fc9553a'}
               deckId={deckId}
+              isOwner={authorId === 'f2be95b9-4d07-4751-a775-bd612fc9553a'}
             />
           }
         </div>

@@ -2,6 +2,7 @@ import {
   CreateDeckResponse,
   createDeckArgs,
   getDeckArgs,
+  getDeckByIdResponse,
   getDecksResponse,
   removeResponse,
 } from '../flashcards.types'
@@ -13,7 +14,7 @@ const deckService = baseApi.injectEndpoints({
       invalidatesTags: ['Decks'],
       query: args => ({ body: args, method: 'POST', url: `v1/decks` }),
     }),
-    getDeckById: builder.query<getDecksResponse, { id: string }>({
+    getDeckById: builder.query<getDeckByIdResponse, { id: string }>({
       query: ({ id }) => ({ url: `v1/decks/${id}` }),
     }),
     getDecks: builder.query<getDecksResponse, getDeckArgs | void>({
@@ -22,7 +23,7 @@ const deckService = baseApi.injectEndpoints({
     }),
     removeDeckById: builder.mutation<removeResponse, { id: string }>({
       invalidatesTags: ['Decks'],
-      query: args => ({ url: `v1/decks/${args.id}`, method: 'DELETE' }),
+      query: args => ({ method: 'DELETE', url: `v1/decks/${args.id}` }),
     }),
   }),
 })

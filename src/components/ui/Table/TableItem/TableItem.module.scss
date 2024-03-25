@@ -95,3 +95,18 @@
 .headerButton {
   cursor: pointer;
 }
+
+.deckName {
+}
+
+.deckName:hover {
+  color: var(--color-primary-500);
+}
+
+.link {
+  // float: left;
+  display: inline-block;
+  width: max-content;
+  padding: 0px 14px;
+  padding-left: 24px;
+}
