@@ -55,7 +55,7 @@ export const Decks = () => {
     return <Typography variant={'H1'}>...Loading</Typography>
   }
 
-  console.log(data?.items.map(t => t.cover))
+  // console.log(data?.items.map(t => t.cover))
 
   return (
     <div style={{ marginTop: '33px' }}>
