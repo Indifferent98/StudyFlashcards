@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import { ReactSVG } from 'react-svg'
 
@@ -14,13 +14,14 @@ import s from './TableItem.module.scss'
 
 import { SettingsBlock } from '../../settingsBlock'
 import { Stars } from '../Stars'
+import { paginationAction } from '@/services/slices/PaginationSlice'
 
 type Props = {
   answer?: number | string
   authorId?: string
-  cardsCount: number | string
+  cardsCount?: number | string
   changeSetting?: boolean
-  createdBy: string
+  createdBy?: string
   deckId?: string
   emptySlot?: boolean
   grade?: string
@@ -36,7 +37,7 @@ export const TableItem = ({
   authorId,
   cardsCount,
   changeSetting = false,
-  createdBy,
+  createdBy = '',
   deckId = '',
   emptySlot = false,
   grade,
@@ -46,13 +47,14 @@ export const TableItem = ({
   question,
   withImg = false,
 }: Props) => {
-  const { changeOrderByValue } = filtersAction
+  const { changeOrderByValue, clearFilter } = filtersAction
   const dispatch = useAppDispatch()
-
   const changeOrderByHandler = (orderBy: orderBy) => {
     dispatch(changeOrderByValue({ orderBy }))
   }
   const orderBy = useSelector(selectOrderBy)
+
+  const { resetPagination } = paginationAction
 
   const ArrowUp = (
     <ReactSVG
@@ -103,6 +105,10 @@ export const TableItem = ({
 
       {name && !isHeader && (
         <Link
+          onClick={() => {
+            dispatch(clearFilter())
+            dispatch(resetPagination())
+          }}
           to={`cards/${deckId}`}
           className={`${s.name} ${s.deckName} ${s.link} ${s.item} ${s.headerButton}`}
         >

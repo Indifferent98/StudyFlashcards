@@ -43,8 +43,8 @@ export const SuperSlider = ({ range }: SuperSlider) => {
     )
   }
 
-  console.log(minCards, 'miiiiiin')
-  console.log(maxCards, 'maxxxxxx')
+  // console.log(minCards, 'miiiiiin')
+  // console.log(maxCards, 'maxxxxxx')
 
   return (
     <div className={s.wrapper}>

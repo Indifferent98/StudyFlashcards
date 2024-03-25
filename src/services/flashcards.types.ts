@@ -90,3 +90,33 @@ export interface getDeckByIdResponse {
   cardsCount: number
   _count: { card: number }
 }
+
+export interface cardResponseItem {
+  answer: string
+  answerImg?: any
+  answerVideo?: any
+  created: string
+  deckId: string
+  grade: number
+  id: string
+  question: string
+  questionImg?: any
+  questionVideo?: any
+  shots: number
+  updated: string
+  userId: string
+}
+
+export interface cardsByIdResponse {
+  pagination: pagination
+  items: cardResponseItem[]
+}
+
+export type getCardsByIdArgs = {
+  id: string
+  question?: string
+  answer?: string
+  orderBy?: orderBy
+  currentPage?: number
+  itemsPerPage?: number
+}

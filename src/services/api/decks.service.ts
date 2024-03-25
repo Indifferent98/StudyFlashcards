@@ -1,6 +1,8 @@
 import {
   CreateDeckResponse,
+  cardsByIdResponse,
   createDeckArgs,
+  getCardsByIdArgs,
   getDeckArgs,
   getDeckByIdResponse,
   getDecksResponse,
@@ -25,6 +27,13 @@ const deckService = baseApi.injectEndpoints({
       invalidatesTags: ['Decks'],
       query: args => ({ method: 'DELETE', url: `v1/decks/${args.id}` }),
     }),
+    getCardsById: builder.query<cardsByIdResponse, getCardsByIdArgs>({
+      query: (args: getCardsByIdArgs) => {
+        const queryParams: Partial<getCardsByIdArgs> = { ...args }
+        delete queryParams.id
+        return { params: queryParams ?? {}, url: `v1/decks/${args.id}/cards` }
+      },
+    }),
   }),
 })
 
@@ -33,4 +42,5 @@ export const {
   useGetDeckByIdQuery,
   useGetDecksQuery,
   useRemoveDeckByIdMutation,
+  useGetCardsByIdQuery,
 } = deckService
