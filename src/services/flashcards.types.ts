@@ -80,15 +80,15 @@ export interface removeResponse {
 }
 
 export interface getDeckByIdResponse {
-  id: string
-  userId: string
-  name: string
-  isPrivate: boolean
+  _count: { card: number }
+  cardsCount: number
   cover?: any
   created: string
+  id: string
+  isPrivate: boolean
+  name: string
   updated: string
-  cardsCount: number
-  _count: { card: number }
+  userId: string
 }
 
 export interface cardResponseItem {
@@ -108,15 +108,15 @@ export interface cardResponseItem {
 }
 
 export interface cardsByIdResponse {
-  pagination: pagination
   items: cardResponseItem[]
+  pagination: pagination
 }
 
 export type getCardsByIdArgs = {
-  id: string
-  question?: string
   answer?: string
-  orderBy?: orderBy
   currentPage?: number
+  id: string
   itemsPerPage?: number
+  orderBy?: orderBy
+  question?: string
 }

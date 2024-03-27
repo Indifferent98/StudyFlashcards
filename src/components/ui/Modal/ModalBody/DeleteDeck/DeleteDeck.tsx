@@ -1,7 +1,8 @@
+import { useSelector } from 'react-redux'
+
 import { Typography } from '@/components/ui/Typography'
 import { useGetDeckByIdQuery } from '@/services/api/decks.service'
 import { selectRemoveDeckModalId } from '@/services/selectors'
-import { useSelector } from 'react-redux'
 
 export const DeleteDeck = () => {
   const removeDeckModalId = useSelector(selectRemoveDeckModalId)

@@ -17,12 +17,12 @@ import { AddNewDeck } from './ModalBody/AddNewDeck'
 import { DeleteCard } from './ModalBody/DeleteCard'
 import { DeleteDeck } from './ModalBody/DeleteDeck'
 
-export type ModalVariant = 'Card' | 'Deck' | 'DeleteCard' | 'Delete Deck'
+export type ModalVariant = 'Card' | 'Deck' | 'Delete Deck' | 'DeleteCard'
 type Props = {
-  variant: ModalVariant
   deckName?: string
+  variant: ModalVariant
 }
-export const Modal = ({ variant, deckName }: Props) => {
+export const Modal = ({ deckName, variant }: Props) => {
   const Title =
     variant === 'Deck'
       ? 'Add New Deck'
@@ -91,7 +91,7 @@ export const Modal = ({ variant, deckName }: Props) => {
                 createDeck({ isPrivate: isPrivatePack, name: deckTitle })
                 dispatch(changeBackGroundDarkMode({ mode: false }))
               }
-              if (variant === 'DeleteCard') {
+              if (variant === 'Delete Deck') {
                 removeDeck({ id: removeDeckModalId })
                 dispatch(changeBackGroundDarkMode({ mode: false }))
               }

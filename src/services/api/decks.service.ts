@@ -16,6 +16,15 @@ const deckService = baseApi.injectEndpoints({
       invalidatesTags: ['Decks'],
       query: args => ({ body: args, method: 'POST', url: `v1/decks` }),
     }),
+    getCardsById: builder.query<cardsByIdResponse, getCardsByIdArgs>({
+      query: (args: getCardsByIdArgs) => {
+        const queryParams: Partial<getCardsByIdArgs> = { ...args }
+
+        delete queryParams.id
+
+        return { params: queryParams ?? {}, url: `v1/decks/${args.id}/cards` }
+      },
+    }),
     getDeckById: builder.query<getDeckByIdResponse, { id: string }>({
       query: ({ id }) => ({ url: `v1/decks/${id}` }),
     }),
@@ -27,20 +36,13 @@ const deckService = baseApi.injectEndpoints({
       invalidatesTags: ['Decks'],
       query: args => ({ method: 'DELETE', url: `v1/decks/${args.id}` }),
     }),
-    getCardsById: builder.query<cardsByIdResponse, getCardsByIdArgs>({
-      query: (args: getCardsByIdArgs) => {
-        const queryParams: Partial<getCardsByIdArgs> = { ...args }
-        delete queryParams.id
-        return { params: queryParams ?? {}, url: `v1/decks/${args.id}/cards` }
-      },
-    }),
   }),
 })
 
 export const {
   useCreateDeckMutation,
+  useGetCardsByIdQuery,
   useGetDeckByIdQuery,
   useGetDecksQuery,
   useRemoveDeckByIdMutation,
-  useGetCardsByIdQuery,
 } = deckService

@@ -8,13 +8,13 @@ import picture from '@/img/tablePicture.png'
 import { orderBy } from '@/services/flashcards.types'
 import { useAppDispatch } from '@/services/hooks'
 import { selectOrderBy } from '@/services/selectors'
+import { paginationAction } from '@/services/slices/PaginationSlice'
 import { filtersAction } from '@/services/slices/filterSlice'
 
 import s from './TableItem.module.scss'
 
 import { SettingsBlock } from '../../settingsBlock'
 import { Stars } from '../Stars'
-import { paginationAction } from '@/services/slices/PaginationSlice'
 
 type Props = {
   answer?: number | string
@@ -30,6 +30,8 @@ type Props = {
   name?: string
   question?: string
   withImg?: boolean
+  answerImg?: string
+  questionImg?: string
 }
 
 export const TableItem = ({
@@ -45,6 +47,8 @@ export const TableItem = ({
   lastUpdated,
   name,
   question,
+  questionImg,
+  answerImg,
   withImg = false,
 }: Props) => {
   const { changeOrderByValue, clearFilter } = filtersAction
@@ -73,11 +77,18 @@ export const TableItem = ({
     <div className={`${s.wrapper} ${isHeader && s.header}`}>
       {question && (
         <div className={`${s.question} ${s.item}`}>
-          {withImg ? (
-            <img className={`${s.img} ${s.item}`} src={picture} />
-          ) : (
-            <div className={s.text}>{question}</div>
-          )}
+          {
+            <>
+              {questionImg && (
+                <img
+                  className={`${s.img} ${s.item}`}
+                  src={questionImg}
+                  style={{ width: '170px', height: '107px' }}
+                />
+              )}
+              <div className={s.text}>{question}</div>
+            </>
+          }
         </div>
       )}
 
@@ -89,7 +100,11 @@ export const TableItem = ({
           }}
         >
           {withImg ? (
-            <img className={`${s.img} ${s.item}`} src={picture} />
+            <img
+              className={`${s.img} ${s.item}`}
+              src={picture}
+              style={{ width: '170px', height: '107px' }}
+            />
           ) : (
             <div className={s.text}>
               {name}
@@ -105,15 +120,15 @@ export const TableItem = ({
 
       {name && !isHeader && (
         <Link
+          className={`${s.name} ${s.deckName} ${s.link} ${s.item} ${s.headerButton}`}
           onClick={() => {
             dispatch(clearFilter())
             dispatch(resetPagination())
           }}
           to={`cards/${deckId}`}
-          className={`${s.name} ${s.deckName} ${s.link} ${s.item} ${s.headerButton}`}
         >
           {
-            <div style={{ width: 'maxContent', float: 'left', height: '40px' }}>
+            <div style={{ float: 'left', height: '40px', width: 'maxContent' }}>
               {withImg && <img className={`${s.img} ${s.item}`} src={picture} />}
 
               <div className={s.text}> {name}</div>
@@ -122,7 +137,12 @@ export const TableItem = ({
         </Link>
       )}
 
-      {answer && <div className={`${s.answer} ${s.item}`}>{answer}</div>}
+      {answer && (
+        <>
+          {answerImg && <img src={answerImg} style={{ width: '170px', height: '107px' }} />}
+          <div className={`${s.answer} ${s.item}`}>{answer}</div>
+        </>
+      )}
 
       {(cardsCount || cardsCount === 0) && (
         <div
