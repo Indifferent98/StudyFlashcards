@@ -1,5 +1,6 @@
 // import headerLogo from '@/img/headerLogo.png'
 import headerLogo from '@/img/private/flashCard.gif'
+
 import s from './Header.module.scss'
 
 import { Button } from '../Button'

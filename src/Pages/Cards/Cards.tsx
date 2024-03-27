@@ -1,26 +1,29 @@
-import { Table } from '@/components/ui/Table'
-import { TableItem } from '@/components/ui/Table/TableItem'
-import { useGetCardsByIdQuery, useGetDeckByIdQuery } from '@/services/api'
 import { ChangeEvent, useState } from 'react'
-import s from './Cards.module.scss'
-import { Input } from '@/components/ui/Input'
-import { Typography } from '@/components/ui/Typography'
-import leftArrow from '@/img/leftBigArrow.svg'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ReactSVG } from 'react-svg'
-import { useSelector } from 'react-redux'
+
+import { Input } from '@/components/ui/Input'
+import { Table } from '@/components/ui/Table'
+import { TableItem } from '@/components/ui/Table/TableItem'
+import { Typography } from '@/components/ui/Typography'
+import leftArrow from '@/img/leftBigArrow.svg'
+import { useGetCardsByIdQuery, useGetDeckByIdQuery } from '@/services/api'
 import { selectCurrentPage, selectPageSize } from '@/services/selectors'
+
+import s from './Cards.module.scss'
+import { DropDown } from '@/components/ui/DropDown'
 
 export const Cards = () => {
   const currentPage = useSelector(selectCurrentPage)
   const pageSize = useSelector(selectPageSize)
 
   const [url, setUrl] = useState(window.location.href)
-  let lastPath = url.substring(url.lastIndexOf('/') + 1)
+  const lastPath = url.substring(url.lastIndexOf('/') + 1)
 
-  const { data, isLoading, isFetching } = useGetCardsByIdQuery({
-    id: lastPath,
+  const { data, isFetching, isLoading } = useGetCardsByIdQuery({
     currentPage,
+    id: lastPath,
     itemsPerPage: pageSize,
   })
   const { data: deckData } = useGetDeckByIdQuery({ id: lastPath })
@@ -28,6 +31,7 @@ export const Cards = () => {
   const changeSearchTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTitle(e.currentTarget.value)
   }
+
   console.log(searchTitle)
 
   if (isLoading) {
@@ -37,27 +41,41 @@ export const Cards = () => {
   return (
     <div className={s.header} style={{ marginTop: '55px' }}>
       <Table pagination={data!.pagination}>
-        <Link to="/" style={{ padding: '0px 0px' }}>
+        {/* <div style={{ marginLeft: '155px' }}>
+          <DropDown variant="Settings" />
+        </div> */}
+        <Link style={{ padding: '0px 0px' }} to={'/'}>
           <ReactSVG src={leftArrow} /> Back to deck list
         </Link>
         <h1>{deckData?.name}</h1>
-        <Input fullWidth variant="search" value={searchTitle} onChange={changeSearchTitle} />
+        {deckData?.cover && (
+          <img src={deckData?.cover} style={{ width: '170px', height: '107px' }} />
+        )}
+        <Input
+          fullWidth
+          onChange={changeSearchTitle}
+          value={searchTitle}
+          variant={'search'}
+          placeholder="Input search"
+        />
         <TableItem
-          question="Question"
-          answer="Answer"
-          lastUpdated={'Last Updated'}
-          grade="grade"
+          answer={'Answer'}
           emptySlot
+          grade={'grade'}
           isHeader
+          lastUpdated={'Last Updated'}
+          question={'Question'}
         />
         {data?.items.map(item => {
           return (
             <TableItem
-              question={item.question}
+              answerImg={item.answerImg}
+              questionImg={item.questionImg}
               answer={item.answer}
               grade={'grade'}
               key={item.id}
               lastUpdated={new Date(item.updated).toLocaleDateString()}
+              question={item.question}
             />
           )
         })}

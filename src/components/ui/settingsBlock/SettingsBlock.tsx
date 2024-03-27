@@ -7,6 +7,7 @@ import { useAppDispatch } from '@/services/hooks'
 import { appAction } from '@/services/slices/appSlice'
 
 import s from './Settings.module.scss'
+import { Link } from 'react-router-dom'
 
 type Props = {
   deckId: string
@@ -22,9 +23,13 @@ export const SettingsBlock = ({ deckId, isOwner }: Props) => {
 
   return (
     <div className={s.wrapper}>
-      <button className={`${s.item} ${s.button}`}>
+      <Link
+        to={`/cards/${deckId}`}
+        style={{ padding: '0px 0px' }}
+        className={`${s.item} ${s.button}`}
+      >
         <ReactSVG src={playIcon} />
-      </button>
+      </Link>
       {isOwner && (
         <>
           <button className={`${s.item} ${s.button}`}>
