@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { ReactSVG } from 'react-svg'
 
 import closeIcon from '@/img/closeIcon.svg'
-import { useCreateDeckMutation, useRemoveDeckByIdMutation } from '@/services/api/decks.service'
+import {
+  useCreateCardMutation,
+  useCreateDeckMutation,
+  useRemoveDeckByIdMutation,
+} from '@/services/api/decks.service'
 import { useAppDispatch } from '@/services/hooks'
 import { selectRemoveDeckModalId } from '@/services/selectors'
 import { appAction } from '@/services/slices/appSlice'
@@ -17,7 +21,7 @@ import { AddNewDeck } from './ModalBody/AddNewDeck'
 import { DeleteCard } from './ModalBody/DeleteCard'
 import { DeleteDeck } from './ModalBody/DeleteDeck'
 
-export type ModalVariant = 'Card' | 'Deck' | 'Delete Deck' | 'DeleteCard'
+export type ModalVariant = 'Add new card' | 'Deck' | 'Delete Deck' | 'DeleteCard'
 type Props = {
   deckName?: string
   variant: ModalVariant
@@ -26,12 +30,13 @@ export const Modal = ({ deckName, variant }: Props) => {
   const Title =
     variant === 'Deck'
       ? 'Add New Deck'
-      : variant === 'Card'
-      ? 'Add New Card'
       : variant === 'Delete Deck'
-      ? 'Delete Deck'
-      : 'Delete Card'
+        ? 'Delete Deck'
+        : variant === 'Add new card'
+          ? 'Add new card'
+          : 'Delete Card'
 
+  console.log('varioat', variant)
   const [createDeck, deckCreationStatus] = useCreateDeckMutation()
   const [showModal, setShowModal] = useState(true)
   const closeModal = () => setShowModal(false)
@@ -40,8 +45,19 @@ export const Modal = ({ deckName, variant }: Props) => {
   const [deckTitle, setDeckTitle] = useState('')
   const [isPrivatePack, setIsPrivatePack] = useState(false)
   const [removeDeck, removeDeckCretionStatus] = useRemoveDeckByIdMutation()
+  const [createCard, createCardCreationStatus] = useCreateCardMutation()
+  const [question, setQuestion] = useState('')
+  const [answer, setAnswer] = useState('')
 
+  const changeQuestion = (e: ChangeEvent<HTMLInputElement>) => {
+    setQuestion(e.currentTarget.value)
+  }
+  const changeAnswer = (e: ChangeEvent<HTMLInputElement>) => {
+    setAnswer(e.currentTarget.value)
+  }
   const removeDeckModalId = useSelector(selectRemoveDeckModalId)
+  const [url, setUrl] = useState(window.location.href)
+  const lastPath = url.substring(url.lastIndexOf('/') + 1)
 
   return (
     showModal && (
@@ -59,9 +75,7 @@ export const Modal = ({ deckName, variant }: Props) => {
           </button>
         </div>
         <div className={s.content}>
-          {variant === 'Card' ? (
-            <AddNewCard />
-          ) : variant === 'Deck' ? (
+          {variant === 'Deck' ? (
             <AddNewDeck
               deckTitle={deckTitle}
               isPrivatePack={isPrivatePack}
@@ -70,6 +84,13 @@ export const Modal = ({ deckName, variant }: Props) => {
             />
           ) : variant === 'Delete Deck' ? (
             <DeleteDeck />
+          ) : variant === 'Add new card' ? (
+            <AddNewCard
+              answer={answer}
+              changeAnswer={changeAnswer}
+              changeQuestion={changeQuestion}
+              question={question}
+            />
           ) : (
             <DeleteCard cardName={'Card name'} />
           )}
@@ -93,6 +114,13 @@ export const Modal = ({ deckName, variant }: Props) => {
               }
               if (variant === 'Delete Deck') {
                 removeDeck({ id: removeDeckModalId })
+                dispatch(changeBackGroundDarkMode({ mode: false }))
+              }
+
+              if (variant === 'Add new card') {
+                console.log('cacacacaca')
+                // removeDeck({ id: removeDeckModalId })
+                createCard({ answer, id: lastPath, question })
                 dispatch(changeBackGroundDarkMode({ mode: false }))
               }
             }}

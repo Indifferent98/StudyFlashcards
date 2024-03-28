@@ -23,7 +23,7 @@ export const hideOverflowText = (text: string) => {
         }}
         style={{ cursor: 'pointer' }}
       >
-        {text.split('').splice(0, 80)}...
+        {text.split('').splice(0, 80)} <span style={{ fontWeight: 600 }}>...читать дальше</span>
       </div>
     )
   }

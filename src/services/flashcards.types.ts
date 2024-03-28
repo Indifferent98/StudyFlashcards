@@ -120,3 +120,15 @@ export type getCardsByIdArgs = {
   orderBy?: orderBy
   question?: string
 }
+
+export type createCardResponse = Omit<Required<cardResponseItem>, 'grade'>
+
+export type createCardArgs = {
+  answer: string
+  answerImg?: string
+  answerVideo?: string
+  id: string
+  question: string
+  questionImg?: string
+  questionVideo?: string
+}

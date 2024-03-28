@@ -10,7 +10,7 @@ type App = {
 const slice = createSlice({
   initialState: {
     backgroundDarkMode: false,
-    currentModal: 'Card',
+    currentModal: 'Add new card',
     removeDeckModalId: '',
   } as App,
   name: 'Pagination',
