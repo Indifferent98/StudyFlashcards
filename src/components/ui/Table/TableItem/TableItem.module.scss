@@ -9,42 +9,62 @@
 }
 
 .question {
-  flex: 30%;
-
+  width: 300px;
+  max-width: 300px;
+  // min-width: 300px;
+  // flex-shrink: 0;
+  // flex: 30%;
   align-self: center;
-  padding-left: 24px;
-  // display: flex;
+  // padding-left: 24px;
+  flex-basis: 30%;
+  overflow: hidden;
+  height: max-content;
+  padding: 0 15px;
 }
 
 .name {
+  flex-shrink: 0;
   flex: 30%;
-
   align-self: center;
   padding-left: 24px;
 }
 
 .answer {
-  flex: 30%;
-
+  width: 280px;
+  max-width: 300px;
+  min-width: 300px;
+  height: max-content;
+  // width: 300px;
+  // max-width: 300px;
+  // height: max-content;
+  // flex-shrink: 0;
+  // flex: 30%;
+  // flex-basis: 30%;
+  padding: 0 15px;
   align-self: center;
-  padding-left: 24px;
+  // padding-left: 24px;
 }
 
 .cards {
   flex: 12%;
-
+  flex-shrink: 0;
   align-self: center;
   padding-left: 24px;
 }
 
 .lastUpdated {
-  flex: 20%;
-
+  // flex-shrink: 0;
+  // // flex: 20%;
+  // flex-basis: 20%;
+  width: 200px;
+  max-width: 200px;
+  min-width: 200px;
   align-self: center;
   padding-left: 24px;
 }
 .grade {
-  flex: 20%;
+  // flex-shrink: 0;
+  // flex: 20%;
   align-self: center;
   padding-left: 24px;
   max-width: 20%;
@@ -52,6 +72,7 @@
 }
 
 .createdBy {
+  // flex-shrink: 0;
   flex: 20%;
   align-self: flex-start;
   padding-left: 24px;
@@ -68,16 +89,23 @@
   margin-top: 5px;
   margin-bottom: 5px;
 
-  display: flex;
+  // display: flex;
+  display: block;
   align-self: center;
 }
 
 .item {
+  // height: max-content;
 }
 
 .text {
+  display: block;
   padding-top: 6px;
   padding-bottom: 6px;
+  width: 280px;
+  max-width: 300px;
+  // overflow: initial;
+  word-wrap: break-word;
 }
 
 .header {
@@ -104,9 +132,18 @@
 }
 
 .link {
-  // float: left;
   display: inline-block;
   width: max-content;
   padding: 0px 14px;
   padding-left: 24px;
+}
+
+.imgWrapper {
+  margin-top: 15px;
+  display: block;
+}
+
+.decksText {
+  padding-top: 6px;
+  padding-bottom: 6px;
 }

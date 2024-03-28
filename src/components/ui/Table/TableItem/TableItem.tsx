@@ -15,6 +15,7 @@ import s from './TableItem.module.scss'
 
 import { SettingsBlock } from '../../settingsBlock'
 import { Stars } from '../Stars'
+import { hideOverflowText } from '@/common/utils'
 
 type Props = {
   answer?: number | string
@@ -83,10 +84,10 @@ export const TableItem = ({
                 <img
                   className={`${s.img} ${s.item}`}
                   src={questionImg}
-                  style={{ width: '170px', height: '107px' }}
+                  style={{ width: '230px', height: '150px' }}
                 />
               )}
-              <div className={s.text}>{question}</div>
+              <div className={s.text}>{hideOverflowText(question)}</div>
             </>
           }
         </div>
@@ -100,13 +101,15 @@ export const TableItem = ({
           }}
         >
           {withImg ? (
-            <img
-              className={`${s.img} ${s.item}`}
-              src={picture}
-              style={{ width: '170px', height: '107px' }}
-            />
+            <div className={s.imgWrapper}>
+              <img
+                className={`${s.img} ${s.item}`}
+                src={picture}
+                style={{ width: '230px', height: '150px' }}
+              />
+            </div>
           ) : (
-            <div className={s.text}>
+            <div className={s.decksText}>
               {name}
               {isHeader && orderBy === 'name-asc'
                 ? ArrowUp
@@ -129,19 +132,27 @@ export const TableItem = ({
         >
           {
             <div style={{ float: 'left', height: '40px', width: 'maxContent' }}>
-              {withImg && <img className={`${s.img} ${s.item}`} src={picture} />}
+              {withImg && (
+                <div className={s.imgWrapper}>
+                  <img className={`${s.img} ${s.item}`} src={picture} />
+                </div>
+              )}
 
-              <div className={s.text}> {name}</div>
+              <div className={s.decksText}> {name}</div>
             </div>
           }
         </Link>
       )}
 
       {answer && (
-        <>
-          {answerImg && <img src={answerImg} style={{ width: '170px', height: '107px' }} />}
-          <div className={`${s.answer} ${s.item}`}>{answer}</div>
-        </>
+        <div className={`${s.answer} ${s.item}`}>
+          {answerImg && (
+            <div className={s.imgWrapper}>
+              <img src={answerImg} style={{ width: '230px', height: '150px' }} />
+            </div>
+          )}
+          <div className={s.text}> {hideOverflowText(String(answer))}</div>
+        </div>
       )}
 
       {(cardsCount || cardsCount === 0) && (
