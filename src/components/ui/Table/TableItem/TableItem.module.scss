@@ -64,7 +64,7 @@
 }
 .grade {
   // flex-shrink: 0;
-  // flex: 20%;
+  flex: 20%;
   align-self: center;
   padding-left: 24px;
   max-width: 20%;
@@ -109,7 +109,7 @@
 }
 
 .header {
-  background-color: var(--color-dark-300);
+  background-color: #333333;
 }
 
 .settings {

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import { ReactSVG } from 'react-svg'
 
+import { hideOverflowText } from '@/common/utils'
 import arrowDown from '@/img/arrowDown.svg'
 import arrowUp from '@/img/arrowUpIcon.svg'
 import picture from '@/img/tablePicture.png'
@@ -15,10 +16,10 @@ import s from './TableItem.module.scss'
 
 import { SettingsBlock } from '../../settingsBlock'
 import { Stars } from '../Stars'
-import { hideOverflowText } from '@/common/utils'
 
 type Props = {
   answer?: number | string
+  answerImg?: string
   authorId?: string
   cardsCount?: number | string
   changeSetting?: boolean
@@ -30,13 +31,13 @@ type Props = {
   lastUpdated: string
   name?: string
   question?: string
-  withImg?: boolean
-  answerImg?: string
   questionImg?: string
+  withImg?: boolean
 }
 
 export const TableItem = ({
   answer,
+  answerImg,
   authorId,
   cardsCount,
   changeSetting = false,
@@ -49,7 +50,6 @@ export const TableItem = ({
   name,
   question,
   questionImg,
-  answerImg,
   withImg = false,
 }: Props) => {
   const { changeOrderByValue, clearFilter } = filtersAction
@@ -84,7 +84,7 @@ export const TableItem = ({
                 <img
                   className={`${s.img} ${s.item}`}
                   src={questionImg}
-                  style={{ width: '230px', height: '150px' }}
+                  style={{ height: '150px', width: '230px' }}
                 />
               )}
               <div className={s.text}>{hideOverflowText(question)}</div>
@@ -105,7 +105,7 @@ export const TableItem = ({
               <img
                 className={`${s.img} ${s.item}`}
                 src={picture}
-                style={{ width: '230px', height: '150px' }}
+                style={{ height: '150px', width: '230px' }}
               />
             </div>
           ) : (
@@ -114,8 +114,8 @@ export const TableItem = ({
               {isHeader && orderBy === 'name-asc'
                 ? ArrowUp
                 : isHeader && orderBy === 'name-desc'
-                ? ArrowDown
-                : ''}
+                  ? ArrowDown
+                  : ''}
             </div>
           )}
         </div>
@@ -148,7 +148,7 @@ export const TableItem = ({
         <div className={`${s.answer} ${s.item}`}>
           {answerImg && (
             <div className={s.imgWrapper}>
-              <img src={answerImg} style={{ width: '230px', height: '150px' }} />
+              <img src={answerImg} style={{ height: '150px', width: '230px' }} />
             </div>
           )}
           <div className={s.text}> {hideOverflowText(String(answer))}</div>
@@ -169,8 +169,8 @@ export const TableItem = ({
           {isHeader && orderBy === 'cardsCount-asc'
             ? ArrowUp
             : isHeader && orderBy === 'cardsCount-desc'
-            ? ArrowDown
-            : ''}
+              ? ArrowDown
+              : ''}
         </div>
       )}
       <div
@@ -184,8 +184,8 @@ export const TableItem = ({
         {isHeader && orderBy === 'updated-asc'
           ? ArrowUp
           : isHeader && orderBy === 'updated-desc'
-          ? ArrowDown
-          : ''}
+            ? ArrowDown
+            : ''}
       </div>
       {!createdBy && (
         <div className={`${s.grade} ${s.item}`}>{grade && isHeader ? grade : <Stars />}</div>

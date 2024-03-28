@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ReactSVG } from 'react-svg'
 
 import editIcon from '@/img/editIcon.svg'
@@ -7,7 +8,6 @@ import { useAppDispatch } from '@/services/hooks'
 import { appAction } from '@/services/slices/appSlice'
 
 import s from './Settings.module.scss'
-import { Link } from 'react-router-dom'
 
 type Props = {
   deckId: string
@@ -24,9 +24,9 @@ export const SettingsBlock = ({ deckId, isOwner }: Props) => {
   return (
     <div className={s.wrapper}>
       <Link
-        to={`/cards/${deckId}`}
-        style={{ padding: '0px 0px' }}
         className={`${s.item} ${s.button}`}
+        style={{ padding: '0px 0px' }}
+        to={`/cards/${deckId}`}
       >
         <ReactSVG src={playIcon} />
       </Link>

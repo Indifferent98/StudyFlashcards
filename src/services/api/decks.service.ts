@@ -1,6 +1,8 @@
 import {
   CreateDeckResponse,
   cardsByIdResponse,
+  createCardArgs,
+  createCardResponse,
   createDeckArgs,
   getCardsByIdArgs,
   getDeckArgs,
@@ -12,11 +14,22 @@ import { baseApi } from './base-api'
 
 const deckService = baseApi.injectEndpoints({
   endpoints: builder => ({
+    createCard: builder.mutation<createCardResponse, createCardArgs>({
+      invalidatesTags: ['Cards'],
+      query: args => {
+        const requestBody: Partial<createCardArgs> = { ...args }
+
+        delete requestBody.id
+
+        return { body: requestBody, method: 'POST', url: `v1/decks/${args.id}/cards` }
+      },
+    }),
     createDeck: builder.mutation<CreateDeckResponse, createDeckArgs>({
       invalidatesTags: ['Decks'],
       query: args => ({ body: args, method: 'POST', url: `v1/decks` }),
     }),
     getCardsById: builder.query<cardsByIdResponse, getCardsByIdArgs>({
+      providesTags: ['Cards'],
       query: (args: getCardsByIdArgs) => {
         const queryParams: Partial<getCardsByIdArgs> = { ...args }
 
@@ -40,6 +53,7 @@ const deckService = baseApi.injectEndpoints({
 })
 
 export const {
+  useCreateCardMutation,
   useCreateDeckMutation,
   useGetCardsByIdQuery,
   useGetDeckByIdQuery,
