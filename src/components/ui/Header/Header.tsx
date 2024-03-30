@@ -11,6 +11,7 @@ export const Header = () => {
     <div className={s.wrapper}>
       <div className={s.body}>
         <img alt={''} className={s.img} src={headerLogo} />
+
         <div className={s.signIn}>
           <Button
             children={<Typography children={'Sign In'} variant={'Subtitle2'} />}

@@ -21,7 +21,7 @@ import { AddNewDeck } from './ModalBody/AddNewDeck'
 import { DeleteCard } from './ModalBody/DeleteCard'
 import { DeleteDeck } from './ModalBody/DeleteDeck'
 
-export type ModalVariant = 'Add new card' | 'Deck' | 'Delete Deck' | 'DeleteCard'
+export type ModalVariant = 'Add new card' | 'Deck' | 'Delete Deck' | 'DeleteCard' | 'Change Deck'
 type Props = {
   deckName?: string
   variant: ModalVariant
@@ -31,10 +31,12 @@ export const Modal = ({ deckName, variant }: Props) => {
     variant === 'Deck'
       ? 'Add New Deck'
       : variant === 'Delete Deck'
-        ? 'Delete Deck'
-        : variant === 'Add new card'
-          ? 'Add new card'
-          : 'Delete Card'
+      ? 'Delete Deck'
+      : variant === 'Add new card'
+      ? 'Add new card'
+      : variant === 'Change Deck'
+      ? 'Change Deck'
+      : 'Delete Card'
 
   console.log('varioat', variant)
   const [createDeck, deckCreationStatus] = useCreateDeckMutation()
@@ -75,7 +77,7 @@ export const Modal = ({ deckName, variant }: Props) => {
           </button>
         </div>
         <div className={s.content}>
-          {variant === 'Deck' ? (
+          {variant === 'Deck' || variant === 'Change Deck' ? (
             <AddNewDeck
               deckTitle={deckTitle}
               isPrivatePack={isPrivatePack}

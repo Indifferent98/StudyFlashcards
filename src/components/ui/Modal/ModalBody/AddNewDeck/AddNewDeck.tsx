@@ -11,9 +11,16 @@ type Props = {
   isPrivatePack: boolean
   setDeckTitle: (title: string) => void
   setIsPrivatePack: (isPrivate: boolean) => void
+  changeDeckMode?: boolean
 }
 
-export const AddNewDeck = ({ deckTitle, isPrivatePack, setDeckTitle, setIsPrivatePack }: Props) => {
+export const AddNewDeck = ({
+  deckTitle,
+  isPrivatePack,
+  setDeckTitle,
+  setIsPrivatePack,
+  changeDeckMode,
+}: Props) => {
   const changeDeckTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setDeckTitle(e.currentTarget.value)
   }
