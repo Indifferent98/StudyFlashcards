@@ -18,7 +18,6 @@ export const SettingsBlock = ({ deckId, isOwner }: Props) => {
   const dispatch = useAppDispatch()
   const { changeBackGroundDarkMode, changeCurrentModal } = appAction
 
-  console.log(deckId)
   const { changeRemoveDeckModalId } = appAction
 
   return (
