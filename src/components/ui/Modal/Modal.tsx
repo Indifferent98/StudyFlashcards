@@ -21,7 +21,7 @@ import { AddNewDeck } from './ModalBody/AddNewDeck'
 import { DeleteCard } from './ModalBody/DeleteCard'
 import { DeleteDeck } from './ModalBody/DeleteDeck'
 
-export type ModalVariant = 'Add new card' | 'Deck' | 'Delete Deck' | 'DeleteCard' | 'Change Deck'
+export type ModalVariant = 'Add new card' | 'Change Deck' | 'Deck' | 'Delete Deck' | 'DeleteCard'
 type Props = {
   deckName?: string
   variant: ModalVariant

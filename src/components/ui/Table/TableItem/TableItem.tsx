@@ -114,8 +114,8 @@ export const TableItem = ({
               {isHeader && orderBy === 'name-asc'
                 ? ArrowUp
                 : isHeader && orderBy === 'name-desc'
-                  ? ArrowDown
-                  : ''}
+                ? ArrowDown
+                : ''}
             </div>
           )}
         </div>
@@ -169,8 +169,8 @@ export const TableItem = ({
           {isHeader && orderBy === 'cardsCount-asc'
             ? ArrowUp
             : isHeader && orderBy === 'cardsCount-desc'
-              ? ArrowDown
-              : ''}
+            ? ArrowDown
+            : ''}
         </div>
       )}
       <div
@@ -184,8 +184,8 @@ export const TableItem = ({
         {isHeader && orderBy === 'updated-asc'
           ? ArrowUp
           : isHeader && orderBy === 'updated-desc'
-            ? ArrowDown
-            : ''}
+          ? ArrowDown
+          : ''}
       </div>
       {!createdBy && (
         <div className={`${s.grade} ${s.item}`}>{grade && isHeader ? grade : <Stars />}</div>

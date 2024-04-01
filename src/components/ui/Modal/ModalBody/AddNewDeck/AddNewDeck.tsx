@@ -7,19 +7,19 @@ import { Input } from '@/components/ui/Input'
 import UploadIcon from '@/img/UploadIcon.svg'
 
 type Props = {
+  changeDeckMode?: boolean
   deckTitle: string
   isPrivatePack: boolean
   setDeckTitle: (title: string) => void
   setIsPrivatePack: (isPrivate: boolean) => void
-  changeDeckMode?: boolean
 }
 
 export const AddNewDeck = ({
+  changeDeckMode,
   deckTitle,
   isPrivatePack,
   setDeckTitle,
   setIsPrivatePack,
-  changeDeckMode,
 }: Props) => {
   const changeDeckTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setDeckTitle(e.currentTarget.value)
