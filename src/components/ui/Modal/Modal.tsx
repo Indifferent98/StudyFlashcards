@@ -4,6 +4,7 @@ import { ReactSVG } from 'react-svg'
 
 import closeIcon from '@/img/closeIcon.svg'
 import {
+  useChangeDeckByIdMutation,
   useCreateCardMutation,
   useCreateDeckMutation,
   useRemoveDeckByIdMutation,
@@ -50,6 +51,8 @@ export const Modal = ({ deckName, variant }: Props) => {
   const [createCard, createCardCreationStatus] = useCreateCardMutation()
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState('')
+  const [changeDeck, changeDeckCreationStatus] = useChangeDeckByIdMutation()
+  const [cover, setCover] = useState('')
 
   const changeQuestion = (e: ChangeEvent<HTMLInputElement>) => {
     setQuestion(e.currentTarget.value)
@@ -60,7 +63,7 @@ export const Modal = ({ deckName, variant }: Props) => {
   const removeDeckModalId = useSelector(selectRemoveDeckModalId)
   const [url, setUrl] = useState(window.location.href)
   const lastPath = url.substring(url.lastIndexOf('/') + 1)
-
+  const deckId = useSelector(selectRemoveDeckModalId)
   return (
     showModal && (
       <div className={s.wrapper}>
@@ -120,9 +123,12 @@ export const Modal = ({ deckName, variant }: Props) => {
               }
 
               if (variant === 'Add new card') {
-                console.log('cacacacaca')
                 // removeDeck({ id: removeDeckModalId })
                 createCard({ answer, id: lastPath, question })
+                dispatch(changeBackGroundDarkMode({ mode: false }))
+              }
+              if (variant === 'Change Deck') {
+                changeDeck({ id: deckId, cover, isPrivate: isPrivatePack, name: deckTitle })
                 dispatch(changeBackGroundDarkMode({ mode: false }))
               }
             }}

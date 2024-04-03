@@ -31,7 +31,14 @@ export const SettingsBlock = ({ deckId, isOwner }: Props) => {
       </Link>
       {isOwner && (
         <>
-          <button className={`${s.item} ${s.button}`}>
+          <button
+            className={`${s.item} ${s.button}`}
+            onClick={() => {
+              dispatch(changeBackGroundDarkMode({ mode: true }))
+              dispatch(changeCurrentModal({ variant: 'Change Deck' }))
+              dispatch(changeRemoveDeckModalId({ id: deckId }))
+            }}
+          >
             <ReactSVG className={s.item} src={editIcon} />
           </button>
           <button
