@@ -33,6 +33,7 @@ type Props = {
   question?: string
   questionImg?: string
   withImg?: boolean
+  gradeMark?: number
 }
 
 export const TableItem = ({
@@ -51,6 +52,7 @@ export const TableItem = ({
   question,
   questionImg,
   withImg = false,
+  gradeMark = 1,
 }: Props) => {
   const { changeOrderByValue, clearFilter } = filtersAction
   const dispatch = useAppDispatch()
@@ -188,7 +190,9 @@ export const TableItem = ({
           : ''}
       </div>
       {!createdBy && (
-        <div className={`${s.grade} ${s.item}`}>{grade && isHeader ? grade : <Stars />}</div>
+        <div className={`${s.grade} ${s.item}`}>
+          {grade && isHeader ? grade : <Stars grade={gradeMark} />}
+        </div>
       )}
       {createdBy && (
         <Link className={`${s.createdBy} ${s.item}`} to={`${authorId}`}>

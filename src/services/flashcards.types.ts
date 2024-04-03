@@ -50,7 +50,7 @@ export type orderBy =
   | 'updated-desc'
   | null
 
-export interface CreateDeckResponse {
+export interface DeckResponse {
   author: Author
   cardsCount: number
   cover: string

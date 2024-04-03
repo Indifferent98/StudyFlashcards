@@ -5,12 +5,7 @@ import { Input } from '@/components/ui/Input'
 import { Table } from '@/components/ui/Table'
 import { TableItem } from '@/components/ui/Table/TableItem'
 import { useGetCardsByIdQuery } from '@/services/api'
-import {
-  selectBackGroundDarkMode,
-  selectCurrentModal,
-  selectCurrentPage,
-  selectPageSize,
-} from '@/services/selectors'
+import { selectCurrentPage, selectPageSize } from '@/services/selectors'
 
 import s from './Cards.module.scss'
 
@@ -61,6 +56,7 @@ export const Cards = () => {
         {data?.items.map(item => {
           return (
             <TableItem
+              gradeMark={item.grade}
               answer={item.answer}
               answerImg={item.answerImg}
               changeSetting

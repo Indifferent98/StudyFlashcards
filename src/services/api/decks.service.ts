@@ -1,5 +1,5 @@
 import {
-  CreateDeckResponse,
+  DeckResponse,
   cardsByIdResponse,
   createCardArgs,
   createCardResponse,
@@ -24,7 +24,7 @@ const deckService = baseApi.injectEndpoints({
         return { body: requestBody, method: 'POST', url: `v1/decks/${args.id}/cards` }
       },
     }),
-    createDeck: builder.mutation<CreateDeckResponse, createDeckArgs>({
+    createDeck: builder.mutation<DeckResponse, createDeckArgs>({
       invalidatesTags: ['Decks'],
       query: args => ({ body: args, method: 'POST', url: `v1/decks` }),
     }),
@@ -49,6 +49,14 @@ const deckService = baseApi.injectEndpoints({
       invalidatesTags: ['Decks'],
       query: args => ({ method: 'DELETE', url: `v1/decks/${args.id}` }),
     }),
+    changeDeckById: builder.mutation<DeckResponse, Partial<createDeckArgs> & { id: string }>({
+      invalidatesTags: ['Decks'],
+      query: ({ id, cover, isPrivate, name }) => ({
+        method: 'PATCH',
+        url: `v1/decks/${id}`,
+        body: { cover, isPrivate, name },
+      }),
+    }),
   }),
 })
 
@@ -59,4 +67,5 @@ export const {
   useGetDeckByIdQuery,
   useGetDecksQuery,
   useRemoveDeckByIdMutation,
+  useChangeDeckByIdMutation,
 } = deckService
