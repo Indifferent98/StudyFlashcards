@@ -1,12 +1,17 @@
+import { cardsUpdateResponse, createCardArgs } from '../flashcards.types'
 import { baseApi } from './base-api'
 
 const cardsService = baseApi.injectEndpoints({
   endpoints: builder => ({
-    createDeck: builder.query<any, any>({
-      // invalidatesTags: ['Decks'],
-      query: args => ({ body: args, method: 'POST', url: `v1/decks` }),
+    updateCard: builder.mutation<cardsUpdateResponse, createCardArgs>({
+      invalidatesTags: ['Cards'],
+      query: args => {
+        const requestBody: Partial<createCardArgs> = { ...args }
+        delete requestBody.id
+        return { body: requestBody, method: 'PATCH', url: `v1/cards/${args.id}` }
+      },
     }),
   }),
 })
 
-export const {} = cardsService
+export const { useUpdateCardMutation } = cardsService

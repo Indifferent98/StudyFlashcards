@@ -34,6 +34,8 @@ type Props = {
   questionImg?: string
   withImg?: boolean
   gradeMark?: number
+  settingVariant?: 'changeDeck' | 'changeCard'
+  cardId?: string
 }
 
 export const TableItem = ({
@@ -53,6 +55,8 @@ export const TableItem = ({
   questionImg,
   withImg = false,
   gradeMark = 1,
+  settingVariant = 'changeDeck',
+  cardId,
 }: Props) => {
   const { changeOrderByValue, clearFilter } = filtersAction
   const dispatch = useAppDispatch()
@@ -204,8 +208,10 @@ export const TableItem = ({
         <div className={`${s.settings} ${s.item}`}>
           {
             <SettingsBlock
+              settingVariant={settingVariant}
               deckId={deckId}
               isOwner={authorId === 'f2be95b9-4d07-4751-a775-bd612fc9553a'}
+              cardId={cardId}
             />
           }
         </div>

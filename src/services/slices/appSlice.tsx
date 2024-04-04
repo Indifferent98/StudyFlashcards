@@ -5,6 +5,7 @@ type App = {
   backgroundDarkMode: boolean
   currentModal: ModalVariant
   removeDeckModalId: string
+  currentCardId: string
 }
 
 const slice = createSlice({
@@ -12,6 +13,7 @@ const slice = createSlice({
     backgroundDarkMode: false,
     currentModal: 'Add new card',
     removeDeckModalId: '',
+    currentCardId: '',
   } as App,
   name: 'Pagination',
   reducers: {
@@ -23,6 +25,9 @@ const slice = createSlice({
     },
     changeRemoveDeckModalId(state, action: PayloadAction<{ id: string }>) {
       state.removeDeckModalId = action.payload.id
+    },
+    changeCurrentCardId(state, action: PayloadAction<{ id: string }>) {
+      state.currentCardId = action.payload.id
     },
   },
 })
