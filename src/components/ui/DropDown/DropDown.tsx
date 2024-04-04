@@ -13,6 +13,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import s from './DropDown.module.scss'
 
 import { Typography } from '../Typography'
+import { relative } from 'path'
 type Props = { email?: string; nickName?: string; variant: 'Profile' | 'Settings' }
 export const DropDown = ({
   email = 'LongTeeeestEmail@gmail.com',
@@ -24,7 +25,7 @@ export const DropDown = ({
       <DropdownMenu.Trigger asChild>
         <button aria-label={'Customize options'} className={s.IconButton}>
           {variant === 'Settings' ? (
-            <ReactSVG src={settingIcon} />
+            <ReactSVG src={settingIcon} style={{ position: 'relative', top: '-4px' }} />
           ) : (
             <img alt={'profileLogo'} className={s.profileAvatar} src={profileAvatar} />
           )}

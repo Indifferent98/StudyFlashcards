@@ -10,7 +10,7 @@ import {
   useRemoveDeckByIdMutation,
 } from '@/services/api/decks.service'
 import { useAppDispatch } from '@/services/hooks'
-import { selectRemoveDeckModalId } from '@/services/selectors'
+import { selectCurrentCardId, selectRemoveDeckModalId } from '@/services/selectors'
 import { appAction } from '@/services/slices/appSlice'
 
 import s from './Modal.module.scss'
@@ -21,24 +21,20 @@ import { AddNewCard } from './ModalBody/AddNewCard'
 import { AddNewDeck } from './ModalBody/AddNewDeck'
 import { DeleteCard } from './ModalBody/DeleteCard'
 import { DeleteDeck } from './ModalBody/DeleteDeck'
+import { useUpdateCardMutation } from '@/services/api'
 
-export type ModalVariant = 'Add new card' | 'Change Deck' | 'Deck' | 'Delete Deck' | 'DeleteCard'
+export type ModalVariant =
+  | 'Add new card'
+  | 'Change Deck'
+  | 'Add New Deck'
+  | 'Delete Deck'
+  | 'Delete Card'
+  | 'Change Card'
 type Props = {
   deckName?: string
   variant: ModalVariant
 }
 export const Modal = ({ deckName, variant }: Props) => {
-  const Title =
-    variant === 'Deck'
-      ? 'Add New Deck'
-      : variant === 'Delete Deck'
-      ? 'Delete Deck'
-      : variant === 'Add new card'
-      ? 'Add new card'
-      : variant === 'Change Deck'
-      ? 'Change Deck'
-      : 'Delete Card'
-
   console.log('varioat', variant)
   const [createDeck, deckCreationStatus] = useCreateDeckMutation()
   const [showModal, setShowModal] = useState(true)
@@ -53,7 +49,8 @@ export const Modal = ({ deckName, variant }: Props) => {
   const [answer, setAnswer] = useState('')
   const [changeDeck, changeDeckCreationStatus] = useChangeDeckByIdMutation()
   const [cover, setCover] = useState('')
-
+  const [changeCard, changeCardCreationStatus] = useUpdateCardMutation()
+  const currentCardId = useSelector(selectCurrentCardId)
   const changeQuestion = (e: ChangeEvent<HTMLInputElement>) => {
     setQuestion(e.currentTarget.value)
   }
@@ -68,7 +65,7 @@ export const Modal = ({ deckName, variant }: Props) => {
     showModal && (
       <div className={s.wrapper}>
         <div className={s.title}>
-          <Typography children={Title} className={s.titleItem} variant={'H3'} />
+          <Typography children={variant} className={s.titleItem} variant={'H3'} />
           <button
             className={s.button}
             onClick={() => {
@@ -80,7 +77,7 @@ export const Modal = ({ deckName, variant }: Props) => {
           </button>
         </div>
         <div className={s.content}>
-          {variant === 'Deck' || variant === 'Change Deck' ? (
+          {variant === 'Add New Deck' || variant === 'Change Deck' ? (
             <AddNewDeck
               deckTitle={deckTitle}
               isPrivatePack={isPrivatePack}
@@ -89,7 +86,7 @@ export const Modal = ({ deckName, variant }: Props) => {
             />
           ) : variant === 'Delete Deck' ? (
             <DeleteDeck />
-          ) : variant === 'Add new card' ? (
+          ) : variant === 'Add new card' || variant === 'Change Card' ? (
             <AddNewCard
               answer={answer}
               changeAnswer={changeAnswer}
@@ -110,27 +107,26 @@ export const Modal = ({ deckName, variant }: Props) => {
             variant={'secondary'}
           />
           <Button
-            children={Title}
+            children={variant}
             display={'inlineBlock'}
             onClick={() => {
-              if (variant === 'Deck') {
+              if (variant === 'Add New Deck') {
                 createDeck({ isPrivate: isPrivatePack, name: deckTitle })
-                dispatch(changeBackGroundDarkMode({ mode: false }))
               }
               if (variant === 'Delete Deck') {
                 removeDeck({ id: removeDeckModalId })
-                dispatch(changeBackGroundDarkMode({ mode: false }))
               }
-
               if (variant === 'Add new card') {
                 // removeDeck({ id: removeDeckModalId })
                 createCard({ answer, id: lastPath, question })
-                dispatch(changeBackGroundDarkMode({ mode: false }))
               }
               if (variant === 'Change Deck') {
                 changeDeck({ id: deckId, cover, isPrivate: isPrivatePack, name: deckTitle })
-                dispatch(changeBackGroundDarkMode({ mode: false }))
               }
+              if (variant === 'Change Card') {
+                changeCard({ id: currentCardId, answer, question })
+              }
+              dispatch(changeBackGroundDarkMode({ mode: false }))
             }}
           />
         </div>

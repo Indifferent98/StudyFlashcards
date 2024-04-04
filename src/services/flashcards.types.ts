@@ -132,3 +132,5 @@ export type createCardArgs = {
   questionImg?: string
   questionVideo?: string
 }
+
+export type cardsUpdateResponse = Required<cardResponseItem>

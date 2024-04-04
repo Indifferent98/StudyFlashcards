@@ -72,7 +72,7 @@ export const Decks = () => {
           display={'inlineBlock'}
           onClick={() => {
             dispatch(changeBackGroundDarkMode({ mode: true }))
-            dispatch(changeCurrentModal({ variant: 'Deck' }))
+            dispatch(changeCurrentModal({ variant: 'Add New Deck' }))
           }}
         >
           Add new Deck
@@ -99,6 +99,7 @@ export const Decks = () => {
               key={item.id}
               lastUpdated={new Date(item.updated).toLocaleDateString()}
               name={item.name}
+              settingVariant="changeDeck"
             />
           )
         })}
