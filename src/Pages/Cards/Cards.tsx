@@ -71,6 +71,7 @@ export const Cards = () => {
               authorId={userId}
               settingVariant="changeCard"
               cardId={id}
+              removeVariant="card"
             />
           )
         })}

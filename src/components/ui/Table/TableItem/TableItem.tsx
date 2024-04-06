@@ -36,6 +36,7 @@ type Props = {
   gradeMark?: number
   settingVariant?: 'changeDeck' | 'changeCard'
   cardId?: string
+  removeVariant?: 'deck' | 'card'
 }
 
 export const TableItem = ({
@@ -57,6 +58,7 @@ export const TableItem = ({
   gradeMark = 1,
   settingVariant = 'changeDeck',
   cardId,
+  removeVariant,
 }: Props) => {
   const { changeOrderByValue, clearFilter } = filtersAction
   const dispatch = useAppDispatch()
@@ -212,6 +214,7 @@ export const TableItem = ({
               deckId={deckId}
               isOwner={authorId === 'f2be95b9-4d07-4751-a775-bd612fc9553a'}
               cardId={cardId}
+              removeVariant={removeVariant ? removeVariant : 'deck'}
             />
           }
         </div>
