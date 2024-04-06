@@ -21,7 +21,7 @@ import { AddNewCard } from './ModalBody/AddNewCard'
 import { AddNewDeck } from './ModalBody/AddNewDeck'
 import { DeleteCard } from './ModalBody/DeleteCard'
 import { DeleteDeck } from './ModalBody/DeleteDeck'
-import { useUpdateCardMutation } from '@/services/api'
+import { useRemoveCardByIdMutation, useUpdateCardMutation } from '@/services/api'
 
 export type ModalVariant =
   | 'Add new card'
@@ -51,6 +51,8 @@ export const Modal = ({ deckName, variant }: Props) => {
   const [cover, setCover] = useState('')
   const [changeCard, changeCardCreationStatus] = useUpdateCardMutation()
   const currentCardId = useSelector(selectCurrentCardId)
+  const [removeCardById, removeCardByIdCreationStatus] = useRemoveCardByIdMutation()
+
   const changeQuestion = (e: ChangeEvent<HTMLInputElement>) => {
     setQuestion(e.currentTarget.value)
   }
@@ -84,8 +86,8 @@ export const Modal = ({ deckName, variant }: Props) => {
               setDeckTitle={setDeckTitle}
               setIsPrivatePack={setIsPrivatePack}
             />
-          ) : variant === 'Delete Deck' ? (
-            <DeleteDeck />
+          ) : variant === 'Delete Deck' || variant === 'Delete Card' ? (
+            <DeleteDeck isCardVariant={variant === 'Delete Card' ? true : false} />
           ) : variant === 'Add new card' || variant === 'Change Card' ? (
             <AddNewCard
               answer={answer}
@@ -125,6 +127,9 @@ export const Modal = ({ deckName, variant }: Props) => {
               }
               if (variant === 'Change Card') {
                 changeCard({ id: currentCardId, answer, question })
+              }
+              if (variant === 'Delete Card') {
+                removeCardById({ id: currentCardId })
               }
               dispatch(changeBackGroundDarkMode({ mode: false }))
             }}

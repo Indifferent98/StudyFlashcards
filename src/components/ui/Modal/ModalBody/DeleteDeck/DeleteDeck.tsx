@@ -1,10 +1,13 @@
 import { useSelector } from 'react-redux'
 
 import { Typography } from '@/components/ui/Typography'
-import { useGetDeckByIdQuery } from '@/services/api/decks.service'
-import { selectRemoveDeckModalId } from '@/services/selectors'
+import { useGetCardsByIdQuery, useGetDeckByIdQuery } from '@/services/api/decks.service'
+import { selectCurrentCardId, selectRemoveDeckModalId } from '@/services/selectors'
 
-export const DeleteDeck = () => {
+type Props = {
+  isCardVariant?: boolean
+}
+export const DeleteDeck = ({ isCardVariant = false }: Props) => {
   const removeDeckModalId = useSelector(selectRemoveDeckModalId)
   const { data, isLoading } = useGetDeckByIdQuery({ id: removeDeckModalId })
 
@@ -16,11 +19,11 @@ export const DeleteDeck = () => {
     <div style={{ marginTop: '24px' }}>
       Do you really want to remove{' '}
       <Typography
-        children={`${data?.name}?`}
+        children={`${isCardVariant ? 'card' : data?.name}?`}
         style={{ display: 'inline-block' }}
         variant={'Subtitle1'}
       />
-      <div>Deck will be deleted.</div>
+      <div>{`${isCardVariant ? 'Card' : 'Deck'} will be deleted.`}</div>
     </div>
   )
 }
