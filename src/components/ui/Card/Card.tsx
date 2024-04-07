@@ -9,11 +9,20 @@ import { SignUp } from '@/components/auth/login-form/SignUp'
 import s from './Card.module.scss'
 
 import { AnswerCard, CardProps } from './CardsType/AnswerCard'
+import { CardContent } from '@/Pages/LearnCard/CardContent'
 
 type Props = {
-  variant: 'Answer' | 'CheckEmail' | 'CreateNewPassword' | 'SignIn' | 'SignUp' | 'forgotPassword'
+  deckId?: string
+  variant:
+    | 'Answer'
+    | 'CheckEmail'
+    | 'CreateNewPassword'
+    | 'SignIn'
+    | 'SignUp'
+    | 'forgotPassword'
+    | 'learnCard'
 } & Partial<CardProps>
-export const Card = ({ answer = '', deckName = '', question = '', variant }: Props) => {
+export const Card = ({ answer = '', deckName = '', question = '', deckId, variant }: Props) => {
   const [showCard, setShowCard] = useState(true)
 
   const closeCard = () => {
@@ -46,7 +55,7 @@ export const Card = ({ answer = '', deckName = '', question = '', variant }: Pro
         ) : variant === 'CreateNewPassword' ? (
           <CreateNewPassword />
         ) : (
-          false
+          <CardContent answer={answer} question={question} deckId={deckId} />
         )}
       </div>
     )

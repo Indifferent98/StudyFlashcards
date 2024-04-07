@@ -1,5 +1,6 @@
 import {
   DeckResponse,
+  cardResponseItem,
   cardsByIdResponse,
   createCardArgs,
   createCardResponse,
@@ -57,6 +58,12 @@ const deckService = baseApi.injectEndpoints({
         body: { cover, isPrivate, name },
       }),
     }),
+    getRandomCard: builder.query<cardResponseItem, { id: string; previousCardId?: string }>({
+      query: ({ id, previousCardId }) => ({
+        params: { previousCardId },
+        url: `v1/decks/${id}/learn`,
+      }),
+    }),
   }),
 })
 
@@ -68,4 +75,5 @@ export const {
   useGetDecksQuery,
   useRemoveDeckByIdMutation,
   useChangeDeckByIdMutation,
+  useGetRandomCardQuery,
 } = deckService
