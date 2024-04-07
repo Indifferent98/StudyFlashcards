@@ -8,6 +8,7 @@ import {
 
 import { Cards } from './Pages/Cards'
 import { Decks } from './Pages/Decks'
+import { LearnCard } from './Pages/LearnCard'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -21,6 +22,10 @@ const publicRoutes: RouteObject[] = [
   {
     element: <Cards />,
     path: '/Cards/*',
+  },
+  {
+    element: <LearnCard />,
+    path: '/learn/*',
   },
 ]
 

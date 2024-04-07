@@ -1,6 +1,5 @@
 import React from 'react'
 import { ReactSVG } from 'react-svg'
-
 import profileAvatar from '@/img/30142bfde5bdcdb7549cf75f7a51d100.png'
 import editIcon from '@/img/editIcon.svg'
 import logOutIcon from '@/img/logOutIcon.svg'
@@ -9,17 +8,26 @@ import playIcon from '@/img/playCircleIcon.svg'
 import settingIcon from '@/img/settings.svg'
 import trashIcon from '@/img/trashIcon.svg'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-
 import s from './DropDown.module.scss'
-
 import { Typography } from '../Typography'
-import { relative } from 'path'
-type Props = { email?: string; nickName?: string; variant: 'Profile' | 'Settings' }
+import { Link } from 'react-router-dom'
+
+type Props = {
+  email?: string
+  nickName?: string
+  variant: 'Profile' | 'Settings'
+  fullSetting: boolean
+  deckId: string
+}
 export const DropDown = ({
   email = 'LongTeeeestEmail@gmail.com',
   nickName = 'Ivan',
   variant,
+  fullSetting,
+  deckId,
 }: Props) => {
+  const fullSettingVariant = variant === 'Settings' && fullSetting
+  console.log(fullSettingVariant)
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -44,7 +52,9 @@ export const DropDown = ({
                 <div className={s.leftSlot}>
                   <ReactSVG src={playIcon} />
                 </div>
-                <span>Learn</span>
+                <Link style={{ all: 'unset', cursor: 'pointer' }} to={`/learn/${deckId}`}>
+                  Learn
+                </Link>
               </>
             ) : (
               <div className={s.profileDropDownItem}>
@@ -62,40 +72,39 @@ export const DropDown = ({
               </div>
             )}
           </DropdownMenu.Item>
-          <DropdownMenu.Item className={s.DropdownMenuItem}>
-            {variant === 'Settings' ? (
-              <>
-                <div className={s.leftSlot}>
-                  <ReactSVG src={editIcon} />
-                </div>
-                <span>Edit</span>
-              </>
-            ) : (
-              <>
-                <div className={s.leftSlot}>
-                  <ReactSVG src={personIcon} />
-                </div>
-                <span>My Profile</span>
-              </>
-            )}
-          </DropdownMenu.Item>
-          <DropdownMenu.Item className={`${s.DropdownMenuItem} ${s.DropdownMenuItemlastChild}`}>
-            {variant === 'Settings' ? (
-              <>
-                <div className={s.leftSlot}>
-                  <ReactSVG src={trashIcon} />
-                </div>
-                <span>Delete</span>
-              </>
-            ) : (
-              <>
-                <div className={s.leftSlot}>
-                  <ReactSVG className={s.logOutSvg} src={logOutIcon} />
-                </div>
-                <span>Sign Out</span>
-              </>
-            )}
-          </DropdownMenu.Item>
+          {fullSettingVariant && (
+            <DropdownMenu.Item className={s.DropdownMenuItem}>
+              <div className={s.leftSlot}>
+                <ReactSVG src={editIcon} />
+              </div>
+              <span>Edit</span>
+            </DropdownMenu.Item>
+          )}
+          {variant === 'Profile' && (
+            <DropdownMenu.Item className={s.DropdownMenuItem}>
+              <div className={s.leftSlot}>
+                <ReactSVG src={personIcon} />
+              </div>
+              <span>My Profile</span>
+            </DropdownMenu.Item>
+          )}
+
+          {fullSettingVariant && (
+            <DropdownMenu.Item className={`${s.DropdownMenuItem} ${s.DropdownMenuItemlastChild}`}>
+              <div className={s.leftSlot}>
+                <ReactSVG src={trashIcon} />
+              </div>
+              <span>Delete</span>
+            </DropdownMenu.Item>
+          )}
+          {variant === 'Profile' && (
+            <DropdownMenu.Item className={`${s.DropdownMenuItem} ${s.DropdownMenuItemlastChild}`}>
+              <div className={s.leftSlot}>
+                <ReactSVG className={s.logOutSvg} src={logOutIcon} />
+              </div>
+              <span>Sign Out</span>
+            </DropdownMenu.Item>
+          )}
           <DropdownMenu.Arrow className={s.DropdownMenuArrow} />
         </DropdownMenu.Content>
       </DropdownMenu.Portal>

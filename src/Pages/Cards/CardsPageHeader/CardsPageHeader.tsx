@@ -41,11 +41,15 @@ export const CardsPageHeader = ({ id }: Props) => {
       <div style={{ marginBottom: '70px' }}>
         <h1>
           {data?.name}
-          {data?.userId === 'f2be95b9-4d07-4751-a775-bd612fc9553a' && (
+          {
             <span style={{ marginLeft: '15px' }}>
-              <DropDown variant="Settings" />
+              <DropDown
+                variant="Settings"
+                fullSetting={data?.userId === 'f2be95b9-4d07-4751-a775-bd612fc9553a'}
+                deckId={id}
+              />
             </span>
-          )}
+          }
         </h1>
         {data?.userId === 'f2be95b9-4d07-4751-a775-bd612fc9553a' && (
           <div style={{ display: 'inline-block', float: 'right' }}>
