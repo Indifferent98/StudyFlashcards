@@ -1,14 +1,24 @@
 import { Card } from '@/components/ui/Card'
 import { useGetRandomCardQuery } from '@/services/api'
+
 import { useState } from 'react'
 
 export const LearnCard = () => {
   const [url, setUrl] = useState(window.location.href)
   const lastPath = url.substring(url.lastIndexOf('/') + 1)
-  console.log('cardIdIs', lastPath)
-  const { data, isLoading } = useGetRandomCardQuery({ id: lastPath })
 
-  if (isLoading) {
+  let lastQuestionId
+  const { data, isLoading, isFetching } = useGetRandomCardQuery({
+    id: lastPath,
+    previousCardId: lastQuestionId,
+  })
+
+  // const { changeLastQuestionId } = appAction
+  if (data) {
+    lastQuestionId = data.id
+  }
+
+  if (isLoading || isFetching) {
     return <h1> is Loading...</h1>
   }
 
@@ -19,6 +29,9 @@ export const LearnCard = () => {
         answer={data?.answer}
         question={data?.question}
         deckId={data?.deckId}
+        answerImg={data?.answerImg}
+        questionImg={data?.questionImg}
+        cardId={data?.id}
       />
     </div>
   )

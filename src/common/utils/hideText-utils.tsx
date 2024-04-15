@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 export const hideOverflowText = (text: string) => {
   const [showAllText, setShowAllText] = useState(false)
-
   if (showAllText) {
     return (
       <div

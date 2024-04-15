@@ -14,6 +14,7 @@ const slice = createSlice({
     currentModal: 'Add new card',
     removeDeckModalId: '',
     currentCardId: '',
+    lastQuestionId: '',
   } as App,
   name: 'Pagination',
   reducers: {
