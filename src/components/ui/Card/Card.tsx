@@ -32,48 +32,47 @@ export const Card = ({
   answerImg = '',
   cardId,
 }: Props) => {
-  const [showCard, setShowCard] = useState(true)
+  // const [showCard, setShowCard] = useState(true)
 
-  const closeCard = () => {
-    setShowCard(false)
-  }
+  // const closeCard = () => {
+  //   debugger
+  //   setShowCard(false)
+  // }
 
-  useEffect(() => {
-    window.addEventListener('click', closeCard)
+  // useEffect(() => {
+  //   window.addEventListener('click', closeCard)
 
-    return () => window.removeEventListener('click', closeCard)
-  }, [])
+  //   return () => window.removeEventListener('click', closeCard)
+  // }, [])
 
-  const aa = (e: any) => {
-    e.stopPropagation()
-  }
+  // const aa = (e: any) => {
+  //   e.stopPropagation()
+  // }
 
   return (
-    showCard && (
-      <div className={s.wrapper} onClick={aa}>
-        {variant === 'Answer' ? (
-          <AnswerCard answer={answer} deckName={deckName} question={question} />
-        ) : variant === 'SignIn' ? (
-          <SignIn />
-        ) : variant === 'SignUp' ? (
-          <SignUp />
-        ) : variant === 'forgotPassword' ? (
-          <ForgotPassword />
-        ) : variant === 'CheckEmail' ? (
-          <CheckEmail />
-        ) : variant === 'CreateNewPassword' ? (
-          <CreateNewPassword />
-        ) : (
-          <CardContent
-            answer={answer}
-            question={question}
-            deckId={deckId}
-            answerImg={answerImg}
-            questionImg={questionImg}
-            id={cardId}
-          />
-        )}
-      </div>
-    )
+    <div className={s.wrapper}>
+      {variant === 'Answer' ? (
+        <AnswerCard answer={answer} deckName={deckName} question={question} />
+      ) : variant === 'SignIn' ? (
+        <SignIn />
+      ) : variant === 'SignUp' ? (
+        <SignUp />
+      ) : variant === 'forgotPassword' ? (
+        <ForgotPassword />
+      ) : variant === 'CheckEmail' ? (
+        <CheckEmail />
+      ) : variant === 'CreateNewPassword' ? (
+        <CreateNewPassword />
+      ) : (
+        <CardContent
+          answer={answer}
+          question={question}
+          deckId={deckId}
+          answerImg={answerImg}
+          questionImg={questionImg}
+          id={cardId}
+        />
+      )}
+    </div>
   )
 }

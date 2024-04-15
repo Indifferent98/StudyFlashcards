@@ -12,6 +12,7 @@ import { appAction } from '@/services/slices/appSlice'
 
 import s from '../Cards.module.scss'
 import { DropDown } from '@/components/ui/DropDown'
+import { BackToListsButton } from '@/components/ui/BackToListsButton'
 
 type Props = {
   id: string
@@ -32,11 +33,7 @@ export const CardsPageHeader = ({ id }: Props) => {
         </>
       )}
       <div>
-        <Link style={{ padding: '0px 0px' }} to={'/'}>
-          <div className={s.arrowStyle}>
-            <ReactSVG src={leftArrow} style={{ display: 'inline-block' }} /> Back to deck list
-          </div>
-        </Link>
+        <BackToListsButton variant="decks" url="/" />
       </div>
       <div style={{ marginBottom: '70px' }}>
         <h1>
