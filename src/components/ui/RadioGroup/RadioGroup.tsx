@@ -3,14 +3,17 @@ import { useState } from 'react'
 import * as Radio from '@radix-ui/react-radio-group'
 
 import s from './RadioGroup.module.scss'
+import { radioUtil } from './utils'
 
 type Props = {
   disabled?: boolean
+  changeVariant: (variant: string) => void
 }
-export const RadioGroup = ({ disabled = false }: Props) => {
-  const [currentValue, setCurrentValue] = useState('')
+export const RadioGroup = ({ disabled = false, changeVariant }: Props) => {
+  const [currentValue, setCurrentValue] = useState<string>('')
 
   const changeValue = (item: string) => {
+    changeVariant(item)
     setCurrentValue(item)
   }
 

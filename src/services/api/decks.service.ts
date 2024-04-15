@@ -10,6 +10,7 @@ import {
   getDeckByIdResponse,
   getDecksResponse,
   removeResponse,
+  saveGradeArgs,
 } from '../flashcards.types'
 import { baseApi } from './base-api'
 
@@ -64,6 +65,14 @@ const deckService = baseApi.injectEndpoints({
         url: `v1/decks/${id}/learn`,
       }),
     }),
+    saveCardGrade: builder.mutation<cardResponseItem, saveGradeArgs>({
+      invalidatesTags: ['Decks'],
+      query: args => {
+        const bodyParams: Partial<saveGradeArgs> = { ...args }
+        delete bodyParams.deckId
+        return { method: 'POST', url: `v1/decks/${args.deckId}/learn`, body: bodyParams }
+      },
+    }),
   }),
 })
 
@@ -76,4 +85,5 @@ export const {
   useRemoveDeckByIdMutation,
   useChangeDeckByIdMutation,
   useGetRandomCardQuery,
+  useSaveCardGradeMutation,
 } = deckService
