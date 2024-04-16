@@ -54,24 +54,26 @@ export const Cards = () => {
           question={'Question'}
         />
         {data?.items.map(item => {
-          const { grade, answer, answerImg, id, updated, question, questionImg, userId } = item
+          const { answer, answerImg, grade, id, question, questionImg, updated, userId } = item
+
           console.log(id)
           const lastUpdate = new Date(updated).toLocaleDateString()
+
           return (
             <TableItem
-              gradeMark={grade}
               answer={answer}
               answerImg={answerImg}
+              authorId={userId}
+              cardId={id}
               changeSetting
               grade={'grade'}
+              gradeMark={grade}
               key={id}
               lastUpdated={lastUpdate}
               question={question}
               questionImg={questionImg}
-              authorId={userId}
-              settingVariant="changeCard"
-              cardId={id}
-              removeVariant="card"
+              removeVariant={'card'}
+              settingVariant={'changeCard'}
             />
           )
         })}

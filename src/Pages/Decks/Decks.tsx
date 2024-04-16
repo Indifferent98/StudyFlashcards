@@ -99,8 +99,8 @@ export const Decks = () => {
               key={item.id}
               lastUpdated={new Date(item.updated).toLocaleDateString()}
               name={item.name}
-              settingVariant="changeDeck"
-              removeVariant="deck"
+              removeVariant={'deck'}
+              settingVariant={'changeDeck'}
             />
           )
         })}

@@ -16,6 +16,14 @@ import { baseApi } from './base-api'
 
 const deckService = baseApi.injectEndpoints({
   endpoints: builder => ({
+    changeDeckById: builder.mutation<DeckResponse, Partial<createDeckArgs> & { id: string }>({
+      invalidatesTags: ['Decks'],
+      query: ({ cover, id, isPrivate, name }) => ({
+        body: { cover, isPrivate, name },
+        method: 'PATCH',
+        url: `v1/decks/${id}`,
+      }),
+    }),
     createCard: builder.mutation<createCardResponse, createCardArgs>({
       invalidatesTags: ['Cards'],
       query: args => {
@@ -47,43 +55,37 @@ const deckService = baseApi.injectEndpoints({
       providesTags: ['Decks'],
       query: (args: getDeckArgs) => ({ params: args ?? {}, url: `v2/decks` }),
     }),
-    removeDeckById: builder.mutation<removeResponse, { id: string }>({
-      invalidatesTags: ['Decks'],
-      query: args => ({ method: 'DELETE', url: `v1/decks/${args.id}` }),
-    }),
-    changeDeckById: builder.mutation<DeckResponse, Partial<createDeckArgs> & { id: string }>({
-      invalidatesTags: ['Decks'],
-      query: ({ id, cover, isPrivate, name }) => ({
-        method: 'PATCH',
-        url: `v1/decks/${id}`,
-        body: { cover, isPrivate, name },
-      }),
-    }),
     getRandomCard: builder.query<cardResponseItem, { id: string; previousCardId?: string }>({
       query: ({ id, previousCardId }) => ({
         params: { previousCardId },
         url: `v1/decks/${id}/learn`,
       }),
     }),
+    removeDeckById: builder.mutation<removeResponse, { id: string }>({
+      invalidatesTags: ['Decks'],
+      query: args => ({ method: 'DELETE', url: `v1/decks/${args.id}` }),
+    }),
     saveCardGrade: builder.mutation<cardResponseItem, saveGradeArgs>({
       invalidatesTags: ['Decks'],
       query: args => {
         const bodyParams: Partial<saveGradeArgs> = { ...args }
+
         delete bodyParams.deckId
-        return { method: 'POST', url: `v1/decks/${args.deckId}/learn`, body: bodyParams }
+
+        return { body: bodyParams, method: 'POST', url: `v1/decks/${args.deckId}/learn` }
       },
     }),
   }),
 })
 
 export const {
+  useChangeDeckByIdMutation,
   useCreateCardMutation,
   useCreateDeckMutation,
   useGetCardsByIdQuery,
   useGetDeckByIdQuery,
   useGetDecksQuery,
-  useRemoveDeckByIdMutation,
-  useChangeDeckByIdMutation,
   useGetRandomCardQuery,
+  useRemoveDeckByIdMutation,
   useSaveCardGradeMutation,
 } = deckService

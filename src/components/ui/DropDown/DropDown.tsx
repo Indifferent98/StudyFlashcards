@@ -1,5 +1,7 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ReactSVG } from 'react-svg'
+
 import profileAvatar from '@/img/30142bfde5bdcdb7549cf75f7a51d100.png'
 import editIcon from '@/img/editIcon.svg'
 import logOutIcon from '@/img/logOutIcon.svg'
@@ -8,26 +10,30 @@ import playIcon from '@/img/playCircleIcon.svg'
 import settingIcon from '@/img/settings.svg'
 import trashIcon from '@/img/trashIcon.svg'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+
 import s from './DropDown.module.scss'
+
 import { Typography } from '../Typography'
-import { Link } from 'react-router-dom'
 
 type Props = {
+  deckId: string
   email?: string
+  fullSetting: boolean
   nickName?: string
   variant: 'Profile' | 'Settings'
-  fullSetting: boolean
-  deckId: string
 }
 export const DropDown = ({
+  deckId,
   email = 'LongTeeeestEmail@gmail.com',
+  fullSetting,
   nickName = 'Ivan',
   variant,
-  fullSetting,
-  deckId,
 }: Props) => {
+  const navigate = useNavigate()
   const fullSettingVariant = variant === 'Settings' && fullSetting
+
   console.log(fullSettingVariant)
+
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -46,16 +52,27 @@ export const DropDown = ({
           }`}
           sideOffset={5}
         >
-          <DropdownMenu.Item className={s.DropdownMenuItem}>
+          <DropdownMenu.Item
+            className={s.DropdownMenuItem}
+            onClick={() => {
+              navigate(`/learn/${deckId}`)
+            }}
+            style={{ cursor: 'pointer' }}
+          >
             {variant === 'Settings' ? (
-              <>
-                <div className={s.leftSlot}>
+              <div
+                style={{
+                  all: 'unset',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  flex: '1',
+                }}
+              >
+                <span className={s.leftSlot}>
                   <ReactSVG src={playIcon} />
-                </div>
-                <Link style={{ all: 'unset', cursor: 'pointer' }} to={`/learn/${deckId}`}>
-                  Learn
-                </Link>
-              </>
+                </span>
+                <>Learn</>
+              </div>
             ) : (
               <div className={s.profileDropDownItem}>
                 <div className={s.leftSlot}>

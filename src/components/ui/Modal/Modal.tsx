@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { ReactSVG } from 'react-svg'
 
 import closeIcon from '@/img/closeIcon.svg'
+import { useRemoveCardByIdMutation, useUpdateCardMutation } from '@/services/api'
 import {
   useChangeDeckByIdMutation,
   useCreateCardMutation,
@@ -21,15 +22,14 @@ import { AddNewCard } from './ModalBody/AddNewCard'
 import { AddNewDeck } from './ModalBody/AddNewDeck'
 import { DeleteCard } from './ModalBody/DeleteCard'
 import { DeleteDeck } from './ModalBody/DeleteDeck'
-import { useRemoveCardByIdMutation, useUpdateCardMutation } from '@/services/api'
 
 export type ModalVariant =
-  | 'Add new card'
-  | 'Change Deck'
   | 'Add New Deck'
-  | 'Delete Deck'
-  | 'Delete Card'
+  | 'Add new card'
   | 'Change Card'
+  | 'Change Deck'
+  | 'Delete Card'
+  | 'Delete Deck'
 type Props = {
   deckName?: string
   variant: ModalVariant
@@ -63,6 +63,7 @@ export const Modal = ({ deckName, variant }: Props) => {
   const [url, setUrl] = useState(window.location.href)
   const lastPath = url.substring(url.lastIndexOf('/') + 1)
   const deckId = useSelector(selectRemoveDeckModalId)
+
   return (
     showModal && (
       <div className={s.wrapper}>
@@ -123,10 +124,10 @@ export const Modal = ({ deckName, variant }: Props) => {
                 createCard({ answer, id: lastPath, question })
               }
               if (variant === 'Change Deck') {
-                changeDeck({ id: deckId, cover, isPrivate: isPrivatePack, name: deckTitle })
+                changeDeck({ cover, id: deckId, isPrivate: isPrivatePack, name: deckTitle })
               }
               if (variant === 'Change Card') {
-                changeCard({ id: currentCardId, answer, question })
+                changeCard({ answer, id: currentCardId, question })
               }
               if (variant === 'Delete Card') {
                 removeCardById({ id: currentCardId })

@@ -2,7 +2,9 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ReactSVG } from 'react-svg'
 
+import { BackToListsButton } from '@/components/ui/BackToListsButton'
 import { Button } from '@/components/ui/Button'
+import { DropDown } from '@/components/ui/DropDown'
 import { Modal } from '@/components/ui/Modal'
 import leftArrow from '@/img/leftBigArrow.svg'
 import { useGetDeckByIdQuery } from '@/services/api'
@@ -11,7 +13,6 @@ import { selectBackGroundDarkMode, selectCurrentModal } from '@/services/selecto
 import { appAction } from '@/services/slices/appSlice'
 
 import s from '../Cards.module.scss'
-import { DropDown } from '@/components/ui/DropDown'
 
 type Props = {
   id: string
@@ -32,11 +33,7 @@ export const CardsPageHeader = ({ id }: Props) => {
         </>
       )}
       <div>
-        <Link style={{ padding: '0px 0px' }} to={'/'}>
-          <div className={s.arrowStyle}>
-            <ReactSVG src={leftArrow} style={{ display: 'inline-block' }} /> Back to deck list
-          </div>
-        </Link>
+        <BackToListsButton url={'/'} variant={'decks'} />
       </div>
       <div style={{ marginBottom: '70px' }}>
         <h1>
@@ -44,9 +41,9 @@ export const CardsPageHeader = ({ id }: Props) => {
           {
             <span style={{ marginLeft: '15px' }}>
               <DropDown
-                variant="Settings"
-                fullSetting={data?.userId === 'f2be95b9-4d07-4751-a775-bd612fc9553a'}
                 deckId={id}
+                fullSetting={data?.userId === 'f2be95b9-4d07-4751-a775-bd612fc9553a'}
+                variant={'Settings'}
               />
             </span>
           }
