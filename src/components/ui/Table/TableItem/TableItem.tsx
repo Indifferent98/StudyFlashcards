@@ -21,44 +21,44 @@ type Props = {
   answer?: number | string
   answerImg?: string
   authorId?: string
+  cardId?: string
   cardsCount?: number | string
   changeSetting?: boolean
   createdBy?: string
   deckId?: string
   emptySlot?: boolean
   grade?: string
+  gradeMark?: number
   isHeader?: boolean
   lastUpdated: string
   name?: string
   question?: string
   questionImg?: string
+  removeVariant?: 'card' | 'deck'
+  settingVariant?: 'changeCard' | 'changeDeck'
   withImg?: boolean
-  gradeMark?: number
-  settingVariant?: 'changeDeck' | 'changeCard'
-  cardId?: string
-  removeVariant?: 'deck' | 'card'
 }
 
 export const TableItem = ({
   answer,
   answerImg,
   authorId,
+  cardId,
   cardsCount,
   changeSetting = false,
   createdBy = '',
   deckId = '',
   emptySlot = false,
   grade,
+  gradeMark = 1,
   isHeader = false,
   lastUpdated,
   name,
   question,
   questionImg,
-  withImg = false,
-  gradeMark = 1,
-  settingVariant = 'changeDeck',
-  cardId,
   removeVariant,
+  settingVariant = 'changeDeck',
+  withImg = false,
 }: Props) => {
   const { changeOrderByValue, clearFilter } = filtersAction
   const dispatch = useAppDispatch()
@@ -122,8 +122,8 @@ export const TableItem = ({
               {isHeader && orderBy === 'name-asc'
                 ? ArrowUp
                 : isHeader && orderBy === 'name-desc'
-                ? ArrowDown
-                : ''}
+                  ? ArrowDown
+                  : ''}
             </div>
           )}
         </div>
@@ -177,8 +177,8 @@ export const TableItem = ({
           {isHeader && orderBy === 'cardsCount-asc'
             ? ArrowUp
             : isHeader && orderBy === 'cardsCount-desc'
-            ? ArrowDown
-            : ''}
+              ? ArrowDown
+              : ''}
         </div>
       )}
       <div
@@ -192,8 +192,8 @@ export const TableItem = ({
         {isHeader && orderBy === 'updated-asc'
           ? ArrowUp
           : isHeader && orderBy === 'updated-desc'
-          ? ArrowDown
-          : ''}
+            ? ArrowDown
+            : ''}
       </div>
       {!createdBy && (
         <div className={`${s.grade} ${s.item}`}>
@@ -210,11 +210,11 @@ export const TableItem = ({
         <div className={`${s.settings} ${s.item}`}>
           {
             <SettingsBlock
-              settingVariant={settingVariant}
+              cardId={cardId}
               deckId={deckId}
               isOwner={authorId === 'f2be95b9-4d07-4751-a775-bd612fc9553a'}
-              cardId={cardId}
               removeVariant={removeVariant ? removeVariant : 'deck'}
+              settingVariant={settingVariant}
             />
           }
         </div>

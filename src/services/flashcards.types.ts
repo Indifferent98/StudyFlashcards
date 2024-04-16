@@ -135,4 +135,4 @@ export type createCardArgs = {
 
 export type cardsUpdateResponse = Required<cardResponseItem>
 
-export type saveGradeArgs = { deckId: string; cardId: string; grade: number }
+export type saveGradeArgs = { cardId: string; deckId: string; grade: number }

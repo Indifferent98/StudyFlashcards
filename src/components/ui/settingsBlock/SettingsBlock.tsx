@@ -1,29 +1,31 @@
 import { Link } from 'react-router-dom'
 import { ReactSVG } from 'react-svg'
+
 import editIcon from '@/img/editIcon.svg'
 import playIcon from '@/img/playCircleIcon.svg'
 import trashIcon from '@/img/trashIcon.svg'
 import { useAppDispatch } from '@/services/hooks'
 import { appAction } from '@/services/slices/appSlice'
+
 import s from './Settings.module.scss'
 
 type Props = {
-  deckId: string
-  settingVariant: 'changeDeck' | 'changeCard'
-  removeVariant: 'deck' | 'card'
-  isOwner: boolean
   cardId?: string
+  deckId: string
+  isOwner: boolean
+  removeVariant: 'card' | 'deck'
+  settingVariant: 'changeCard' | 'changeDeck'
 }
 
 export const SettingsBlock = ({
+  cardId,
   deckId,
   isOwner,
-  settingVariant,
-  cardId,
   removeVariant,
+  settingVariant,
 }: Props) => {
   const dispatch = useAppDispatch()
-  const { changeBackGroundDarkMode, changeCurrentModal, changeCurrentCardId } = appAction
+  const { changeBackGroundDarkMode, changeCurrentCardId, changeCurrentModal } = appAction
   const { changeRemoveDeckModalId } = appAction
 
   const removeButtonHandler = () => {

@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react'
+
+import { CardContent } from '@/Pages/LearnCard/CardContent'
 import { CheckEmail } from '@/components/auth/login-form/CheckEmail/CheckEmail'
 import { CreateNewPassword } from '@/components/auth/login-form/CreateNewPassword'
 import { ForgotPassword } from '@/components/auth/login-form/ForgotPassword'
 import { SignIn } from '@/components/auth/login-form/SignIn/SignIn'
 import { SignUp } from '@/components/auth/login-form/SignUp'
+
 import s from './Card.module.scss'
+
 import { AnswerCard, CardProps } from './CardsType/AnswerCard'
-import { CardContent } from '@/Pages/LearnCard/CardContent'
 
 type Props = {
-  deckId?: string
-  questionImg?: string
   answerImg?: string
   cardId?: string
+  deckId?: string
+  questionImg?: string
   variant:
     | 'Answer'
     | 'CheckEmail'
@@ -24,13 +27,13 @@ type Props = {
 } & Partial<CardProps>
 export const Card = ({
   answer = '',
-  deckName = '',
-  question = '',
-  deckId,
-  variant,
-  questionImg = '',
   answerImg = '',
   cardId,
+  deckId,
+  deckName = '',
+  question = '',
+  questionImg = '',
+  variant,
 }: Props) => {
   // const [showCard, setShowCard] = useState(true)
 
@@ -66,11 +69,11 @@ export const Card = ({
       ) : (
         <CardContent
           answer={answer}
-          question={question}
-          deckId={deckId}
           answerImg={answerImg}
-          questionImg={questionImg}
+          deckId={deckId}
           id={cardId}
+          question={question}
+          questionImg={questionImg}
         />
       )}
     </div>

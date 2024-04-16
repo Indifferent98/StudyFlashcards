@@ -1,5 +1,7 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ReactSVG } from 'react-svg'
+
 import profileAvatar from '@/img/30142bfde5bdcdb7549cf75f7a51d100.png'
 import editIcon from '@/img/editIcon.svg'
 import logOutIcon from '@/img/logOutIcon.svg'
@@ -8,27 +10,30 @@ import playIcon from '@/img/playCircleIcon.svg'
 import settingIcon from '@/img/settings.svg'
 import trashIcon from '@/img/trashIcon.svg'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+
 import s from './DropDown.module.scss'
+
 import { Typography } from '../Typography'
-import { useNavigate } from 'react-router-dom'
 
 type Props = {
+  deckId: string
   email?: string
+  fullSetting: boolean
   nickName?: string
   variant: 'Profile' | 'Settings'
-  fullSetting: boolean
-  deckId: string
 }
 export const DropDown = ({
+  deckId,
   email = 'LongTeeeestEmail@gmail.com',
+  fullSetting,
   nickName = 'Ivan',
   variant,
-  fullSetting,
-  deckId,
 }: Props) => {
   const navigate = useNavigate()
   const fullSettingVariant = variant === 'Settings' && fullSetting
+
   console.log(fullSettingVariant)
+
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -49,10 +54,10 @@ export const DropDown = ({
         >
           <DropdownMenu.Item
             className={s.DropdownMenuItem}
-            style={{ cursor: 'pointer' }}
             onClick={() => {
               navigate(`/learn/${deckId}`)
             }}
+            style={{ cursor: 'pointer' }}
           >
             {variant === 'Settings' ? (
               <div

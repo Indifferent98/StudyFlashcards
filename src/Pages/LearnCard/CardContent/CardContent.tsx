@@ -1,26 +1,28 @@
+import { useState } from 'react'
+
 import { Button } from '@/components/ui/Button'
 import { RadioGroup } from '@/components/ui/RadioGroup'
+import { radioUtil } from '@/components/ui/RadioGroup/utils'
 import { Typography } from '@/components/ui/Typography'
 import { useGetDeckByIdQuery, useSaveCardGradeMutation } from '@/services/api'
 import { cardResponseItem } from '@/services/flashcards.types'
-import { useState } from 'react'
+
 import s from './CardContent.module.scss'
-import { radioUtil } from '@/components/ui/RadioGroup/utils'
 
 export const CardContent = ({
   answer,
+  answerImg,
+  answerVideo,
   created,
   deckId,
   grade,
   id,
   question,
+  questionImg,
+  questionVideo,
   shots,
   updated,
   userId,
-  answerImg,
-  answerVideo,
-  questionImg,
-  questionVideo,
 }: Partial<Omit<cardResponseItem, 'answer' | 'question'>> & {
   answer: string
   question: string
@@ -32,39 +34,41 @@ export const CardContent = ({
   const buttonHandler = () => {
     setIsAnswered(!isAnswered)
     const grade = localStorage.getItem('grade')
+
     if (id && deckId && isAnswered) {
       saveCardGrade({ cardId: id, deckId, grade: Number(grade) })
     }
   }
   const changeRadioVariant = (variant: string) => {
     const grade = radioUtil(variant)
+
     localStorage.setItem('grade', String(grade))
   }
 
   return (
     <>
-      <Typography variant="H1">{`Learn ${data?.name}`}</Typography>
+      <Typography variant={'H1'}>{`Learn ${data?.name}`}</Typography>
       <div className={s.question}>
-        <Typography variant="Subtitle1" as="span">
+        <Typography as={'span'} variant={'Subtitle1'}>
           {'Question: '}
         </Typography>
-        <Typography variant="Body2" as="span">
+        <Typography as={'span'} variant={'Body2'}>
           {question}
         </Typography>
         <div className={s.imgWrapper}>
-          <div>{questionImg && <img src={questionImg} alt="" className={s.imgSize} />}</div>
+          <div>{questionImg && <img alt={''} className={s.imgSize} src={questionImg} />}</div>
         </div>
       </div>
       {isAnswered && (
         <div className={s.contentBlock}>
-          <Typography variant="Subtitle1" as="span">
+          <Typography as={'span'} variant={'Subtitle1'}>
             {'Answer: '}
           </Typography>
-          <Typography variant="Body2" as="span">
+          <Typography as={'span'} variant={'Body2'}>
             {answer}
           </Typography>
           <div className={s.imgWrapper}>
-            <div>{answerImg && <img src={answerImg} alt="" className={s.imgSize} />}</div>
+            <div>{answerImg && <img alt={''} className={s.imgSize} src={answerImg} />}</div>
           </div>
         </div>
       )}
@@ -73,7 +77,7 @@ export const CardContent = ({
           <RadioGroup changeVariant={changeRadioVariant} />
         </div>
       )}
-      <Button onClick={buttonHandler} fullWidth>
+      <Button fullWidth onClick={buttonHandler}>
         {isAnswered ? 'Next Question' : 'Show Answer'}
       </Button>
     </>
