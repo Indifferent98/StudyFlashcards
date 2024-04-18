@@ -29,6 +29,7 @@ export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
     height,
     variant = 'primary',
     withIcon = false,
+
     ...restProps
   } = props
 

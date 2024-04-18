@@ -13,7 +13,7 @@ export const LearnCard = () => {
   console.log('here CARD')
   console.log(lastPath, 'last path')
   let lastQuestionId
-  const { data, isFetching, isLoading } = useGetRandomCardQuery({
+  const { data, isFetching, isLoading, refetch } = useGetRandomCardQuery({
     id: lastPath,
     previousCardId: lastQuestionId,
   })
@@ -30,6 +30,7 @@ export const LearnCard = () => {
     <div className={s.wrapper}>
       <BackToListsButton url={`/cards/${lastPath}`} variant={'cards'} />
       <Card
+        refetch={refetch}
         answer={data?.answer}
         answerImg={data?.answerImg}
         cardId={data?.id}
