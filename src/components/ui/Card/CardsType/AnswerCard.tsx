@@ -32,7 +32,7 @@ export const AnswerCard = ({ answer, deckName, question }: CardProps) => {
       <div className={s.rate}>
         <Typography children={`Rate yourself: `} variant={'Subtitle1'} />
       </div>
-      <RadioGroup />
+      {/* <RadioGroup /> */}
       <div className={s.buttonBlock}>
         <Button children={'Next Question'} fullWidth height={'36px'} />
       </div>

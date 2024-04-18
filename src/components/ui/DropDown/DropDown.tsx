@@ -14,6 +14,8 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import s from './DropDown.module.scss'
 
 import { Typography } from '../Typography'
+import { appAction, appSlice } from '@/services/slices/appSlice'
+import { useAppDispatch } from '@/services/hooks'
 
 type Props = {
   deckId: string
@@ -29,10 +31,22 @@ export const DropDown = ({
   nickName = 'Ivan',
   variant,
 }: Props) => {
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const fullSettingVariant = variant === 'Settings' && fullSetting
-
+  const { changeBackGroundDarkMode, changeCurrentModal } = appAction
   console.log(fullSettingVariant)
+  const { changeRemoveDeckModalId } = appAction
+  const editHandler = () => {
+    dispatch(changeRemoveDeckModalId({ id: deckId }))
+    dispatch(changeBackGroundDarkMode({ mode: true }))
+    dispatch(changeCurrentModal({ variant: 'Change Deck' }))
+  }
+  const deleteHandler = () => {
+    dispatch(changeRemoveDeckModalId({ id: deckId }))
+    dispatch(changeBackGroundDarkMode({ mode: true }))
+    dispatch(changeCurrentModal({ variant: 'Delete Deck' }))
+  }
 
   return (
     <DropdownMenu.Root>
@@ -90,7 +104,7 @@ export const DropDown = ({
             )}
           </DropdownMenu.Item>
           {fullSettingVariant && (
-            <DropdownMenu.Item className={s.DropdownMenuItem}>
+            <DropdownMenu.Item className={s.DropdownMenuItem} onClick={editHandler}>
               <div className={s.leftSlot}>
                 <ReactSVG src={editIcon} />
               </div>
@@ -107,7 +121,10 @@ export const DropDown = ({
           )}
 
           {fullSettingVariant && (
-            <DropdownMenu.Item className={`${s.DropdownMenuItem} ${s.DropdownMenuItemlastChild}`}>
+            <DropdownMenu.Item
+              className={`${s.DropdownMenuItem} ${s.DropdownMenuItemlastChild}`}
+              onClick={deleteHandler}
+            >
               <div className={s.leftSlot}>
                 <ReactSVG src={trashIcon} />
               </div>

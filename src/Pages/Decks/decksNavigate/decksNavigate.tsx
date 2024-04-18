@@ -20,9 +20,10 @@ export const DecksNavigate = () => {
   const maxCards = useSelector(selectMaxCards)
   const dispatch = useAppDispatch()
   const [searchValue, setSearchValue] = useState('')
-  const [timerId, setTimerId] = useState<any>()
+
   const searchItem = useSelector(selectSearchValue)
   const { changeSearchValue, clearFilter } = filtersAction
+  const [timerId, setTimerId] = useState<any>()
   const changeSearchParams = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value)
   }

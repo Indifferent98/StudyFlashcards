@@ -22,6 +22,7 @@ import { AddNewCard } from './ModalBody/AddNewCard'
 import { AddNewDeck } from './ModalBody/AddNewDeck'
 import { DeleteCard } from './ModalBody/DeleteCard'
 import { DeleteDeck } from './ModalBody/DeleteDeck'
+import { useNavigate } from 'react-router-dom'
 
 export type ModalVariant =
   | 'Add New Deck'
@@ -52,7 +53,7 @@ export const Modal = ({ deckName, variant }: Props) => {
   const [changeCard, changeCardCreationStatus] = useUpdateCardMutation()
   const currentCardId = useSelector(selectCurrentCardId)
   const [removeCardById, removeCardByIdCreationStatus] = useRemoveCardByIdMutation()
-
+  const navigate = useNavigate()
   const changeQuestion = (e: ChangeEvent<HTMLInputElement>) => {
     setQuestion(e.currentTarget.value)
   }
@@ -118,6 +119,7 @@ export const Modal = ({ deckName, variant }: Props) => {
               }
               if (variant === 'Delete Deck') {
                 removeDeck({ id: removeDeckModalId })
+                navigate('/')
               }
               if (variant === 'Add new card') {
                 // removeDeck({ id: removeDeckModalId })

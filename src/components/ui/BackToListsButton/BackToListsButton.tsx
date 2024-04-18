@@ -10,7 +10,15 @@ type Props = {
 }
 export const BackToListsButton = ({ url, variant }: Props) => {
   return (
-    <Link style={{ padding: '0px 0px' }} to={url}>
+    <Link
+      style={{ padding: '0px 0px' }}
+      to={url}
+      onClick={() => {
+        if (variant === 'cards') {
+          localStorage.removeItem('grade')
+        }
+      }}
+    >
       <div className={s.arrowStyle}>
         <ReactSVG src={leftArrow} style={{ display: 'inline-block' }} /> {`Back to ${variant} list`}
       </div>
