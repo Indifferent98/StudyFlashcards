@@ -16,6 +16,7 @@ type Props = {
   cardId?: string
   deckId?: string
   questionImg?: string
+  refetch?: any
   variant:
     | 'Answer'
     | 'CheckEmail'
@@ -34,6 +35,7 @@ export const Card = ({
   question = '',
   questionImg = '',
   variant,
+  refetch,
 }: Props) => {
   // const [showCard, setShowCard] = useState(true)
 
@@ -68,6 +70,7 @@ export const Card = ({
         <CreateNewPassword />
       ) : (
         <CardContent
+          refetch={refetch}
           answer={answer}
           answerImg={answerImg}
           deckId={deckId}

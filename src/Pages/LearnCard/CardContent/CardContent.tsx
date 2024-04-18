@@ -8,6 +8,7 @@ import { useGetDeckByIdQuery, useSaveCardGradeMutation } from '@/services/api'
 import { cardResponseItem } from '@/services/flashcards.types'
 
 import s from './CardContent.module.scss'
+import { useNavigate } from 'react-router-dom'
 
 export const CardContent = ({
   answer,
@@ -23,14 +24,18 @@ export const CardContent = ({
   shots,
   updated,
   userId,
+  refetch,
 }: Partial<Omit<cardResponseItem, 'answer' | 'question'>> & {
   answer: string
   question: string
+  refetch: any
 }) => {
   const [saveCardGrade, saveCardGradeCreationStatus] = useSaveCardGradeMutation()
 
   const { data } = useGetDeckByIdQuery({ id: deckId ? deckId : '' })
   const [isAnswered, setIsAnswered] = useState(false)
+  const [gradeValue, setGradeValue] = useState<string>('')
+
   const buttonHandler = () => {
     setIsAnswered(!isAnswered)
     const grade = localStorage.getItem('grade')
@@ -38,17 +43,23 @@ export const CardContent = ({
     if (id && deckId && isAnswered) {
       saveCardGrade({ cardId: id, deckId, grade: Number(grade) })
     }
+
+    if (isAnswered) {
+      refetch()
+      localStorage.removeItem('grade')
+      setGradeValue('')
+    }
   }
+
   const changeRadioVariant = (variant: string) => {
     const grade = radioUtil(variant)
-
     localStorage.setItem('grade', String(grade))
   }
 
   return (
     <>
       <Typography variant={'H1'}>{`Learn ${data?.name}`}</Typography>
-      <div className={s.question}>
+      <div className={s.question} style={{ marginTop: '30px', marginBottom: '30px' }}>
         <Typography as={'span'} variant={'Subtitle1'}>
           {'Question: '}
         </Typography>
@@ -72,12 +83,17 @@ export const CardContent = ({
           </div>
         </div>
       )}
+
       {!isAnswered && (
         <div className={s.contentBlock}>
-          <RadioGroup changeVariant={changeRadioVariant} />
+          <RadioGroup
+            changeVariant={changeRadioVariant}
+            gradeValue={gradeValue}
+            setGradeValue={setGradeValue}
+          />
         </div>
       )}
-      <Button fullWidth onClick={buttonHandler}>
+      <Button fullWidth onClick={buttonHandler} disabled={!gradeValue}>
         {isAnswered ? 'Next Question' : 'Show Answer'}
       </Button>
     </>

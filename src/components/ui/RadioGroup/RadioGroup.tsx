@@ -9,13 +9,19 @@ import { radioUtil } from './utils'
 type Props = {
   changeVariant: (variant: string) => void
   disabled?: boolean
+  gradeValue: string
+  setGradeValue: (item: string) => void
 }
-export const RadioGroup = ({ changeVariant, disabled = false }: Props) => {
-  const [currentValue, setCurrentValue] = useState<string>('')
 
+export const RadioGroup = ({
+  changeVariant,
+  disabled = false,
+  gradeValue,
+  setGradeValue,
+}: Props) => {
   const changeValue = (item: string) => {
     changeVariant(item)
-    setCurrentValue(item)
+    setGradeValue(item)
   }
 
   return (
@@ -26,7 +32,7 @@ export const RadioGroup = ({ changeVariant, disabled = false }: Props) => {
         defaultValue={'default'}
         onValueChange={changeValue}
       >
-        <div className={`${currentValue === 'Did not know' ? s.activeItemWrapper : s.itemWrapper}`}>
+        <div className={`${gradeValue === 'Did not know' ? s.activeItemWrapper : s.itemWrapper}`}>
           <Radio.Item
             className={`${disabled ? s.RadioGroupItemDisabled : s.RadioGroupItem}`}
             disabled={disabled}
@@ -44,12 +50,12 @@ export const RadioGroup = ({ changeVariant, disabled = false }: Props) => {
           {!disabled && (
             <span
               className={`${!disabled && s.circle} ${
-                currentValue === 'Did not know' && s.activeItem
+                gradeValue === 'Did not know' && s.activeItem
               }`}
             ></span>
           )}
         </div>
-        <div className={`${currentValue === 'Forgot' ? s.activeItemWrapper : s.itemWrapper}`}>
+        <div className={`${gradeValue === 'Forgot' ? s.activeItemWrapper : s.itemWrapper}`}>
           <Radio.Item
             className={`${disabled ? s.RadioGroupItemDisabled : s.RadioGroupItem}`}
             disabled={disabled}
@@ -65,12 +71,12 @@ export const RadioGroup = ({ changeVariant, disabled = false }: Props) => {
           </label>
           {!disabled && (
             <span
-              className={`${!disabled && s.circle} ${currentValue === 'Forgot' && s.activeItem}`}
+              className={`${!disabled && s.circle} ${gradeValue === 'Forgot' && s.activeItem}`}
             ></span>
           )}
         </div>
         <div
-          className={`${currentValue === 'A lot of though' ? s.activeItemWrapper : s.itemWrapper}`}
+          className={`${gradeValue === 'A lot of though' ? s.activeItemWrapper : s.itemWrapper}`}
         >
           <Radio.Item
             className={`${disabled ? s.RadioGroupItemDisabled : s.RadioGroupItem}`}
@@ -88,12 +94,12 @@ export const RadioGroup = ({ changeVariant, disabled = false }: Props) => {
           {!disabled && (
             <span
               className={`${!disabled && s.circle} ${
-                currentValue === 'A lot of though' && s.activeItem
+                gradeValue === 'A lot of though' && s.activeItem
               }`}
             ></span>
           )}
         </div>
-        <div className={`${currentValue === 'Confused' ? s.activeItemWrapper : s.itemWrapper}`}>
+        <div className={`${gradeValue === 'Confused' ? s.activeItemWrapper : s.itemWrapper}`}>
           <Radio.Item
             className={`${disabled ? s.RadioGroupItemDisabled : s.RadioGroupItem}`}
             disabled={disabled}
@@ -109,12 +115,12 @@ export const RadioGroup = ({ changeVariant, disabled = false }: Props) => {
           </label>
           {!disabled && (
             <span
-              className={`${!disabled && s.circle} ${currentValue === 'Confused' && s.activeItem}`}
+              className={`${!disabled && s.circle} ${gradeValue === 'Confused' && s.activeItem}`}
             ></span>
           )}
         </div>
         <div
-          className={`${currentValue === 'Knew the answer' ? s.activeItemWrapper : s.itemWrapper}`}
+          className={`${gradeValue === 'Knew the answer' ? s.activeItemWrapper : s.itemWrapper}`}
         >
           <Radio.Item
             className={`${disabled ? s.RadioGroupItemDisabled : s.RadioGroupItem}`}
@@ -132,7 +138,7 @@ export const RadioGroup = ({ changeVariant, disabled = false }: Props) => {
           {!disabled && (
             <span
               className={`${!disabled && s.circle} ${
-                currentValue === 'Knew the answer' && s.activeItem
+                gradeValue === 'Knew the answer' && s.activeItem
               }`}
             ></span>
           )}
