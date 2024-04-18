@@ -50,7 +50,9 @@ export const Button = <T extends ElementType = 'button'>(props: Props<T>) => {
       }
       className={`${Component === 'button' && s.button} ${s[variant]} ${
         fullWidth ? s.fullWidth : ''
-      } ${withIcon ? s.withIcon : s.withoutIcon}  ${className} ${display && s.inlineBlock}`}
+      } ${withIcon ? s.withIcon : s.withoutIcon}  ${className} ${display && s.inlineBlock} ${
+        disabled && s.defaultCursor
+      }`}
       {...restProps}
       disabled={disabled}
       style={{ height: `${height && height}` }}

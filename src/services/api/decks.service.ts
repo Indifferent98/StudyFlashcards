@@ -66,7 +66,7 @@ const deckService = baseApi.injectEndpoints({
       query: args => ({ method: 'DELETE', url: `v1/decks/${args.id}` }),
     }),
     saveCardGrade: builder.mutation<cardResponseItem, saveGradeArgs>({
-      invalidatesTags: ['Decks'],
+      invalidatesTags: ['Decks', 'Cards'],
       query: args => {
         const bodyParams: Partial<saveGradeArgs> = { ...args }
 
