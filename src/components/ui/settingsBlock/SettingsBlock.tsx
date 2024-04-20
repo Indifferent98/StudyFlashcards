@@ -51,14 +51,11 @@ export const SettingsBlock = ({
       dispatch(changeCurrentModal({ variant: 'Change Card' }))
     }
   }
+  const link = removeVariant === 'deck' ? `/cards/${deckId}` : `/getCurrentCard/${deckId}/${cardId}`
 
   return (
     <div className={s.wrapper}>
-      <Link
-        className={`${s.item} ${s.button}`}
-        style={{ padding: '0px 0px' }}
-        to={`/cards/${deckId}`}
-      >
+      <Link className={`${s.item} ${s.button}`} style={{ padding: '0px 0px' }} to={link}>
         <ReactSVG src={playIcon} />
       </Link>
       {isOwner && (

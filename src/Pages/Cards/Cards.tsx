@@ -21,6 +21,7 @@ import { Modal } from '@/components/ui/Modal'
 import { appAction } from '@/services/slices/appSlice'
 import { filtersAction } from '@/services/slices/filterSlice'
 import { useAppDispatch } from '@/services/hooks'
+import { paginationAction } from '@/services/slices/PaginationSlice'
 
 export const Cards = () => {
   const currentPage = useSelector(selectCurrentPage)
@@ -28,6 +29,7 @@ export const Cards = () => {
   const searchItem = useSelector(selectSearchValue)
   const [url, setUrl] = useState(window.location.href)
   const lastPath = url.substring(url.lastIndexOf('/') + 1)
+  const { changeCurrentPage } = paginationAction
   const { data, isFetching, isLoading } = useGetCardsByIdQuery({
     currentPage,
     id: lastPath,
@@ -55,6 +57,7 @@ export const Cards = () => {
     clearTimeout(timerId)
     setTimerId(
       setTimeout(() => {
+        dispatch(changeCurrentPage({ newPage: 1 }))
         dispatch(changeSearchValue({ value: searchValue }))
       }, 800)
     )
@@ -99,6 +102,7 @@ export const Cards = () => {
 
           return (
             <TableItem
+              deckId={lastPath}
               answer={answer}
               answerImg={answerImg}
               authorId={userId}

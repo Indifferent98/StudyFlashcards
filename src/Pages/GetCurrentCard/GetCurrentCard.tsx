@@ -2,26 +2,20 @@ import { useState } from 'react'
 
 import { BackToListsButton } from '@/components/ui/BackToListsButton'
 import { Card } from '@/components/ui/Card'
-import { useGetRandomCardQuery } from '@/services/api'
+import { useGetCardByIdQuery, useGetRandomCardQuery } from '@/services/api'
 
-import s from './LearnCard.module.scss'
+import s from './GetCurrentCard.module.scss'
 
-export const LearnCard = () => {
+export const GetCurrentCard = () => {
   const [url, setUrl] = useState(window.location.href)
-  const lastPath = url.substring(url.lastIndexOf('/') + 1)
 
-  console.log('here CARD')
-  console.log(lastPath, 'last path')
   let lastQuestionId
-  const { data, isFetching, isLoading, refetch } = useGetRandomCardQuery({
-    id: lastPath,
-    previousCardId: lastQuestionId,
-  })
 
-  // const firstParamRegex = /\/([^\/]+)\/([^\/]+)$/
-  // const secondParamGroup = '([^/]+)$'
-  // const firstParamMatch = url.match(regex)[1]
-  // const secondParamMatch = url.match(secondParamGroup)[1]
+  let parts = url.split('/')
+  let secondParam = parts[parts.length - 2]
+  let lastParam = parts[parts.length - 1]
+  console.log(lastParam)
+  const { data, isLoading, isFetching, refetch } = useGetCardByIdQuery({ id: lastParam })
 
   if (data) {
     lastQuestionId = data.id
@@ -33,7 +27,7 @@ export const LearnCard = () => {
 
   return (
     <div className={s.wrapper}>
-      <BackToListsButton url={`/cards/${lastPath}`} variant={'cards'} />
+      <BackToListsButton url={`/cards/${secondParam}`} variant={'cards'} />
       <Card
         refetch={refetch}
         answer={data?.answer}

@@ -1,4 +1,9 @@
-import { cardsByIdResponse, cardsUpdateResponse, createCardArgs } from '../flashcards.types'
+import {
+  cardResponseItem,
+  cardsByIdResponse,
+  cardsUpdateResponse,
+  createCardArgs,
+} from '../flashcards.types'
 import { baseApi } from './base-api'
 
 const cardsService = baseApi.injectEndpoints({
@@ -13,13 +18,17 @@ const cardsService = baseApi.injectEndpoints({
       invalidatesTags: ['Cards'],
       query: args => {
         const requestBody: Partial<createCardArgs> = { ...args }
-
         delete requestBody.id
-
         return { body: requestBody, method: 'PATCH', url: `v1/cards/${args.id}` }
+      },
+    }),
+    getCardById: builder.query<cardResponseItem, { id: string }>({
+      query: args => {
+        return { url: `v1/cards/${args.id}` }
       },
     }),
   }),
 })
 
-export const { useRemoveCardByIdMutation, useUpdateCardMutation } = cardsService
+export const { useRemoveCardByIdMutation, useUpdateCardMutation, useGetCardByIdQuery } =
+  cardsService

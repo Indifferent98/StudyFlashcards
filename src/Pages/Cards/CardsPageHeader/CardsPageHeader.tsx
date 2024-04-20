@@ -59,7 +59,9 @@ export const CardsPageHeader = ({ id }: Props) => {
 
           <div>
             <Button
-              disabled={data?.cardsCount === 0}
+              disabled={
+                data?.cardsCount === 0 && data?.userId !== 'f2be95b9-4d07-4751-a775-bd612fc9553a'
+              }
               onClick={() => {
                 if (data?.userId === 'f2be95b9-4d07-4751-a775-bd612fc9553a') {
                   dispatch(changeBackGroundDarkMode({ mode: true }))
