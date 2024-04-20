@@ -9,6 +9,7 @@ import {
 import { Cards } from './Pages/Cards'
 import { Decks } from './Pages/Decks'
 import { LearnCard } from './Pages/LearnCard'
+import { GetCurrentCard } from './Pages/GetCurrentCard/GetCurrentCard'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -26,6 +27,10 @@ const publicRoutes: RouteObject[] = [
   {
     element: <LearnCard />,
     path: '/learn/*',
+  },
+  {
+    element: <GetCurrentCard />,
+    path: '/getCurrentCard/*',
   },
 ]
 

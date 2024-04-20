@@ -35,7 +35,7 @@ export const CardContent = ({
   const { data } = useGetDeckByIdQuery({ id: deckId ? deckId : '' })
   const [isAnswered, setIsAnswered] = useState(false)
   const [gradeValue, setGradeValue] = useState<string>('')
-
+  const navigate = useNavigate()
   const buttonHandler = () => {
     setIsAnswered(!isAnswered)
     const grade = localStorage.getItem('grade')
@@ -45,6 +45,7 @@ export const CardContent = ({
     }
 
     if (isAnswered) {
+      navigate(`/learn/${deckId}`)
       refetch()
       localStorage.removeItem('grade')
       setGradeValue('')
